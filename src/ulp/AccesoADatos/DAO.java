@@ -24,13 +24,14 @@ public abstract class DAO {
     private final String USER = "root";
     private final String PASSWORD = "";
     private final String DATABASE = "ulap";
-    private final String DRIVER = "com.mysql.jdbc.Driver";
+    private final String DRIVER = "org.mariadb.jdbc.Driver";
 
     protected void coneccionBaseDatos() throws ClassNotFoundException, SQLException {
         try {
             Class.forName(DRIVER);
-            String urlBaseDatos = "jdbc:mysql://localhost:3306/" + DATABASE + "?zeroDateTimeBehavior=convertToNull";
+            String urlBaseDatos = "jdbc:mariadb://localhost:3306/" + DATABASE + "?zeroDateTimeBehavior=convertToNull";
             coneccion = DriverManager.getConnection(urlBaseDatos, USER, PASSWORD);
+            System.out.println("Conectado");
         } catch (ClassNotFoundException | SQLException e) {
             throw e;
         }
@@ -47,6 +48,7 @@ public abstract class DAO {
             if (coneccion != null) {
                 coneccion.close();
             }
+            System.out.println("Desconectado");
         } catch (Exception e) {
             throw e;
         }
