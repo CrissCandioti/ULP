@@ -16,10 +16,10 @@ public class materiaService {
 
     private materiaDAO dao = new materiaDAO();
 
-    public void guardarMateria(int idMateria, String nombre, int año, boolean estado) throws NumberFormatException, NullPointerException, Exception {
+    public void guardarMateria( String nombre, int año, boolean estado) throws NumberFormatException, NullPointerException, Exception {
         try {
             materia aux = new materia();
-            aux.setIdMateria(idMateria);
+           
             aux.setNombre(nombre);
             aux.setAño(año);
             aux.setEstado(estado);

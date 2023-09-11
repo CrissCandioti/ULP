@@ -16,9 +16,11 @@ import ulp.AccesoADatos.alumnoDAO;
  */
 public class alumnoService {
 
-    private alumnoDAO dao = new alumnoDAO();
+//    private alumnoDAO dao = new alumnoDAO();
 
     public void crearAlumno(int dni, String apellido, String nombre, LocalDate fechaNacimiento, boolean estado) throws NumberFormatException, NullPointerException, DateTimeException, Exception {
+        
+        alumnoDAO dao = new alumnoDAO();
         try {
             alumno aux = new alumno();
             aux.setDni(dni);
@@ -39,6 +41,7 @@ public class alumnoService {
     }
 
     public void eliminarAlumno(int id) throws NumberFormatException, Exception {
+       alumnoDAO dao = new alumnoDAO();
         try {
             dao.eliminarEliminarAlumno(id);
         } catch (NumberFormatException f) {
@@ -49,6 +52,8 @@ public class alumnoService {
     }
 
     public alumno buscarAlumnoPorID(int id) throws NumberFormatException, Exception {
+        alumnoDAO dao = new alumnoDAO();
+        
         try {
             return dao.buscarAlumnoPorID(id);
         } catch (NumberFormatException f) {
@@ -59,6 +64,7 @@ public class alumnoService {
     }
 
     public alumno buscarAlumnoPorDNI(int dni) throws NumberFormatException, Exception {
+       alumnoDAO dao = new alumnoDAO();
         try {
             return dao.buscarAlumnoPorDNI(dni);
         } catch (NumberFormatException f) {
@@ -69,6 +75,7 @@ public class alumnoService {
     }
 
     public ArrayList<alumno> listarAlumno() throws Exception {
+       alumnoDAO dao = new alumnoDAO();
         try {
             return dao.listarAlumno();
         } catch (Exception e) {
@@ -77,6 +84,7 @@ public class alumnoService {
     }
 
     public void modificarAlumno(int dni, String apellido, String nombre, LocalDate fechaNacimiento, boolean estado) throws NumberFormatException, NullPointerException, DateTimeException, Exception {
+       alumnoDAO dao = new alumnoDAO();
         try {
             alumno aux = new alumno();
             aux.setDni(dni);

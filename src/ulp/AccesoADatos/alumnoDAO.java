@@ -17,7 +17,8 @@ public final class alumnoDAO extends DAO {
 
     public void guardarAlumno(alumno aux) throws Exception {
         try {
-            String sql = "INSERT INTO `alumno`(`dni`, `apellido`, `nombre`, `fechaNacimiento`, `estado`) VALUES ('" + aux.getDni() + "','" + aux.getApellido() + "','" + aux.getNombre() + "','" + aux.getFechaNacimiento() + "',1)";
+            String sql = "INSERT INTO `alumno`(`dni`, `apellido`, `nombre`, `fechaNacimiento`, `estado`)"
+                    + " VALUES ('" + aux.getDni() + "','" + aux.getApellido() + "','" + aux.getNombre() + "','" + aux.getFechaNacimiento() + "',?)";
             insertarModificarEliminarBaseDatos(sql);
         } catch (Exception e) {
             throw e;

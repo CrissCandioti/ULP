@@ -5,6 +5,8 @@
  */
 package ulp;
 
+import Vista.Principal;
+
 
 /**
  *
@@ -16,10 +18,11 @@ public class ULP {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        try {
-
-        } catch (Exception e) {
-        }
+       
+        
+          Principal p = new Principal();
+          p.setVisible(true);
+          p.setLocationRelativeTo(null);
     }
 
 }

@@ -59,6 +59,7 @@ public abstract class DAO {
             coneccionBaseDatos();
             sentencia = coneccion.createStatement();
             sentencia.executeUpdate(sql);
+            
         } catch (SQLException | ClassNotFoundException e) {
             throw e;
         } finally {
