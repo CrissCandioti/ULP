@@ -5,6 +5,9 @@
  */
 package ulp;
 
+import java.time.LocalDate;
+import ulp.Entidades.alumnoService;
+import ulp.Entidades.materiaService;
 
 /**
  *
@@ -17,7 +20,9 @@ public class ULP {
      */
     public static void main(String[] args) {
         try {
-
+            alumnoService as = new alumnoService();
+            as.modificarAlumno(6, 10, "PACO", "MERLO", LocalDate.now(), true);
+            materiaService ms = new materiaService();
         } catch (Exception e) {
         }
     }

@@ -15,9 +15,9 @@ import ulp.Entidades.alumno;
  */
 public final class alumnoDAO extends DAO {
 
-    public void guardarAlumno(alumno aux) throws Exception {
+    public void guardarAlumno(alumno aux, int index) throws Exception {
         try {
-            String sql = "INSERT INTO `alumno`(`dni`, `apellido`, `nombre`, `fechaNacimiento`, `estado`) VALUES ('" + aux.getDni() + "','" + aux.getApellido() + "','" + aux.getNombre() + "','" + aux.getFechaNacimiento() + "',1)";
+            String sql = "INSERT INTO `alumno`(`dni`, `apellido`, `nombre`, `fechaNacimiento`, `estado`) VALUES ('" + aux.getDni() + "','" + aux.getApellido() + "','" + aux.getNombre() + "','" + aux.getFechaNacimiento() + "', " + index + ")";
             insertarModificarEliminarBaseDatos(sql);
         } catch (Exception e) {
             throw e;
@@ -116,9 +116,10 @@ public final class alumnoDAO extends DAO {
         }
     }
 
-    public void modificarAlumno(alumno aux) throws Exception {
+    public void modificarAlumno(alumno aux, int index) throws Exception {
         try {
-            String sql = "UPDATE `alumno` SET `dni`= " + aux.getDni() + ",`apellido`='" + aux.getApellido() + "',`nombre`='" + aux.getNombre() + "',`fechaNacimiento`='" + aux.getFechaNacimiento() + "' WHERE idAlumno = " + aux.getIdAlumno();
+            //String sql = "UPDATE `alumno` SET `dni`= " + aux.getDni() + ",`apellido`='" + aux.getApellido() + "',`nombre`='" + aux.getNombre() + "',`fechaNacimiento`='" + aux.getFechaNacimiento() + "' WHERE idAlumno = " + aux.getIdAlumno();
+            String sql = "UPDATE `alumno` SET `dni`='" + aux.getDni() + "',`apellido`='" + aux.getApellido() + "',`nombre`='" + aux.getNombre() + "',`fechaNacimiento`='" + aux.getFechaNacimiento() + "',`estado`='" + index + "' WHERE idAlumno = " + aux.getIdAlumno();
             insertarModificarEliminarBaseDatos(sql);
         } catch (Exception e) {
             throw e;

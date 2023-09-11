@@ -16,17 +16,22 @@ import ulp.AccesoADatos.alumnoDAO;
  */
 public class alumnoService {
 
-    private alumnoDAO dao = new alumnoDAO();
-
     public void crearAlumno(int dni, String apellido, String nombre, LocalDate fechaNacimiento, boolean estado) throws NumberFormatException, NullPointerException, DateTimeException, Exception {
         try {
+            alumnoDAO dao = new alumnoDAO();
             alumno aux = new alumno();
             aux.setDni(dni);
             aux.setApellido(apellido);
             aux.setNombre(nombre);
             aux.setFechaNacimiento(fechaNacimiento);
             aux.setEstado(estado);
-            dao.guardarAlumno(aux);
+            int index = 0;
+            if (estado == true) {
+                index = 1;
+            } else if (estado == false) {
+                index = 0;
+            }
+            dao.guardarAlumno(aux, index);
         } catch (NumberFormatException a) {
             throw new NumberFormatException("Ingrese los numero correspondientes");
         } catch (NullPointerException b) {
@@ -40,6 +45,7 @@ public class alumnoService {
 
     public void eliminarAlumno(int id) throws NumberFormatException, Exception {
         try {
+            alumnoDAO dao = new alumnoDAO();
             dao.eliminarEliminarAlumno(id);
         } catch (NumberFormatException f) {
             throw new NumberFormatException("Ingrese correctamente el ID");
@@ -50,6 +56,7 @@ public class alumnoService {
 
     public alumno buscarAlumnoPorID(int id) throws NumberFormatException, Exception {
         try {
+            alumnoDAO dao = new alumnoDAO();
             return dao.buscarAlumnoPorID(id);
         } catch (NumberFormatException f) {
             throw new NumberFormatException("Ingrese el id correspondiente para buscar al alumno");
@@ -60,6 +67,7 @@ public class alumnoService {
 
     public alumno buscarAlumnoPorDNI(int dni) throws NumberFormatException, Exception {
         try {
+            alumnoDAO dao = new alumnoDAO();
             return dao.buscarAlumnoPorDNI(dni);
         } catch (NumberFormatException f) {
             throw new NumberFormatException("Ingrese el DNI correspondiente para buscar al alumno deseado");
@@ -70,21 +78,30 @@ public class alumnoService {
 
     public ArrayList<alumno> listarAlumno() throws Exception {
         try {
+            alumnoDAO dao = new alumnoDAO();
             return dao.listarAlumno();
         } catch (Exception e) {
             throw e;
         }
     }
 
-    public void modificarAlumno(int dni, String apellido, String nombre, LocalDate fechaNacimiento, boolean estado) throws NumberFormatException, NullPointerException, DateTimeException, Exception {
+    public void modificarAlumno(int id,int dni, String apellido, String nombre, LocalDate fechaNacimiento, boolean estado) throws NumberFormatException, NullPointerException, DateTimeException, Exception {
         try {
+            alumnoDAO dao = new alumnoDAO();
             alumno aux = new alumno();
+            aux.setIdAlumno(id);
             aux.setDni(dni);
             aux.setApellido(apellido);
             aux.setNombre(nombre);
             aux.setFechaNacimiento(fechaNacimiento);
             aux.setEstado(estado);
-            dao.modificarAlumno(aux);
+            int index = 0;
+            if (estado == true) {
+                index = 1;
+            } else if (estado == false) {
+                index = 0;
+            }
+            dao.modificarAlumno(aux, index);
         } catch (NumberFormatException a) {
             throw new NumberFormatException("Ingrese los numero correspondientes para su modificacion");
         } catch (NullPointerException b) {

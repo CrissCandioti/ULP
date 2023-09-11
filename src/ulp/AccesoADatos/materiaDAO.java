@@ -14,9 +14,9 @@ import ulp.Entidades.materia;
  */
 public final class materiaDAO extends DAO {
 
-    public void guardarMateria(materia aux) throws Exception {
+    public void guardarMateria(materia aux, int index) throws Exception {
         try {
-            String sql = "INSERT INTO `materia`(`idMateria`, `nombre`, `año`, `estado`) VALUES ('" + aux.getIdMateria() + "','" + aux.getNombre() + "','" + aux.getAño() + "', 1 )";
+            String sql = "INSERT INTO `materia`(`idMateria`, `nombre`, `año`, `estado`) VALUES ('" + aux.getIdMateria() + "','" + aux.getNombre() + "','" + aux.getAño() + "', " + index + " )";
             insertarModificarEliminarBaseDatos(sql);
         } catch (Exception e) {
             throw e;
@@ -39,9 +39,9 @@ public final class materiaDAO extends DAO {
         }
     }
 
-    public void modificarMateria(materia aux) throws Exception {
+    public void modificarMateria(materia aux, int index) throws Exception {
         try {
-            String sql = "UPDATE `materia` SET `nombre`='" + aux.getNombre() + "',`año`='" + aux.getAño() + "' WHERE idMateria = " + aux.getIdMateria();
+            String sql = "UPDATE `materia` SET `nombre`='" + aux.getNombre() + "',`año`='" + aux.getAño() + "',`estado`='" + index + "' WHERE idMateria = " + aux.getIdMateria();
             insertarModificarEliminarBaseDatos(sql);
         } catch (Exception e) {
             throw e;
@@ -76,4 +76,3 @@ public final class materiaDAO extends DAO {
     }
 
 }
-
