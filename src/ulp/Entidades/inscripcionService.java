@@ -57,15 +57,26 @@ public class inscripcionService {
             throw ex;
         }
     }
-    
-    public ArrayList<materia> obtenerMateriaCursadas(int idAlumno) throws NumberFormatException, Exception{
+
+    public ArrayList<materia> obtenerMateriaCursadas(int idAlumno) throws NumberFormatException, Exception {
         try {
             inscripcionDAO dao = new inscripcionDAO();
             return dao.obtenerMateriaCursadas(idAlumno);
         } catch (NumberFormatException e) {
-            throw new NumberFormatException("Ingrese el numero correcto");
+            throw e;
         } catch (Exception ex) {
             throw ex;
         }
-    } 
+    }
+
+    public ArrayList<materia> obtenerMateriaNoCursadas(int idAlumno) throws NumberFormatException, Exception {
+        try {
+            inscripcionDAO dao = new inscripcionDAO();
+            return dao.obtenerMateriaNoCursada(idAlumno);
+        } catch (NumberFormatException e) {
+            throw e;
+        } catch (Exception ex) {
+            throw ex;
+        }
+    }
 }

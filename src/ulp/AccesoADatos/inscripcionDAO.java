@@ -82,14 +82,15 @@ public final class inscripcionDAO extends DAO {
             throw e;
         }
     }
-    
-    public ArrayList<materia> obtenerMateriaCursadas(int idAlumno) throws Exception{
+
+    //Metodo para revisar
+    public ArrayList<materia> obtenerMateriaCursadas(int idAlumno) throws Exception {
         try {
-            String sql = "SELECT materia.idMateria FROM inscripcion INNER JOIN materia ON inscripcion.idMateria = materia.idMateria WHERE idAlumno = " + idAlumno + " AND materia.estado = 1";
+            String sql = "SELECT materia.idMateria FROM inscripcion INNER JOIN materia ON inscripcion.idMateria = materia.idMateria WHERE idAlumno = " + idAlumno;
             consultarBaseDatos(sql);
             ArrayList<materia> listaARetornarDeMateriasCursadas = new ArrayList<>();
             materiaService ms = new materiaService();
-            while (resultado.next()) {                
+            while (resultado.next()) {
                 Integer idMateria = resultado.getInt(1);
                 materia materia = ms.buscarMateria(idMateria);
                 listaARetornarDeMateriasCursadas.add(materia);
@@ -101,10 +102,23 @@ public final class inscripcionDAO extends DAO {
             throw e;
         }
     }
-    
-    
+
+    public ArrayList<materia> obtenerMateriaNoCursada(int idAlumno) throws Exception {
+        try {
+            String sql = "SELECT materia.idMateria FROM materia WHERE materia.idMateria NOT IN (SELECT inscripcion.idMateria FROM inscripcion WHERE inscripcion.idAlumno = " + idAlumno + " );";
+            consultarBaseDatos(sql);
+            ArrayList<materia> listaARetornarDeMateriasNoCursadas = new ArrayList<>();
+            materiaService ms = new materiaService();
+            while (resultado.next()) {
+                Integer idMateria = resultado.getInt(1);
+                materia materia = ms.buscarMateria(idMateria);
+                listaARetornarDeMateriasNoCursadas.add(materia);
+            }
+            desconectarBaseDatos();
+            return listaARetornarDeMateriasNoCursadas;
+        } catch (Exception e) {
+            desconectarBaseDatos();
+            throw e;
+        }
+    }
 }
-//SELECT materia.idMateria FROM inscripcion INNER JOIN materia ON inscripcion.idMateria = materia.idMateria WHERE materia.estado = 1;
-//Para el metodo materiaCursadas
-//SELECT materia.idMateria FROM inscripcion INNER JOIN materia ON inscripcion.idMateria = materia.idMateria WHERE materia.estado = 0;
-//Para el metodo materiaNoCursada
