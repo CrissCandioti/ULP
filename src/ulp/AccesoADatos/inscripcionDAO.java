@@ -5,10 +5,85 @@
  */
 package ulp.AccesoADatos;
 
+import java.util.ArrayList;
+import ulp.Entidades.alumno;
+import ulp.Entidades.alumnoService;
+import ulp.Entidades.inscripcion;
+import ulp.Entidades.materia;
+import ulp.Entidades.materiaService;
+
 /**
  *
  * @author criss
  */
-public class inscripcionDAO {
-    
+public final class inscripcionDAO extends DAO {
+
+    public void guardarInscripcion(inscripcion aux) throws Exception {
+        try {
+            String sql = "INSERT INTO `inscripcion`(`nota`, `idAlumno`, `idMateria`) VALUES ('" + aux.getNota() + "','" + aux.getIdAlumno().getIdAlumno() + "','" + aux.getIdMateria().getIdMateria() + "')";
+            insertarModificarEliminarBaseDatos(sql);
+        } catch (Exception e) {
+            throw e;
+        }
+    }
+
+    public ArrayList<inscripcion> obtenerInscripcion() throws Exception {
+        try {
+            alumnoService as = new alumnoService();
+            materiaService ms = new materiaService();
+            String sql = "SELECT * FROM `inscripcion`";
+            consultarBaseDatos(sql);
+            ArrayList<inscripcion> obtenerListaIncripcionesARetornar = new ArrayList<>();
+            inscripcion aux = null;
+            while (resultado.next()) {
+                aux = new inscripcion();
+                aux.setIdInscripto(resultado.getInt(1));
+                aux.setNota(resultado.getInt(2));
+                Integer idAlumno = resultado.getInt(3);
+                alumno alumno = as.buscarAlumnoPorID(idAlumno);
+                aux.setIdAlumno(alumno);
+                Integer idMateria = resultado.getInt(4);
+                materia materia = ms.buscarMateria(idMateria);
+                aux.setIdMateria(materia);
+                obtenerListaIncripcionesARetornar.add(aux);
+            }
+            desconectarBaseDatos();
+            return obtenerListaIncripcionesARetornar;
+        } catch (Exception e) {
+            desconectarBaseDatos();
+            throw e;
+        }
+    }
+
+    public ArrayList<inscripcion> obtenerInscripcionPorAlumno(int id_Alumno) throws Exception {
+        try {
+            String sql = "SELECT `idInscripto`, `nota`, `idAlumno`, `idMateria` FROM `inscripcion` WHERE idAlumno = " + id_Alumno;
+            consultarBaseDatos(sql);
+            ArrayList<inscripcion> listaInscripcionPorAlumnoARetornar = new ArrayList<>();
+            alumnoService as = new alumnoService();
+            materiaService ms = new materiaService();
+            inscripcion aux = null;
+            while (resultado.next()) {
+                aux = new inscripcion();
+                aux.setIdInscripto(resultado.getInt(1));
+                aux.setNota(resultado.getInt(2));
+                Integer idAlumno = resultado.getInt(3);
+                alumno alumno = as.buscarAlumnoPorID(idAlumno);
+                aux.setIdAlumno(alumno);
+                Integer idMateria = resultado.getInt(4);
+                materia materia = ms.buscarMateria(idMateria);
+                aux.setIdMateria(materia);
+                listaInscripcionPorAlumnoARetornar.add(aux);
+            }
+            desconectarBaseDatos();
+            return listaInscripcionPorAlumnoARetornar;
+        } catch (Exception e) {
+            desconectarBaseDatos();
+            throw e;
+        }
+    }
 }
+//SELECT materia.idMateria FROM inscripcion INNER JOIN materia ON inscripcion.idMateria = materia.idMateria WHERE materia.estado = 1;
+//Para el metodo materiaCursadas
+//SELECT materia.idMateria FROM inscripcion INNER JOIN materia ON inscripcion.idMateria = materia.idMateria WHERE materia.estado = 0;
+//Para el metodo materiaNoCursada
