@@ -83,7 +83,6 @@ public final class inscripcionDAO extends DAO {
         }
     }
 
-    //Metodo para revisar
     public ArrayList<materia> obtenerMateriaCursadas(int idAlumno) throws Exception {
         try {
             String sql = "SELECT materia.idMateria FROM inscripcion INNER JOIN materia ON inscripcion.idMateria = materia.idMateria WHERE idAlumno = " + idAlumno;
@@ -118,6 +117,16 @@ public final class inscripcionDAO extends DAO {
             return listaARetornarDeMateriasNoCursadas;
         } catch (Exception e) {
             desconectarBaseDatos();
+            throw e;
+        }
+
+    }
+
+    public void borrarInscripcionAlumnoMateria(int idAlumno, int idMateria) throws Exception {
+        try {
+            String sql = "DELETE FROM `inscripcion` WHERE idAlumno = " + idAlumno + " AND idMateria = " + idMateria + "";
+            insertarModificarEliminarBaseDatos(sql);
+        } catch (Exception e) {
             throw e;
         }
     }
