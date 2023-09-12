@@ -63,8 +63,18 @@ public final class materiaDAO extends DAO {
             consultarBaseDatos(sql);
             ArrayList<materia> listaMateriaARetornar = new ArrayList<>();
             materia aux = null;
+            boolean estado = false;
             while (resultado.next()) {
-                aux = new materia(resultado.getInt(1), resultado.getString(2), resultado.getInt(3), true);
+                aux = new materia();
+                aux.setIdMateria(resultado.getInt(1));
+                aux.setNombre(resultado.getString(2));
+                aux.setAño(resultado.getInt(3));
+                if (resultado.getInt(4) == 1) {
+                    estado = true;
+                } else if (resultado.getInt(4) == 0) {
+                    estado = false;
+                }
+                aux.setEstado(estado);
                 listaMateriaARetornar.add(aux);
             }
             desconectarBaseDatos();

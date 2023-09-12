@@ -82,6 +82,8 @@ public final class inscripcionDAO extends DAO {
             throw e;
         }
     }
+    
+    
 }
 //SELECT materia.idMateria FROM inscripcion INNER JOIN materia ON inscripcion.idMateria = materia.idMateria WHERE materia.estado = 1;
 //Para el metodo materiaCursadas
