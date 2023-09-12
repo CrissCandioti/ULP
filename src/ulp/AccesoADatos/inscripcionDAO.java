@@ -83,6 +83,25 @@ public final class inscripcionDAO extends DAO {
         }
     }
     
+    public ArrayList<materia> obtenerMateriaCursadas(int idAlumno) throws Exception{
+        try {
+            String sql = "SELECT materia.idMateria FROM inscripcion INNER JOIN materia ON inscripcion.idMateria = materia.idMateria WHERE idAlumno = " + idAlumno + " AND materia.estado = 1";
+            consultarBaseDatos(sql);
+            ArrayList<materia> listaARetornarDeMateriasCursadas = new ArrayList<>();
+            materiaService ms = new materiaService();
+            while (resultado.next()) {                
+                Integer idMateria = resultado.getInt(1);
+                materia materia = ms.buscarMateria(idMateria);
+                listaARetornarDeMateriasCursadas.add(materia);
+            }
+            desconectarBaseDatos();
+            return listaARetornarDeMateriasCursadas;
+        } catch (Exception e) {
+            desconectarBaseDatos();
+            throw e;
+        }
+    }
+    
     
 }
 //SELECT materia.idMateria FROM inscripcion INNER JOIN materia ON inscripcion.idMateria = materia.idMateria WHERE materia.estado = 1;

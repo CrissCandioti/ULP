@@ -6,7 +6,6 @@
 package ulp;
 
 import ulp.Entidades.inscripcionService;
-import ulp.Entidades.materiaService;
 
 /**
  *
@@ -20,8 +19,8 @@ public class ULP {
     public static void main(String[] args) {
         try {
             inscripcionService is = new inscripcionService();
-            materiaService ms = new materiaService();
-            System.out.println(ms.listarMateria());
+            //System.out.println(is.obtenerMateriaCursadas(7));
+            is.crearInscripcion(20, 2, 10);
         } catch (Exception e) {
         }
     }

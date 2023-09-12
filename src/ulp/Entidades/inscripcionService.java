@@ -7,6 +7,7 @@ package ulp.Entidades;
 
 import java.util.ArrayList;
 import ulp.AccesoADatos.inscripcionDAO;
+import ulp.AccesoADatos.materiaDAO;
 
 /**
  *
@@ -56,4 +57,15 @@ public class inscripcionService {
             throw ex;
         }
     }
+    
+    public ArrayList<materia> obtenerMateriaCursadas(int idAlumno) throws NumberFormatException, Exception{
+        try {
+            inscripcionDAO dao = new inscripcionDAO();
+            return dao.obtenerMateriaCursadas(idAlumno);
+        } catch (NumberFormatException e) {
+            throw new NumberFormatException("Ingrese el numero correcto");
+        } catch (Exception ex) {
+            throw ex;
+        }
+    } 
 }
