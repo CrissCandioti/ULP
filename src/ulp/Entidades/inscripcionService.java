@@ -90,4 +90,16 @@ public class inscripcionService {
             throw ex;
         }
     }
+    
+    public void actualizarNota(int idAlumno, int idMateria, int nota) throws NumberFormatException, Exception {
+        try {
+            inscripcionDAO dao = new inscripcionDAO();
+            dao.actualizarNota(idAlumno, idMateria, nota);
+        } catch (NumberFormatException e) {
+            throw new NumberFormatException("Ingrese los datos correctamentes para borrar la inscripcion");
+        } catch (Exception ex) {
+            throw ex;
+        }
+    }
+    
 }

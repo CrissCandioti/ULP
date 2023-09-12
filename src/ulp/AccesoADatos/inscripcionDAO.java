@@ -130,4 +130,13 @@ public final class inscripcionDAO extends DAO {
             throw e;
         }
     }
+
+    public void actualizarNota(int idAlumno, int idMateria, int nota) throws Exception {
+        try {
+            String sql = "UPDATE `inscripcion` SET `nota` = " + nota + " WHERE idAlumno = " + idAlumno + " AND idMateria = " + idMateria + " ";
+            insertarModificarEliminarBaseDatos(sql);
+        } catch (Exception e) {
+            throw e;
+        }
+    }
 }

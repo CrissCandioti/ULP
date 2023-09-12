@@ -19,8 +19,6 @@ public class ULP {
     public static void main(String[] args) {
         try {
             inscripcionService is = new inscripcionService();
-            is.borrarInscripcionAlumnoMateria(2, 2);
-            System.out.println("Se elimino correctamente");
         } catch (Exception e) {
         }
     }
