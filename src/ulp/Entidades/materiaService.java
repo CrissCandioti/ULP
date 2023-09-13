@@ -14,11 +14,10 @@ import ulp.AccesoADatos.materiaDAO;
  */
 public class materiaService {
 
-    public void guardarMateria(int idMateria, String nombre, int año, boolean estado) throws NumberFormatException, NullPointerException, Exception {
+    public void guardarMateria(String nombre, int año, boolean estado) throws NumberFormatException, NullPointerException, Exception {
         try {
             materiaDAO dao = new materiaDAO();
             materia aux = new materia();
-            aux.setIdMateria(idMateria);
             aux.setNombre(nombre);
             aux.setAño(año);
             aux.setEstado(estado);

@@ -16,7 +16,7 @@ public final class materiaDAO extends DAO {
 
     public void guardarMateria(materia aux, int index) throws Exception {
         try {
-            String sql = "INSERT INTO `materia`(`idMateria`, `nombre`, `año`, `estado`) VALUES ('" + aux.getIdMateria() + "','" + aux.getNombre() + "','" + aux.getAño() + "', " + index + " )";
+            String sql = "INSERT INTO `materia`(`nombre`, `año`, `estado`) VALUES ('" + aux.getNombre() + "','" + aux.getAño() + "', " + index + " )";
             insertarModificarEliminarBaseDatos(sql);
         } catch (Exception e) {
             throw e;

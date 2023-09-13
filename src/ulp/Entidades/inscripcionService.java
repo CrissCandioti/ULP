@@ -7,7 +7,6 @@ package ulp.Entidades;
 
 import java.util.ArrayList;
 import ulp.AccesoADatos.inscripcionDAO;
-import ulp.AccesoADatos.materiaDAO;
 
 /**
  *

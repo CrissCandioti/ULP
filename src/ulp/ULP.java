@@ -5,7 +5,10 @@
  */
 package ulp;
 
+import java.time.LocalDate;
+import ulp.Entidades.alumnoService;
 import ulp.Entidades.inscripcionService;
+import ulp.Entidades.materiaService;
 
 /**
  *
@@ -18,8 +21,9 @@ public class ULP {
      */
     public static void main(String[] args) {
         try {
+            alumnoService as = new alumnoService();
+            materiaService ms = new materiaService();
             inscripcionService is = new inscripcionService();
-
         } catch (Exception e) {
         }
     }

@@ -118,7 +118,6 @@ public final class alumnoDAO extends DAO {
 
     public void modificarAlumno(alumno aux, int index) throws Exception {
         try {
-            //String sql = "UPDATE `alumno` SET `dni`= " + aux.getDni() + ",`apellido`='" + aux.getApellido() + "',`nombre`='" + aux.getNombre() + "',`fechaNacimiento`='" + aux.getFechaNacimiento() + "' WHERE idAlumno = " + aux.getIdAlumno();
             String sql = "UPDATE `alumno` SET `dni`='" + aux.getDni() + "',`apellido`='" + aux.getApellido() + "',`nombre`='" + aux.getNombre() + "',`fechaNacimiento`='" + aux.getFechaNacimiento() + "',`estado`='" + index + "' WHERE idAlumno = " + aux.getIdAlumno();
             insertarModificarEliminarBaseDatos(sql);
         } catch (Exception e) {
