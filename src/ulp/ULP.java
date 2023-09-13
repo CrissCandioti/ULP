@@ -19,6 +19,7 @@ public class ULP {
     public static void main(String[] args) {
         try {
             inscripcionService is = new inscripcionService();
+
         } catch (Exception e) {
         }
     }

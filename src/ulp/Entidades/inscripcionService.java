@@ -14,7 +14,7 @@ import ulp.AccesoADatos.materiaDAO;
  * @author criss
  */
 public class inscripcionService {
-    
+
     public void crearInscripcion(int nota, int id_Alumno, int id_Materia) throws NumberFormatException, NullPointerException, Exception {
         try {
             alumnoService as = new alumnoService();
@@ -37,7 +37,7 @@ public class inscripcionService {
             throw new Exception("Ingrese correctamente los datos");
         }
     }
-    
+
     public ArrayList<inscripcion> obtenerInscripciones() throws Exception {
         try {
             inscripcionDAO dao = new inscripcionDAO();
@@ -46,7 +46,7 @@ public class inscripcionService {
             throw e;
         }
     }
-    
+
     public ArrayList<inscripcion> obtenerInscripcionPorAlumno(int id_Alumno) throws NumberFormatException, Exception {
         try {
             inscripcionDAO dao = new inscripcionDAO();
@@ -57,7 +57,7 @@ public class inscripcionService {
             throw ex;
         }
     }
-    
+
     public ArrayList<materia> obtenerMateriaCursadas(int idAlumno) throws NumberFormatException, Exception {
         try {
             inscripcionDAO dao = new inscripcionDAO();
@@ -68,7 +68,7 @@ public class inscripcionService {
             throw ex;
         }
     }
-    
+
     public ArrayList<materia> obtenerMateriaNoCursadas(int idAlumno) throws NumberFormatException, Exception {
         try {
             inscripcionDAO dao = new inscripcionDAO();
@@ -79,7 +79,7 @@ public class inscripcionService {
             throw ex;
         }
     }
-    
+
     public void borrarInscripcionAlumnoMateria(int idAlumno, int idMateria) throws NumberFormatException, Exception {
         try {
             inscripcionDAO dao = new inscripcionDAO();
@@ -90,7 +90,7 @@ public class inscripcionService {
             throw ex;
         }
     }
-    
+
     public void actualizarNota(int idAlumno, int idMateria, int nota) throws NumberFormatException, Exception {
         try {
             inscripcionDAO dao = new inscripcionDAO();
@@ -101,5 +101,13 @@ public class inscripcionService {
             throw ex;
         }
     }
-    
+
+    public ArrayList<alumno> obtenerAlumnoPorMateria(int idMateria) throws Exception {
+        try {
+            inscripcionDAO dao = new inscripcionDAO();
+            return dao.obtenerAlumnoPorMateria(idMateria);
+        } catch (Exception e) {
+            throw e;
+        }
+    }
 }
