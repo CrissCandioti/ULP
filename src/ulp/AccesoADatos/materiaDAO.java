@@ -25,7 +25,7 @@ public final class materiaDAO extends DAO {
 
     public materia buscarMateria(int id) throws Exception {
         try {
-            String sql = "SELECT * FROM `materia` WHERE idMateria = " + id + " AND estado = 1 ";
+            String sql = "SELECT `idMateria`, `nombre`, `año`, `estado` FROM `materia` WHERE idMateria = " + id + " AND estado = 1 ";
             consultarBaseDatos(sql);
             materia aux = null;
             while (resultado.next()) {
@@ -59,7 +59,7 @@ public final class materiaDAO extends DAO {
 
     public ArrayList<materia> listarMateria() throws Exception {
         try {
-            String sql = "SELECT * FROM `materia`";
+            String sql = "SELECT `idMateria`, `nombre`, `año`, `estado` FROM `materia`";
             consultarBaseDatos(sql);
             ArrayList<materia> listaMateriaARetornar = new ArrayList<>();
             materia aux = null;

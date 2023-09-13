@@ -31,7 +31,7 @@ public final class inscripcionDAO extends DAO {
         try {
             alumnoService as = new alumnoService();
             materiaService ms = new materiaService();
-            String sql = "SELECT * FROM `inscripcion`";
+            String sql = "SELECT `idInscripto`, `nota`, `idAlumno`, `idMateria` FROM `inscripcion`";
             consultarBaseDatos(sql);
             ArrayList<inscripcion> obtenerListaIncripcionesARetornar = new ArrayList<>();
             inscripcion aux = null;

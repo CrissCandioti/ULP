@@ -24,6 +24,7 @@ public class ULP {
             alumnoService as = new alumnoService();
             materiaService ms = new materiaService();
             inscripcionService is = new inscripcionService();
+            System.out.println(is.obtenerInscripciones());
         } catch (Exception e) {
         }
     }
