@@ -9,8 +9,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import ulp.AccesoADatos.alumnoDAO;
 import ulp.AccesoADatos.inscripcionDAO;
 import ulp.Entidades.alumno;
 import ulp.Entidades.inscripcion;
@@ -209,5 +211,7 @@ public class FormularioDeInscripcion extends javax.swing.JInternalFrame {
 //            Logger.getLogger(FormularioDeInscripcion.class.getName()).log(Level.SEVERE, null, ex);
 //        }
 //        
-//    }              
+//    }    
+    
+       
 }
