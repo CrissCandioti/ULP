@@ -15,10 +15,10 @@ import ulp.Entidades.alumno;
  */
 public final class alumnoDAO extends DAO {
 
-    public void guardarAlumno(alumno aux) throws Exception {
+    public void guardarAlumno(alumno aux,int index) throws Exception {
         try {
             String sql = "INSERT INTO `alumno`(`dni`, `apellido`, `nombre`, `fechaNacimiento`, `estado`)"
-                    + " VALUES ('" + aux.getDni() + "','" + aux.getApellido() + "','" + aux.getNombre() + "','" + aux.getFechaNacimiento() + "',?)";
+                    + " VALUES ('" + aux.getDni() + "','" + aux.getApellido() + "','" + aux.getNombre() + "','" + aux.getFechaNacimiento() + "','" + index + "')";
             insertarModificarEliminarBaseDatos(sql);
         } catch (Exception e) {
             throw e;

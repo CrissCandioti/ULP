@@ -226,15 +226,15 @@ public class FormularioAlumno extends javax.swing.JInternalFrame {
         String nombre = txtNombre.getText();
         String fechaNac = ((JTextField) datechooser.getDateEditor().getUiComponent()).getText();
        
-        boolean activo=radioBestado.isSelected();
+        boolean index= radioBestado.isSelected();
 //            if (radioBestado.isSelected()) {
-//                activo=1;
+//                index=1;
 //                
 //            }else{
-//                activo=0;
+//                index=0;
 //            }
 
-            a.crearAlumno(dni, apellido, nombre, LocalDate.parse(fechaNac), activo);
+            a.crearAlumno(dni, apellido, nombre, LocalDate.parse(fechaNac), index);
             
             JOptionPane.showMessageDialog(null, "Alumno Agregado con éxito");
             

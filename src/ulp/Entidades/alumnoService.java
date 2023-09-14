@@ -18,17 +18,22 @@ public class alumnoService {
 
 //    private alumnoDAO dao = new alumnoDAO();
 
-    public void crearAlumno(int dni, String apellido, String nombre, LocalDate fechaNacimiento, boolean estado) throws NumberFormatException, NullPointerException, DateTimeException, Exception {
-        
-        alumnoDAO dao = new alumnoDAO();
+ public void crearAlumno(int dni, String apellido, String nombre, LocalDate fechaNacimiento, boolean estado) throws NumberFormatException, NullPointerException, DateTimeException, Exception {
         try {
+            alumnoDAO dao = new alumnoDAO();
             alumno aux = new alumno();
             aux.setDni(dni);
             aux.setApellido(apellido);
             aux.setNombre(nombre);
             aux.setFechaNacimiento(fechaNacimiento);
             aux.setEstado(estado);
-            dao.guardarAlumno(aux);
+            int index = 0;
+            if (estado == true) {
+                index = 1;
+            } else if (estado == false) {
+                index = 0;
+            }
+            dao.guardarAlumno(aux, index);
         } catch (NumberFormatException a) {
             throw new NumberFormatException("Ingrese los numero correspondientes");
         } catch (NullPointerException b) {
