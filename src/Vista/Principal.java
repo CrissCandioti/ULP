@@ -81,6 +81,11 @@ public class Principal extends javax.swing.JFrame {
         jMenu3.setText("Administracion");
 
         jMenuItem2.setText("Manejo de Inscripciones");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
         jMenu3.add(jMenuItem2);
 
         jMenuItem5.setText("Manipulacion de notas");
@@ -127,7 +132,10 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
-        // TODO add your handling code here:
+        FormularioNotas nota= new FormularioNotas();
+        Escritorio.add(nota);
+        nota.show();
+        
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
@@ -140,6 +148,12 @@ public class Principal extends javax.swing.JFrame {
         
                 
     }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        FormularioDeInscripcion insc= new FormularioDeInscripcion();
+        Escritorio.add(insc);
+        insc.show();
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
 
 //    /**
 //     * @param args the command line arguments

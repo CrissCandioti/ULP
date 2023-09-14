@@ -64,6 +64,8 @@ public class FormularioAlumno extends javax.swing.JInternalFrame {
         setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/alumno.jpg"))); // NOI18N
         setPreferredSize(new java.awt.Dimension(500, 500));
 
+        jPanel1.setBackground(new java.awt.Color(18, 123, 77));
+
         jLabel1.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
         jLabel1.setText("Alumnos");
 
@@ -106,6 +108,11 @@ public class FormularioAlumno extends javax.swing.JInternalFrame {
         jButton4.setText("Eliminar");
 
         jButton5.setText("Salir");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -240,6 +247,12 @@ public class FormularioAlumno extends javax.swing.JInternalFrame {
         }
         
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+      
+        this.dispose();
+        
+    }//GEN-LAST:event_jButton5ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

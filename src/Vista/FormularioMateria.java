@@ -60,6 +60,8 @@ public class FormularioMateria extends javax.swing.JInternalFrame {
         setName(""); // NOI18N
         setPreferredSize(new java.awt.Dimension(500, 500));
 
+        jPanel1.setBackground(new java.awt.Color(18, 123, 77));
+
         jLabel1.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
         jLabel1.setText("Materias");
 
@@ -98,6 +100,11 @@ public class FormularioMateria extends javax.swing.JInternalFrame {
         btnEliminar.setText("Eliminar");
 
         btnSalir.setText("Salir");
+        btnSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalirActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -136,7 +143,7 @@ public class FormularioMateria extends javax.swing.JInternalFrame {
                                         .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
-                .addContainerGap(60, Short.MAX_VALUE))
+                .addContainerGap(55, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -168,7 +175,7 @@ public class FormularioMateria extends javax.swing.JInternalFrame {
                     .addComponent(btnGuardar)
                     .addComponent(btnSalir)
                     .addComponent(btnEliminar))
-                .addContainerGap(110, Short.MAX_VALUE))
+                .addContainerGap(104, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -211,7 +218,7 @@ public class FormularioMateria extends javax.swing.JInternalFrame {
         } catch (NullPointerException ex) {
             System.out.println("Ingrese datos"+ex);
         } catch (DateTimeException ex) {
-            Logger.getLogger(GestionAlumno.class.getName()).log(Level.SEVERE, null, ex.getLocalizedMessage());
+            System.out.println(ex);
         } catch (NumberFormatException ex) {          
              JOptionPane.showMessageDialog(null, "ingrese numeros en año "+ex);
         } catch (Exception ex) {
@@ -223,6 +230,10 @@ public class FormularioMateria extends javax.swing.JInternalFrame {
     private void radioActivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioActivoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_radioActivoActionPerformed
+
+    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_btnSalirActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
