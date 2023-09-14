@@ -3,10 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ulp.Entidades;
+package ulp.Service;
 
 import java.util.ArrayList;
 import ulp.AccesoADatos.inscripcionDAO;
+import ulp.Entidades.alumno;
+import ulp.Entidades.inscripcion;
+import ulp.Entidades.materia;
 
 /**
  *

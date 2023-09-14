@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Vista;
+package ulp.Vistas;
 
 import java.sql.Date;
 import java.time.DateTimeException;
@@ -12,8 +12,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
-import ulp.Entidades.alumnoService;
-
+import ulp.Service.alumnoService;
 
 /**
  *
@@ -26,6 +25,7 @@ public class FormularioAlumno extends javax.swing.JInternalFrame {
      */
     public FormularioAlumno() {
         initComponents();
+
     }
 
     /**
@@ -60,7 +60,7 @@ public class FormularioAlumno extends javax.swing.JInternalFrame {
         setIconifiable(true);
         setResizable(true);
         setTitle("Gestión Alumnos");
-        setToolTipText("mmmmmmm");
+        setToolTipText("Rellene todos los campos");
         setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/alumno.jpg"))); // NOI18N
         setPreferredSize(new java.awt.Dimension(500, 500));
 
@@ -220,38 +220,50 @@ public class FormularioAlumno extends javax.swing.JInternalFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
 
         alumnoService a = new alumnoService();
-        try { 
-        int dni= Integer.parseInt(txtDni.getText());
-        String apellido = txtApellido.getText();
-        String nombre = txtNombre.getText();
-        String fechaNac = ((JTextField) datechooser.getDateEditor().getUiComponent()).getText();
-       
-        boolean index= radioBestado.isSelected();
+        try {
+            int dni = Integer.parseInt(txtDni.getText());
+            String apellido = txtApellido.getText();
+            String nombre = txtNombre.getText();
+            String fechaNac = ((JTextField) datechooser.getDateEditor().getUiComponent()).getText();
+
+            boolean index = radioBestado.isSelected();
 //            if (radioBestado.isSelected()) {
 //                index=1;
 //                
 //            }else{
 //                index=0;
 //            }
-
-            a.crearAlumno(dni, apellido, nombre, LocalDate.parse(fechaNac), index);
-            
-            JOptionPane.showMessageDialog(null, "Alumno Agregado con éxito");
-            
-        } catch (NullPointerException ex) {
-            System.out.println("rellene todos los campos"+ex);
-        } catch (DateTimeException ex) {
-            System.out.println(" error con data "+ex);
-        } catch (Exception ex) {
-            System.out.println("error "+ex);
+            if (apellido.equals("") || nombre.equals("")) {
+                JOptionPane.showMessageDialog(null, "No deje la celda del nombre o apellido vacias");
+            } else {
+                a.crearAlumno(dni, apellido, nombre, LocalDate.parse(fechaNac), index);
+                JOptionPane.showMessageDialog(null, "Alumno Agregado con éxito");
+                limpiar();
+            }
+        } catch (NumberFormatException f) {
+            JOptionPane.showMessageDialog(null, "Ingrese los numero correspondientes");
+        } catch (NullPointerException b) {
+            JOptionPane.showMessageDialog(null, "No deje ninguna celda vacia");
+        } catch (DateTimeException c) {
+            JOptionPane.showMessageDialog(null, "Error al analizar la fecha");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Ingrese correctamente los datos" + e);
         }
-        
+
+//        } catch (NullPointerException ex) {
+//            System.out.println("rellene todos los campos" + ex);
+//        } catch (DateTimeException ex) {
+//            System.out.println(" error con data " + ex);
+//        } catch (Exception ex) {
+//            System.out.println("error " + ex);
+//        }
+
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-      
+
         this.dispose();
-        
+
     }//GEN-LAST:event_jButton5ActionPerformed
 
 
@@ -275,4 +287,12 @@ public class FormularioAlumno extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtDni;
     private javax.swing.JTextField txtNombre;
     // End of variables declaration//GEN-END:variables
+
+    public void limpiar() {
+        txtApellido.setText("");
+        txtDni.setText("");
+        txtNombre.setText("");
+        radioBestado.setSelected(false);
+        //Falta la fecha
+    }
 }

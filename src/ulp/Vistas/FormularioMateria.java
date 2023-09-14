@@ -3,13 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Vista;
+package ulp.Vistas;
 
 import java.time.DateTimeException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import ulp.Entidades.materiaService;
+import ulp.Service.materiaService;
 
 
 /**

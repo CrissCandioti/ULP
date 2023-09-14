@@ -7,10 +7,10 @@ package ulp.AccesoADatos;
 
 import java.util.ArrayList;
 import ulp.Entidades.alumno;
-import ulp.Entidades.alumnoService;
+import ulp.Service.alumnoService;
 import ulp.Entidades.inscripcion;
 import ulp.Entidades.materia;
-import ulp.Entidades.materiaService;
+import ulp.Service.materiaService;
 
 /**
  *

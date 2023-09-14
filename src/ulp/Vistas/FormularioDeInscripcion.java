@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Vista;
+package ulp.Vistas;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -72,22 +72,27 @@ public class FormularioDeInscripcion extends javax.swing.JInternalFrame {
         setClosable(true);
         setIconifiable(true);
         setTitle("Formulario de Inscrpción");
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        getContentPane().setLayout(null);
 
         jLabel1.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
         jLabel1.setText("Formulario de Inscripción");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(115, 21, -1, -1));
-        getContentPane().add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(51, 53, 402, 10));
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(115, 21, 277, 26);
+        getContentPane().add(jSeparator1);
+        jSeparator1.setBounds(51, 53, 402, 10);
 
         jLabel2.setText("Seleccione un alumno:");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(51, 80, -1, -1));
+        getContentPane().add(jLabel2);
+        jLabel2.setBounds(51, 80, 106, 14);
 
         comboBoxAlumno.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        getContentPane().add(comboBoxAlumno, new org.netbeans.lib.awtextra.AbsoluteConstraints(195, 75, 258, -1));
+        getContentPane().add(comboBoxAlumno);
+        comboBoxAlumno.setBounds(195, 75, 258, 20);
 
         jLabel3.setFont(new java.awt.Font("Arial Black", 0, 14)); // NOI18N
         jLabel3.setText("Listado de Materias");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(153, 107, -1, -1));
+        getContentPane().add(jLabel3);
+        jLabel3.setBounds(153, 107, 150, 21);
 
         jRadioButton1.setText("Materias Inscriptas");
         jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -95,7 +100,8 @@ public class FormularioDeInscripcion extends javax.swing.JInternalFrame {
                 jRadioButton1ActionPerformed(evt);
             }
         });
-        getContentPane().add(jRadioButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(51, 134, -1, -1));
+        getContentPane().add(jRadioButton1);
+        jRadioButton1.setBounds(51, 134, 117, 23);
 
         jRadioButton2.setText("Materias no Inscriptas");
         jRadioButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -103,7 +109,8 @@ public class FormularioDeInscripcion extends javax.swing.JInternalFrame {
                 jRadioButton2ActionPerformed(evt);
             }
         });
-        getContentPane().add(jRadioButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 134, -1, -1));
+        getContentPane().add(jRadioButton2);
+        jRadioButton2.setBounds(310, 134, 131, 23);
 
         tablaAlumno.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -118,13 +125,16 @@ public class FormularioDeInscripcion extends javax.swing.JInternalFrame {
         ));
         jScrollPane2.setViewportView(tablaAlumno);
 
-        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(18, 164, -1, 214));
+        getContentPane().add(jScrollPane2);
+        jScrollPane2.setBounds(18, 164, 452, 214);
 
         btnInscribir.setText("Inscribir");
-        getContentPane().add(btnInscribir, new org.netbeans.lib.awtextra.AbsoluteConstraints(18, 390, -1, -1));
+        getContentPane().add(btnInscribir);
+        btnInscribir.setBounds(18, 390, 71, 23);
 
         btnAnular.setText("Anular Inscripcion");
-        getContentPane().add(btnAnular, new org.netbeans.lib.awtextra.AbsoluteConstraints(198, 390, -1, -1));
+        getContentPane().add(btnAnular);
+        btnAnular.setBounds(198, 390, 117, 23);
 
         btnSalir.setText("Salir");
         btnSalir.addActionListener(new java.awt.event.ActionListener() {
@@ -132,7 +142,8 @@ public class FormularioDeInscripcion extends javax.swing.JInternalFrame {
                 btnSalirActionPerformed(evt);
             }
         });
-        getContentPane().add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(421, 390, -1, -1));
+        getContentPane().add(btnSalir);
+        btnSalir.setBounds(421, 390, 53, 23);
 
         jPanel1.setBackground(new java.awt.Color(18, 123, 77));
 
@@ -147,7 +158,8 @@ public class FormularioDeInscripcion extends javax.swing.JInternalFrame {
             .addGap(0, 460, Short.MAX_VALUE)
         );
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 510, 460));
+        getContentPane().add(jPanel1);
+        jPanel1.setBounds(0, 0, 510, 460);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

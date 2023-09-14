@@ -3,12 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ulp.Entidades;
+package ulp.Service;
 
 import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import ulp.AccesoADatos.alumnoDAO;
+import ulp.Entidades.alumno;
 
 /**
  *
@@ -85,7 +87,7 @@ public class alumnoService {
         }
     }
 
-    public void modificarAlumno(int id,int dni, String apellido, String nombre, LocalDate fechaNacimiento, boolean estado) throws NumberFormatException, NullPointerException, DateTimeException, Exception {
+    public void modificarAlumno(int id, int dni, String apellido, String nombre, LocalDate fechaNacimiento, boolean estado) throws NumberFormatException, NullPointerException, DateTimeException, Exception {
         try {
             alumnoDAO dao = new alumnoDAO();
             alumno aux = new alumno();
