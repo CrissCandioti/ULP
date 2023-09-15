@@ -82,11 +82,9 @@ public class alumno {
 
     @Override
     public String toString() {
-<<<<<<< Updated upstream
-        return    + idAlumno + ", DNI: " + dni + "," + apellido + ", " + nombre + ", " + fechaNacimiento + ", Estado: " + estado;
-=======
-        return   + idAlumno + ", DNI: " + dni + ", Apellido: " + apellido + ", Nombre: " + nombre + ", Fecha de Nacimiento: " + fechaNacimiento + ", Estado: " + estado;
->>>>>>> Stashed changes
-    }
 
+        return    + idAlumno + ", DNI: " + dni + "," + apellido + ", " + nombre + ", " + fechaNacimiento + ", Estado: " + estado;
+
+
+}
 }

@@ -5,30 +5,18 @@
  */
 package ulp.Vistas;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-<<<<<<< Updated upstream
+
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-=======
-import javax.swing.DefaultComboBoxModel;
->>>>>>> Stashed changes
-import ulp.AccesoADatos.alumnoDAO;
-import ulp.AccesoADatos.inscripcionDAO;
+
 import ulp.Entidades.alumno;
-import ulp.Entidades.inscripcion;
-<<<<<<< Updated upstream
+
 import ulp.Entidades.materia;
-import ulp.Service.alumnoService;
 import ulp.Service.inscripcionService;
-=======
+
 import ulp.Service.alumnoService;
->>>>>>> Stashed changes
 
 /**
  *
@@ -41,11 +29,9 @@ public class FormularioDeInscripcion extends javax.swing.JInternalFrame {
      */
     public FormularioDeInscripcion() {
         initComponents();
-<<<<<<< Updated upstream
-        llenarCombobox();
-=======
+
         llenarComboBoxAlumno();
->>>>>>> Stashed changes
+
     }
 
     /**
@@ -100,7 +86,6 @@ public class FormularioDeInscripcion extends javax.swing.JInternalFrame {
         getContentPane().add(jSeparator1);
         jSeparator1.setBounds(51, 53, 402, 10);
 
-<<<<<<< Updated upstream
         comboBoxAlumno.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 comboBoxAlumnoActionPerformed(evt);
@@ -108,15 +93,6 @@ public class FormularioDeInscripcion extends javax.swing.JInternalFrame {
         });
         getContentPane().add(comboBoxAlumno);
         comboBoxAlumno.setBounds(173, 75, 330, 26);
-=======
-        jLabel2.setText("Seleccione un alumno:");
-        getContentPane().add(jLabel2);
-        jLabel2.setBounds(51, 80, 126, 16);
-
-        comboBoxAlumno.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        getContentPane().add(comboBoxAlumno);
-        comboBoxAlumno.setBounds(195, 75, 258, 26);
->>>>>>> Stashed changes
 
         jLabel3.setFont(new java.awt.Font("Arial Black", 0, 14)); // NOI18N
         jLabel3.setText("Listado de Materias");
@@ -159,32 +135,20 @@ public class FormularioDeInscripcion extends javax.swing.JInternalFrame {
 
         btnInscribir.setText("Inscribir");
         getContentPane().add(btnInscribir);
-<<<<<<< Updated upstream
         btnInscribir.setBounds(18, 390, 110, 28);
 
         btnAnular.setText("Anular Inscripcion");
         getContentPane().add(btnAnular);
         btnAnular.setBounds(198, 390, 150, 28);
-=======
-        btnInscribir.setBounds(18, 390, 72, 28);
 
-        btnAnular.setText("Anular Inscripcion");
-        getContentPane().add(btnAnular);
-        btnAnular.setBounds(198, 390, 126, 28);
->>>>>>> Stashed changes
-
-        btnSalir.setText("Salir");
+        btnSalir.setText("Salir1");
         btnSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSalirActionPerformed(evt);
             }
         });
         getContentPane().add(btnSalir);
-<<<<<<< Updated upstream
-        btnSalir.setBounds(404, 390, 70, 28);
-=======
-        btnSalir.setBounds(421, 390, 53, 28);
->>>>>>> Stashed changes
+        btnSalir.setBounds(394, 390, 80, 28);
 
         jPanel1.setBackground(new java.awt.Color(18, 123, 77));
 
@@ -280,21 +244,21 @@ public class FormularioDeInscripcion extends javax.swing.JInternalFrame {
     private javax.swing.JTable tablaAlumno;
     // End of variables declaration//GEN-END:variables
 
-<<<<<<< Updated upstream
-    public void llenarCombobox() {
-        try {
-            alumnoService a = new alumnoService();
 
-            for (alumno object : a.listarAlumno()) {
-                comboBoxAlumno.addItem(object);
+//    public void llenarCombobox() {
+//        try {
+//            alumnoService a = new alumnoService();
+//
+//            for (alumno object : a.listarAlumno()) {
+//                comboBoxAlumno.addItem(object);
+//
+//            }
+//        } catch (Exception ex) {
+//            Logger.getLogger(FormularioDeInscripcion.class
+//                    .getName()).log(Level.SEVERE, null, ex);
+//        }
 
-            }
-        } catch (Exception ex) {
-            Logger.getLogger(FormularioDeInscripcion.class
-                    .getName()).log(Level.SEVERE, null, ex);
-        }
-
-    }
+//    }
 
 //    private void borrarFilas() {
 //
@@ -304,13 +268,13 @@ public class FormularioDeInscripcion extends javax.swing.JInternalFrame {
 //            modelo.removeRow(f);
 //        }
 //    }
-=======
+
 public void llenarComboBoxAlumno(){
     alumnoService a = new alumnoService();
     
         try {
             for (alumno o : a.listarAlumno()) {
-                comboBoxAlumno.addItem(o.toString());
+                comboBoxAlumno.addItem(o);
             }   } catch (Exception ex) {
             Logger.getLogger(FormularioDeInscripcion.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -318,5 +282,5 @@ public void llenarComboBoxAlumno(){
 
     
        
->>>>>>> Stashed changes
+
 }
