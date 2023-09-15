@@ -241,13 +241,13 @@ public class FormularioAlumno extends javax.swing.JInternalFrame {
                 limpiar();
             }
         } catch (NumberFormatException f) {
-            JOptionPane.showMessageDialog(null, "Ingrese los numero correspondientes");
+            JOptionPane.showMessageDialog(null, "Ingrese Dni");
         } catch (NullPointerException b) {
             JOptionPane.showMessageDialog(null, "No deje ninguna celda vacia");
         } catch (DateTimeException c) {
             JOptionPane.showMessageDialog(null, "Error al analizar la fecha");
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Ingrese correctamente los datos" + e);
+            JOptionPane.showMessageDialog(null, "error"+ e.getMessage() );
         }
 
 //        } catch (NullPointerException ex) {
