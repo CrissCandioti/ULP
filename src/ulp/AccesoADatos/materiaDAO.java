@@ -25,7 +25,7 @@ public final class materiaDAO extends DAO {
 
     public materia buscarMateria(int id) throws Exception {
         try {
-            String sql = "SELECT `idMateria`, `nombre`, `año`, `estado` FROM `materia` WHERE idMateria = " + id + " AND estado = 1 ";
+            String sql = "SELECT `idMateria`, `nombre`, `año`, `estado` FROM `materia` WHERE idMateria = " + id;
             consultarBaseDatos(sql);
             materia aux = null;
             while (resultado.next()) {
@@ -50,7 +50,7 @@ public final class materiaDAO extends DAO {
 
     public void eliminarMateria(int id) throws Exception {
         try {
-            String sql = "DELETE FROM `materia` WHERE idMateria = " + id;
+            String sql = "UPDATE `materia` SET `estado`= 0 WHERE idMateria = " + id;
             insertarModificarEliminarBaseDatos(sql);
         } catch (Exception e) {
             throw e;

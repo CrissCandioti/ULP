@@ -20,6 +20,14 @@ public class alumnoService {
 
     public void crearAlumno(int dni, String apellido, String nombre, LocalDate fechaNacimiento, boolean estado) throws NumberFormatException, NullPointerException, DateTimeException, Exception {
         try {
+            if (buscarAlumnoPorDNI(dni) != null) {
+                JOptionPane.showMessageDialog(null, "Tenemos registrado un alumno con el documento ingresado");
+                return;
+            }
+            if (nombre.length() < 2 || apellido.length() < 2) {
+                JOptionPane.showMessageDialog(null, "El nombre u apellido no pueden tener menos de 4 caracteres");
+                return;
+            }
             alumnoDAO dao = new alumnoDAO();
             alumno aux = new alumno();
             aux.setDni(dni);
@@ -34,14 +42,9 @@ public class alumnoService {
                 index = 0;
             }
             dao.guardarAlumno(aux, index);
-        } catch (NumberFormatException a) {
-            throw new NumberFormatException("Ingrese los numero correspondientes");
-        } catch (NullPointerException b) {
-            throw new NullPointerException("No deje ninguna celda vacia");
-        } catch (DateTimeException c) {
-            throw new DateTimeException("Error al analizar la fecha");
+            JOptionPane.showMessageDialog(null, "El alumno fue registrado correctamente");
         } catch (Exception e) {
-            throw new Exception("Ingrese correctamente los datos");
+            throw e;
         }
     }
 

@@ -26,7 +26,7 @@ public final class alumnoDAO extends DAO {
 
     public void eliminarEliminarAlumno(int id) throws Exception {
         try {
-            String sql = "DELETE FROM `alumno` WHERE idAlumno = " + id;
+            String sql = "UPDATE `alumno` SET `estado`= 0 WHERE idAlumno = " + id;
             insertarModificarEliminarBaseDatos(sql);
         } catch (Exception e) {
             throw e;
@@ -35,7 +35,7 @@ public final class alumnoDAO extends DAO {
 
     public alumno buscarAlumnoPorID(int id) throws Exception {
         try {
-            String sql = "SELECT `idAlumno`, `dni`, `apellido`, `nombre`, `fechaNacimiento`, `estado` FROM `alumno` WHERE idAlumno = " + id + " AND estado = 1";
+            String sql = "SELECT `idAlumno`, `dni`, `apellido`, `nombre`, `fechaNacimiento`, `estado` FROM `alumno` WHERE idAlumno = " + id;
             consultarBaseDatos(sql);
             alumno aux = null;
             while (resultado.next()) {
@@ -62,7 +62,7 @@ public final class alumnoDAO extends DAO {
 
     public alumno buscarAlumnoPorDNI(int dni) throws Exception {
         try {
-            String sql = "SELECT `idAlumno`, `dni`, `apellido`, `nombre`, `fechaNacimiento`, `estado` FROM `alumno` WHERE dni = " + dni + " AND estado = 1";
+            String sql = "SELECT `idAlumno`, `dni`, `apellido`, `nombre`, `fechaNacimiento`, `estado` FROM `alumno` WHERE dni = " + dni;
             consultarBaseDatos(sql);
             alumno aux = null;
             while (resultado.next()) {
@@ -89,7 +89,7 @@ public final class alumnoDAO extends DAO {
 
     public ArrayList<alumno> listarAlumno() throws Exception {
         try {
-            String sql = "SELECT `idAlumno`, `dni`, `apellido`, `nombre`, `fechaNacimiento`, `estado` FROM `alumno` WHERE estado = 1";
+            String sql = "SELECT `idAlumno`, `dni`, `apellido`, `nombre`, `fechaNacimiento`, `estado` FROM `alumno` ";
             consultarBaseDatos(sql);
             ArrayList<alumno> listaAlumnoARetornar = new ArrayList<>();
             alumno aux = null;
@@ -124,5 +124,4 @@ public final class alumnoDAO extends DAO {
             throw e;
         }
     }
-
 }

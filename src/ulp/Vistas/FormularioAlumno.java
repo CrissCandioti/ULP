@@ -218,45 +218,28 @@ public class FormularioAlumno extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtNombreActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-
-        alumnoService a = new alumnoService();
         try {
+            alumnoService a = new alumnoService();
             int dni = Integer.parseInt(txtDni.getText());
             String apellido = txtApellido.getText();
             String nombre = txtNombre.getText();
             String fechaNac = ((JTextField) datechooser.getDateEditor().getUiComponent()).getText();
-
             boolean index = radioBestado.isSelected();
-//            if (radioBestado.isSelected()) {
-//                index=1;
-//                
-//            }else{
-//                index=0;
-//            }
-            if (apellido.equals("") || nombre.equals("")) {
-                JOptionPane.showMessageDialog(null, "No deje la celda del nombre o apellido vacias");
-            } else {
-                a.crearAlumno(dni, apellido, nombre, LocalDate.parse(fechaNac), index);
-                JOptionPane.showMessageDialog(null, "Alumno Agregado con éxito");
-                limpiar();
+            if (apellido.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "La celda del apellido esta vacia");
             }
-        } catch (NumberFormatException f) {
-            JOptionPane.showMessageDialog(null, "Ingrese los numero correspondientes");
-        } catch (NullPointerException b) {
-            JOptionPane.showMessageDialog(null, "No deje ninguna celda vacia");
-        } catch (DateTimeException c) {
-            JOptionPane.showMessageDialog(null, "Error al analizar la fecha");
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Ingrese correctamente los datos" + e);
+            if (nombre.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "La celda del nombre esta vacia");
+            }
+            a.crearAlumno(dni, apellido, nombre, LocalDate.parse(fechaNac), index);
+            limpiar();
+        } catch (NumberFormatException b) {
+            JOptionPane.showMessageDialog(this, "Ingrese los datos numericos del documento correspondiente");
+        } catch (DateTimeException d) {
+            JOptionPane.showMessageDialog(this, "Ocurrio un error al analizar la fecha ingresada");
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "Ingrese correctamente los datos");
         }
-
-//        } catch (NullPointerException ex) {
-//            System.out.println("rellene todos los campos" + ex);
-//        } catch (DateTimeException ex) {
-//            System.out.println(" error con data " + ex);
-//        } catch (Exception ex) {
-//            System.out.println("error " + ex);
-//        }
 
     }//GEN-LAST:event_jButton3ActionPerformed
 
