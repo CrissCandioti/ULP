@@ -99,6 +99,7 @@ public class FormularioDeInscripcion extends javax.swing.JInternalFrame {
         getContentPane().add(jLabel3);
         jLabel3.setBounds(153, 107, 150, 21);
 
+        buttonGroup1.add(jRadioButton1);
         jRadioButton1.setText("Materias Inscriptas");
         jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -108,6 +109,7 @@ public class FormularioDeInscripcion extends javax.swing.JInternalFrame {
         getContentPane().add(jRadioButton1);
         jRadioButton1.setBounds(51, 134, 126, 18);
 
+        buttonGroup1.add(jRadioButton2);
         jRadioButton2.setText("Materias no Inscriptas");
         jRadioButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -177,21 +179,55 @@ public class FormularioDeInscripcion extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    //Método para llenar la tabla con las materias en la que está inscripto el alumno.
     private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
-        // TODO add your handling code here:
+        //activo y desactivo botones correspondientes
+        btnAnular.setVisible(true);
+        btnInscribir.setVisible(false);
+
+        try {
+            //guardo en una variable el id recogido del alumno del combobox
+            int id = comboBoxAlumno.getItemAt(comboBoxAlumno.getSelectedIndex()).getIdAlumno();
+
+            //Instancio una clase "inscripcionService" para poder acceder a sus metodos
+            inscripcionService ins = new inscripcionService();
+
+            //le otorgo un modelo a la tabla
+            DefaultTableModel modelo = new DefaultTableModel();
+            modelo.addColumn("Id");
+            modelo.addColumn("Nombre");
+            modelo.addColumn("Año");
+            tablaAlumno.setModel(modelo);
+
+            //creo un vector para guardar los datos del array y que luego el modelo de la tabla pueda agregarlo a la tabla.
+            Object mate[] = null;
+            for (int i = 0; i < ins.obtenerMateriaCursadas(id).size(); i++) {
+                modelo.addRow(mate);
+                materia getm = (materia) ins.obtenerMateriaCursadas(id).get(i);
+                modelo.setValueAt(getm.getIdMateria(), i, 0);
+                modelo.setValueAt(getm.getNombre(), i, 1);
+                modelo.setValueAt(getm.getAño(), i, 2);
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "eerroorr" + ex.getLocalizedMessage());
+
+        }
     }//GEN-LAST:event_jRadioButton1ActionPerformed
 
+    //Método para cerrar la ventana
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
         this.dispose();
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
+        
+           //activo y desactivo botones correspondientes
+        btnAnular.setVisible(false);
+        btnInscribir.setVisible(true);
         try {
             int id = comboBoxAlumno.getItemAt(comboBoxAlumno.getSelectedIndex()).getIdAlumno();
 
             inscripcionService ins = new inscripcionService();
-
-//            ins.obtenerMateriaNoCursadas(id);
 
             DefaultTableModel modelo = new DefaultTableModel();
             modelo.addColumn("Id");
@@ -199,9 +235,11 @@ public class FormularioDeInscripcion extends javax.swing.JInternalFrame {
             modelo.addColumn("Año");
             tablaAlumno.setModel(modelo);
 
-            for (materia object :ins.obtenerMateriaNoCursadas(id) ) {
+            for (materia object : ins.obtenerMateriaNoCursadas(id)) {
                 System.out.println(object);
             }
+            //creo un vector para guardar los datos del array y que luego el modelo de la tabla pueda agregarlo a la tabla.
+
             Object mate[] = null;
             for (int i = 0; i < ins.obtenerMateriaNoCursadas(id).size(); i++) {
                 modelo.addRow(mate);
@@ -211,9 +249,9 @@ public class FormularioDeInscripcion extends javax.swing.JInternalFrame {
                 modelo.setValueAt(getm.getAño(), i, 2);
 
             }
-            } catch (NullPointerException ex) {
-            JOptionPane.showMessageDialog(null, "eerroorr" +ex.getLocalizedMessage());
-        
+        } catch (NullPointerException ex) {
+            JOptionPane.showMessageDialog(null, "eerroorr" + ex.getLocalizedMessage());
+
         } catch (Exception ex) {
             Logger.getLogger(FormularioDeInscripcion.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -244,7 +282,6 @@ public class FormularioDeInscripcion extends javax.swing.JInternalFrame {
     private javax.swing.JTable tablaAlumno;
     // End of variables declaration//GEN-END:variables
 
-
 //    public void llenarCombobox() {
 //        try {
 //            alumnoService a = new alumnoService();
@@ -257,9 +294,7 @@ public class FormularioDeInscripcion extends javax.swing.JInternalFrame {
 //            Logger.getLogger(FormularioDeInscripcion.class
 //                    .getName()).log(Level.SEVERE, null, ex);
 //        }
-
 //    }
-
 //    private void borrarFilas() {
 //
 //        int f = tablaAlumno.getRowCount() - 1;
@@ -268,19 +303,16 @@ public class FormularioDeInscripcion extends javax.swing.JInternalFrame {
 //            modelo.removeRow(f);
 //        }
 //    }
+    public void llenarComboBoxAlumno() {
+        alumnoService a = new alumnoService();
 
-public void llenarComboBoxAlumno(){
-    alumnoService a = new alumnoService();
-    
         try {
             for (alumno o : a.listarAlumno()) {
                 comboBoxAlumno.addItem(o);
-            }   } catch (Exception ex) {
+            }
+        } catch (Exception ex) {
             Logger.getLogger(FormularioDeInscripcion.class.getName()).log(Level.SEVERE, null, ex);
         }
-}
-
-    
-       
+    }
 
 }
