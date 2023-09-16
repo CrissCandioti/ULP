@@ -137,6 +137,11 @@ public class FormularioDeInscripcion extends javax.swing.JInternalFrame {
         jScrollPane2.setBounds(18, 164, 456, 214);
 
         btnInscribir.setText("Inscribir");
+        btnInscribir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnInscribirActionPerformed(evt);
+            }
+        });
         getContentPane().add(btnInscribir);
         btnInscribir.setBounds(18, 390, 110, 28);
 
@@ -267,6 +272,22 @@ public class FormularioDeInscripcion extends javax.swing.JInternalFrame {
     private void comboBoxAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxAlumnoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_comboBoxAlumnoActionPerformed
+
+    private void btnInscribirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInscribirActionPerformed
+        
+        try {
+            int idAlumno= comboBoxAlumno.getItemAt(comboBoxAlumno.getSelectedIndex()).getIdAlumno();
+            
+            
+            inscripcionService ins = new inscripcionService();
+            ins.crearInscripcion(1 ,idAlumno,3);
+            
+        } catch (NullPointerException ex) {
+            Logger.getLogger(FormularioDeInscripcion.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Logger.getLogger(FormularioDeInscripcion.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnInscribirActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
