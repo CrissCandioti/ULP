@@ -2,8 +2,19 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/C:/Users/criss/OneDrive/Documentos/NetBeansProjects/ULP/src/ulp/ULP.java</file>
+        <group name="Guias">
+            <file>file:/E:/Curso%20Arg%20PROGRAMA%204.0/ULP/src/ulp/Vistas/FormularioNotas.java</file>
+            <file>file:/E:/Curso%20Arg%20PROGRAMA%204.0/ULP/src/ulp/AccesoADatos/DAO.java</file>
+            <file>file:/E:/Curso%20Arg%20PROGRAMA%204.0/ULP/src/ulp/Service/inscripcionService.java</file>
+            <file>file:/E:/Curso%20Arg%20PROGRAMA%204.0/ULP/src/ulp/AccesoADatos/materiaDAO.java</file>
+            <file>file:/E:/Curso%20Arg%20PROGRAMA%204.0/ULP/src/ulp/ULP.java</file>
+            <file>file:/E:/Curso%20Arg%20PROGRAMA%204.0/ULP/src/ulp/AccesoADatos/alumnoDAO.java</file>
+            <file>file:/E:/Curso%20Arg%20PROGRAMA%204.0/ULP/src/ulp/Vistas/FormularioDeInscripcion.java</file>
+            <file>file:/E:/Curso%20Arg%20PROGRAMA%204.0/ULP/src/ulp/Entidades/alumno.java</file>
+            <file>file:/E:/Curso%20Arg%20PROGRAMA%204.0/ULP/src/ulp/Vistas/FormularioAlumno.java</file>
+            <file>file:/E:/Curso%20Arg%20PROGRAMA%204.0/ULP/src/ulp/Service/materiaService.java</file>
+            <file>file:/E:/Curso%20Arg%20PROGRAMA%204.0/ULP/src/ulp/AccesoADatos/inscripcionDAO.java</file>
+            <file>file:/E:/Curso%20Arg%20PROGRAMA%204.0/ULP/src/ulp/Service/alumnoService.java</file>
         </group>
     </open-files>
 </project-private>

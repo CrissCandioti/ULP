@@ -31,11 +31,13 @@ public final class materiaDAO extends DAO {
             while (resultado.next()) {
                 aux = new materia(resultado.getInt(1), resultado.getString(2), resultado.getInt(3), true);
             }
-            desconectarBaseDatos();
+            
             return aux;
         } catch (Exception e) {
             desconectarBaseDatos();
             throw e;
+        }finally{
+            desconectarBaseDatos();
         }
     }
 

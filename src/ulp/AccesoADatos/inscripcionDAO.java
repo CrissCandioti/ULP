@@ -78,7 +78,7 @@ public final class inscripcionDAO extends DAO {
             desconectarBaseDatos();
             return listaInscripcionPorAlumnoARetornar;
         } catch (Exception e) {
-            desconectarBaseDatos();
+
             throw e;
         }
     }
@@ -94,11 +94,13 @@ public final class inscripcionDAO extends DAO {
                 materia materia = ms.buscarMateria(idMateria);
                 listaARetornarDeMateriasCursadas.add(materia);
             }
-            desconectarBaseDatos();
+
             return listaARetornarDeMateriasCursadas;
         } catch (Exception e) {
-            desconectarBaseDatos();
+
             throw e;
+        } finally {
+            desconectarBaseDatos();
         }
     }
 
@@ -113,10 +115,11 @@ public final class inscripcionDAO extends DAO {
                 materia materia = ms.buscarMateria(idMateria);
                 listaARetornarDeMateriasNoCursadas.add(materia);
             }
-            desconectarBaseDatos();
+
             return listaARetornarDeMateriasNoCursadas;
+
         } catch (Exception e) {
-            desconectarBaseDatos();
+
             throw e;
         }
 
@@ -146,7 +149,7 @@ public final class inscripcionDAO extends DAO {
             consultarBaseDatos(sql);
             ArrayList<alumno> listaAlumnoPorMateriaARetornar = new ArrayList<>();
             alumnoService as = new alumnoService();
-            while (resultado.next()) {                
+            while (resultado.next()) {
                 Integer idAlumno = resultado.getInt(1);
                 alumno alumno = as.buscarAlumnoPorID(idAlumno);
                 listaAlumnoPorMateriaARetornar.add(alumno);

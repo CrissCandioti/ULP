@@ -5,17 +5,19 @@
  */
 package ulp.Vistas;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import ulp.AccesoADatos.alumnoDAO;
-import ulp.AccesoADatos.inscripcionDAO;
+
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 import ulp.Entidades.alumno;
-import ulp.Entidades.inscripcion;
+
+import ulp.Entidades.materia;
+import ulp.Service.inscripcionService;
+
+import ulp.Service.alumnoService;
 
 /**
  *
@@ -28,6 +30,9 @@ public class FormularioDeInscripcion extends javax.swing.JInternalFrame {
      */
     public FormularioDeInscripcion() {
         initComponents();
+
+        llenarComboBoxAlumno();
+
     }
 
     /**
@@ -44,7 +49,6 @@ public class FormularioDeInscripcion extends javax.swing.JInternalFrame {
         jTable1 = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
-        jLabel2 = new javax.swing.JLabel();
         comboBoxAlumno = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
         jRadioButton1 = new javax.swing.JRadioButton();
@@ -55,6 +59,7 @@ public class FormularioDeInscripcion extends javax.swing.JInternalFrame {
         btnAnular = new javax.swing.JButton();
         btnSalir = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -72,6 +77,7 @@ public class FormularioDeInscripcion extends javax.swing.JInternalFrame {
         setClosable(true);
         setIconifiable(true);
         setTitle("Formulario de Inscrpción");
+        setPreferredSize(new java.awt.Dimension(500, 500));
         getContentPane().setLayout(null);
 
         jLabel1.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
@@ -81,19 +87,20 @@ public class FormularioDeInscripcion extends javax.swing.JInternalFrame {
         getContentPane().add(jSeparator1);
         jSeparator1.setBounds(51, 53, 402, 10);
 
-        jLabel2.setText("Seleccione un alumno:");
-        getContentPane().add(jLabel2);
-        jLabel2.setBounds(51, 80, 106, 14);
-
-        comboBoxAlumno.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboBoxAlumno.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboBoxAlumnoActionPerformed(evt);
+            }
+        });
         getContentPane().add(comboBoxAlumno);
-        comboBoxAlumno.setBounds(195, 75, 258, 20);
+        comboBoxAlumno.setBounds(173, 75, 330, 26);
 
         jLabel3.setFont(new java.awt.Font("Arial Black", 0, 14)); // NOI18N
         jLabel3.setText("Listado de Materias");
         getContentPane().add(jLabel3);
         jLabel3.setBounds(153, 107, 150, 21);
 
+        buttonGroup1.add(jRadioButton1);
         jRadioButton1.setText("Materias Inscriptas");
         jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -101,8 +108,9 @@ public class FormularioDeInscripcion extends javax.swing.JInternalFrame {
             }
         });
         getContentPane().add(jRadioButton1);
-        jRadioButton1.setBounds(51, 134, 117, 23);
+        jRadioButton1.setBounds(51, 134, 126, 18);
 
+        buttonGroup1.add(jRadioButton2);
         jRadioButton2.setText("Materias no Inscriptas");
         jRadioButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -110,7 +118,7 @@ public class FormularioDeInscripcion extends javax.swing.JInternalFrame {
             }
         });
         getContentPane().add(jRadioButton2);
-        jRadioButton2.setBounds(310, 134, 131, 23);
+        jRadioButton2.setBounds(310, 134, 143, 18);
 
         tablaAlumno.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -126,55 +134,139 @@ public class FormularioDeInscripcion extends javax.swing.JInternalFrame {
         jScrollPane2.setViewportView(tablaAlumno);
 
         getContentPane().add(jScrollPane2);
-        jScrollPane2.setBounds(18, 164, 452, 214);
+        jScrollPane2.setBounds(18, 164, 456, 214);
 
         btnInscribir.setText("Inscribir");
         getContentPane().add(btnInscribir);
-        btnInscribir.setBounds(18, 390, 71, 23);
+        btnInscribir.setBounds(18, 390, 110, 28);
 
         btnAnular.setText("Anular Inscripcion");
         getContentPane().add(btnAnular);
-        btnAnular.setBounds(198, 390, 117, 23);
+        btnAnular.setBounds(198, 390, 150, 28);
 
-        btnSalir.setText("Salir");
+        btnSalir.setText("Salir1");
         btnSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSalirActionPerformed(evt);
             }
         });
         getContentPane().add(btnSalir);
-        btnSalir.setBounds(421, 390, 53, 23);
+        btnSalir.setBounds(394, 390, 80, 28);
 
         jPanel1.setBackground(new java.awt.Color(18, 123, 77));
+
+        jLabel2.setText("Seleccione un alumno:");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 510, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(32, 32, 32)
+                .addComponent(jLabel2)
+                .addContainerGap(362, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 460, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(80, 80, 80)
+                .addComponent(jLabel2)
+                .addContainerGap(364, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel1);
-        jPanel1.setBounds(0, 0, 510, 460);
+        jPanel1.setBounds(0, 0, 520, 460);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    //Método para llenar la tabla con las materias en la que está inscripto el alumno.
     private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
-        // TODO add your handling code here:
+        //activo y desactivo botones correspondientes
+        btnAnular.setVisible(true);
+        btnInscribir.setVisible(false);
+
+        try {
+            //guardo en una variable el id recogido del alumno del combobox
+            int id = comboBoxAlumno.getItemAt(comboBoxAlumno.getSelectedIndex()).getIdAlumno();
+
+            //Instancio una clase "inscripcionService" para poder acceder a sus metodos
+            inscripcionService ins = new inscripcionService();
+           
+            ArrayList materias = ins.obtenerMateriaCursadas(id);
+
+            //le otorgo un modelo a la tabla
+            DefaultTableModel modelo = new DefaultTableModel();
+            modelo.addColumn("Id");
+            modelo.addColumn("Nombre");
+            modelo.addColumn("Año");
+            tablaAlumno.setModel(modelo);
+
+            //creo un vector para guardar los datos del array y que luego el modelo de la tabla pueda agregarlo a la tabla.
+            Object mate[] = null;
+            for (int i = 0; i < materias.size(); i++) {
+                modelo.addRow(mate);
+                materia getm = (materia) materias.get(i);
+                modelo.setValueAt(getm.getIdMateria(), i, 0);
+                modelo.setValueAt(getm.getNombre(), i, 1);
+                modelo.setValueAt(getm.getAño(), i, 2);
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "eerroorr" + ex.getLocalizedMessage());
+
+        }
     }//GEN-LAST:event_jRadioButton1ActionPerformed
 
+    //Método para cerrar la ventana
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
         this.dispose();
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
-        // TODO add your handling code here:
+        
+           //activo y desactivo botones correspondientes
+        btnAnular.setVisible(false);
+        btnInscribir.setVisible(true);
+        try {
+            int id = comboBoxAlumno.getItemAt(comboBoxAlumno.getSelectedIndex()).getIdAlumno();
+
+            inscripcionService ins = new inscripcionService();
+            //Guardo el arraylist que me retorna en una variable para usar luego la variable 
+            //y no se esté conectando y desconectando de la base de datos si llamo al metodo varias veces
+            ArrayList materias = ins.obtenerMateriaNoCursadas(id);
+
+            DefaultTableModel modelo = new DefaultTableModel();
+            modelo.addColumn("Id");
+            modelo.addColumn("Nombre");
+            modelo.addColumn("Año");
+            tablaAlumno.setModel(modelo);
+
+            for (Object object : materias) {
+                System.out.println(object);
+            }
+            //creo un vector para guardar los datos del array y que luego el modelo de la tabla pueda agregarlo a la tabla.
+
+            Object mate[] = null;
+            for (int i = 0; i < materias.size(); i++) {
+                modelo.addRow(mate);
+                materia getm = (materia) materias.get(i);
+                modelo.setValueAt(getm.getIdMateria(), i, 0);
+                modelo.setValueAt(getm.getNombre(), i, 1);
+                modelo.setValueAt(getm.getAño(), i, 2);
+
+            }
+        } catch (NullPointerException ex) {
+            JOptionPane.showMessageDialog(null, "eerroorr" + ex.getLocalizedMessage());
+
+        } catch (Exception ex) {
+            Logger.getLogger(FormularioDeInscripcion.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jRadioButton2ActionPerformed
+
+
+    private void comboBoxAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxAlumnoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_comboBoxAlumnoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -182,7 +274,7 @@ public class FormularioDeInscripcion extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnInscribir;
     private javax.swing.JButton btnSalir;
     private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.JComboBox<String> comboBoxAlumno;
+    private javax.swing.JComboBox<alumno> comboBoxAlumno;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -196,43 +288,37 @@ public class FormularioDeInscripcion extends javax.swing.JInternalFrame {
     private javax.swing.JTable tablaAlumno;
     // End of variables declaration//GEN-END:variables
 
-//public void llenarComboBoxAlumno(){
-//        
-//       inscripcionDAO ins = new inscripcionDAO();
-//         
+//    public void llenarCombobox() {
 //        try {
-//            ins.coneccionBaseDatos();
-//        String sql = "select * from alumno";
-//             
-//        
-//                     
-////          st = cn.createStatement();
-//            ResultSet rs = st.executeQuery(sql);
-//            while (rs.next()) {
-//              this.jComboBox1.addItem(rs.getInt("idAlumno")+"-"+rs.getString("nombre")+"-"+rs.getString("apellido"));
-//             
-////               String nombre = rs.getString("nombre");
-////              System.out.println(nombre);
+//            alumnoService a = new alumnoService();
+//
+//            for (alumno object : a.listarAlumno()) {
+//                comboBoxAlumno.addItem(object);
+//
 //            }
-//        } catch (SQLException e) {
-//            System.out.println("Error al mostrar datos " + e);
-//        } catch (ClassNotFoundException ex) {
-//            Logger.getLogger(FormularioDeInscripcion.class.getName()).log(Level.SEVERE, null, ex);
+//        } catch (Exception ex) {
+//            Logger.getLogger(FormularioDeInscripcion.class
+//                    .getName()).log(Level.SEVERE, null, ex);
 //        }
 //    }
+//    private void borrarFilas() {
 //
-//    public void llenarCombo(){
-//         inscripcionDAO ins = new inscripcionDAO();
-//         
-//         ins.coneccionBaseDatos();
-//        try {
-//            ins.listarAlumno();
-//            
-//        } catch (Exception ex) {
-//            Logger.getLogger(FormularioDeInscripcion.class.getName()).log(Level.SEVERE, null, ex);
+//        int f = tablaAlumno.getRowCount() - 1;
+//
+//        for (; f >= 0; f--) {
+//            modelo.removeRow(f);
 //        }
-//        
-//    }    
-    
-       
+//    }
+    public void llenarComboBoxAlumno() {
+        alumnoService a = new alumnoService();
+
+        try {
+            for (alumno o : a.listarAlumno()) {
+                comboBoxAlumno.addItem(o);
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(FormularioDeInscripcion.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
 }
