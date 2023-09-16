@@ -5,6 +5,7 @@
  */
 package ulp.Vistas;
 
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -191,6 +192,8 @@ public class FormularioDeInscripcion extends javax.swing.JInternalFrame {
 
             //Instancio una clase "inscripcionService" para poder acceder a sus metodos
             inscripcionService ins = new inscripcionService();
+           
+            ArrayList materias = ins.obtenerMateriaCursadas(id);
 
             //le otorgo un modelo a la tabla
             DefaultTableModel modelo = new DefaultTableModel();
@@ -201,9 +204,9 @@ public class FormularioDeInscripcion extends javax.swing.JInternalFrame {
 
             //creo un vector para guardar los datos del array y que luego el modelo de la tabla pueda agregarlo a la tabla.
             Object mate[] = null;
-            for (int i = 0; i < ins.obtenerMateriaCursadas(id).size(); i++) {
+            for (int i = 0; i < materias.size(); i++) {
                 modelo.addRow(mate);
-                materia getm = (materia) ins.obtenerMateriaCursadas(id).get(i);
+                materia getm = (materia) materias.get(i);
                 modelo.setValueAt(getm.getIdMateria(), i, 0);
                 modelo.setValueAt(getm.getNombre(), i, 1);
                 modelo.setValueAt(getm.getAño(), i, 2);
@@ -228,6 +231,9 @@ public class FormularioDeInscripcion extends javax.swing.JInternalFrame {
             int id = comboBoxAlumno.getItemAt(comboBoxAlumno.getSelectedIndex()).getIdAlumno();
 
             inscripcionService ins = new inscripcionService();
+            //Guardo el arraylist que me retorna en una variable para usar luego la variable 
+            //y no se esté conectando y desconectando de la base de datos si llamo al metodo varias veces
+            ArrayList materias = ins.obtenerMateriaNoCursadas(id);
 
             DefaultTableModel modelo = new DefaultTableModel();
             modelo.addColumn("Id");
@@ -235,15 +241,15 @@ public class FormularioDeInscripcion extends javax.swing.JInternalFrame {
             modelo.addColumn("Año");
             tablaAlumno.setModel(modelo);
 
-            for (materia object : ins.obtenerMateriaNoCursadas(id)) {
+            for (Object object : materias) {
                 System.out.println(object);
             }
             //creo un vector para guardar los datos del array y que luego el modelo de la tabla pueda agregarlo a la tabla.
 
             Object mate[] = null;
-            for (int i = 0; i < ins.obtenerMateriaNoCursadas(id).size(); i++) {
+            for (int i = 0; i < materias.size(); i++) {
                 modelo.addRow(mate);
-                materia getm = (materia) ins.obtenerMateriaNoCursadas(id).get(i);
+                materia getm = (materia) materias.get(i);
                 modelo.setValueAt(getm.getIdMateria(), i, 0);
                 modelo.setValueAt(getm.getNombre(), i, 1);
                 modelo.setValueAt(getm.getAño(), i, 2);
