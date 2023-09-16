@@ -20,12 +20,26 @@ public class alumnoService {
 
     public void crearAlumno(int dni, String apellido, String nombre, LocalDate fechaNacimiento, boolean estado) throws NumberFormatException, NullPointerException, DateTimeException, Exception {
         try {
+            int dniReglamentarioMinimo = 1234567;
+            int dniReglamentarioMaximo = 123456789;
+
+            String cadenaDni = Integer.toString(dni);
+            String cadenaDniReglamentarioMinimo = Integer.toString(dniReglamentarioMinimo);
+            String cadenaDniReglamentarioMaximo = Integer.toString(dniReglamentarioMaximo);
             if (buscarAlumnoPorDNI(dni) != null) {
                 JOptionPane.showMessageDialog(null, "Tenemos registrado un alumno con el documento ingresado");
                 return;
             }
-            if (nombre.length() < 2 || apellido.length() < 2) {
-                JOptionPane.showMessageDialog(null, "El nombre u apellido no pueden tener menos de 4 caracteres");
+            if (nombre.length() < 3 || apellido.length() < 3) {
+                JOptionPane.showMessageDialog(null, "El nombre u apellido no pueden tener menos de 3 caracteres");
+                return;
+            }
+            if (cadenaDni.length() < cadenaDniReglamentarioMinimo.length()) {
+                JOptionPane.showMessageDialog(null, "El documento ingresado es menor al reglamentario");
+                return;
+            }
+            if (cadenaDni.length() > cadenaDniReglamentarioMaximo.length()) {
+                JOptionPane.showMessageDialog(null, "El documento ingresado es mayor al reglamentario");
                 return;
             }
             alumnoDAO dao = new alumnoDAO();
