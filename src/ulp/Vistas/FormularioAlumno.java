@@ -32,7 +32,7 @@ public class FormularioAlumno extends javax.swing.JInternalFrame {
         btnEliminar.setEnabled(false);
         btnModificar.setEnabled(false);
         txtId.setVisible(true);
-
+        txtId.setEditable(false);
     }
 
     /**
@@ -301,16 +301,15 @@ public class FormularioAlumno extends javax.swing.JInternalFrame {
             btnEliminar.setEnabled(true);
             btnModificar.setEnabled(true);
             btnGuardar.setEnabled(false);
-            txtDni.setEnabled(false);
+            txtDni.setEditable(false);
+            
             alumnoService a = new alumnoService();
 
             int dni = Integer.parseInt(txtDni.getText());
-
             a.buscarAlumnoPorDNI(dni);
             alumno aux = new alumno();
             //Guardamos en un alumno los valores obtenidos por el método
             aux = a.buscarAlumnoPorDNI(dni);
-
             // utilizamos la informacioon del alumno para setear los campos
             txtId.setText("" + aux.getIdAlumno());
             txtApellido.setText(aux.getApellido());
@@ -358,11 +357,10 @@ public class FormularioAlumno extends javax.swing.JInternalFrame {
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, "Ingrese correctamente los datos");
         }
-
     }//GEN-LAST:event_btnModificarActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        txtId.setEditable(false);
+        txtDni.setEditable(true);
         btnGuardar.setEnabled(true);
         btnEliminar.setEnabled(false);
         btnModificar.setEnabled(false);

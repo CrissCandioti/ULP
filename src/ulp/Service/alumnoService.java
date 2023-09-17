@@ -24,13 +24,11 @@ public class alumnoService {
             int dniReglamentarioMinimo = 1234567;
             int dniReglamentarioMaximo = 123456789;
             LocalDate mayorEdad = LocalDate.of(2005, 01, 01);
-            int edadMayor = 18;
 
             String cadenaDni = Integer.toString(dni);
             String cadenaDniReglamentarioMinimo = Integer.toString(dniReglamentarioMinimo);
             String cadenaDniReglamentarioMaximo = Integer.toString(dniReglamentarioMaximo);
-            Period edad = Period.between(mayorEdad, fechaNacimiento);
-            int años = edad.getYears();
+            boolean limiteEdad = fechaNacimiento.isAfter(mayorEdad);
 
             if (buscarAlumnoPorDNI(dni) != null) {
                 JOptionPane.showMessageDialog(null, "Tenemos registrado un alumno con el documento ingresado");
@@ -48,7 +46,7 @@ public class alumnoService {
                 JOptionPane.showMessageDialog(null, "El documento ingresado es mayor al reglamentario");
                 return;
             }
-            if (años < edadMayor) {
+            if (limiteEdad == true) {
                 JOptionPane.showMessageDialog(null, "Eres menor de edad para proseguir con el registro de inscripcion");
                 return;
             }
@@ -77,7 +75,7 @@ public class alumnoService {
         try {
             alumnoDAO dao = new alumnoDAO();
             if (dao.buscarAlumnoPorID(id).isEstado() == false) {
-                JOptionPane.showMessageDialog(null, "Alumno dado de baja previamente");
+                JOptionPane.showMessageDialog(null, "El alumno ya fue dado de baja");
                 return;
             }
             dao.eliminarEliminarAlumno(id);
@@ -121,13 +119,11 @@ public class alumnoService {
             int dniReglamentarioMinimo = 1234567;
             int dniReglamentarioMaximo = 123456789;
             LocalDate mayorEdad = LocalDate.of(2005, 01, 01);
-            int edadMayor = 18;
 
             String cadenaDni = Integer.toString(dni);
             String cadenaDniReglamentarioMinimo = Integer.toString(dniReglamentarioMinimo);
             String cadenaDniReglamentarioMaximo = Integer.toString(dniReglamentarioMaximo);
-            Period edad = Period.between(mayorEdad, fechaNacimiento);
-            int años = edad.getYears();
+            boolean limiteEdad = fechaNacimiento.isAfter(mayorEdad);
 
             if (buscarAlumnoPorDNI(dni) != null && buscarAlumnoPorDNI(dni).getDni() != dni) {
                 JOptionPane.showMessageDialog(null, "Tenemos registrado un alumno con el documento ingresado");
@@ -147,10 +143,10 @@ public class alumnoService {
                 JOptionPane.showMessageDialog(null, "El documento ingresado es mayor al reglamentario");
                 return;
             }
-//            if (años < edadMayor) {
-//                JOptionPane.showMessageDialog(null, "Eres menor de edad para proseguir con el registro de inscripcion");
-//                return;
-//            }
+            if (limiteEdad == true) {
+                JOptionPane.showMessageDialog(null, "Eres menor de edad para proseguir con el registro de inscripcion");
+                return;
+            }
 
             alumnoDAO dao = new alumnoDAO();
             alumno aux = new alumno();
@@ -167,6 +163,7 @@ public class alumnoService {
                 index = 0;
             }
             dao.modificarAlumno(aux, index);
+            JOptionPane.showMessageDialog(null, "Se modifico exitosamente el alumno");
         } catch (Exception e) {
             throw e;
         }
