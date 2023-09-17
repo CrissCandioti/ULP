@@ -134,7 +134,7 @@ public class FormularioDeInscripcion extends javax.swing.JInternalFrame {
         jScrollPane2.setViewportView(tablaAlumno);
 
         getContentPane().add(jScrollPane2);
-        jScrollPane2.setBounds(18, 164, 456, 214);
+        jScrollPane2.setBounds(44, 164, 430, 214);
 
         btnInscribir.setText("Inscribir");
         btnInscribir.addActionListener(new java.awt.event.ActionListener() {

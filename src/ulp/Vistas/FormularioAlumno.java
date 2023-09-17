@@ -5,7 +5,9 @@
  */
 package ulp.Vistas;
 
+import com.toedter.calendar.JTextFieldDateEditor;
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -32,6 +34,8 @@ public class FormularioAlumno extends javax.swing.JInternalFrame {
         btnEliminar.setEnabled(false);
         btnModificar.setEnabled(false);
         txtId.setVisible(true);
+          datechooser.getDateEditor().setEnabled(false);
+
 
     }
 
@@ -63,6 +67,7 @@ public class FormularioAlumno extends javax.swing.JInternalFrame {
         btnEliminar = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         txtId = new javax.swing.JTextField();
+        btnNuevo = new javax.swing.JButton();
 
         setClosable(true);
         setIconifiable(true);
@@ -137,6 +142,13 @@ public class FormularioAlumno extends javax.swing.JInternalFrame {
             }
         });
 
+        btnNuevo.setText("Nuevo");
+        btnNuevo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNuevoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -152,8 +164,10 @@ public class FormularioAlumno extends javax.swing.JInternalFrame {
                                 .addGap(35, 35, 35)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jLabel6)
-                                        .addGap(22, 22, 22)
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel6)
+                                            .addComponent(btnNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(datechooser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -182,7 +196,7 @@ public class FormularioAlumno extends javax.swing.JInternalFrame {
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
                                                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addGap(0, 46, Short.MAX_VALUE)))))))
-                        .addGap(0, 37, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jButton5)))
@@ -225,7 +239,8 @@ public class FormularioAlumno extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnModificar)
                     .addComponent(btnGuardar)
-                    .addComponent(btnEliminar))
+                    .addComponent(btnEliminar)
+                    .addComponent(btnNuevo))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 91, Short.MAX_VALUE)
                 .addComponent(jButton5)
                 .addContainerGap())
@@ -283,6 +298,7 @@ public class FormularioAlumno extends javax.swing.JInternalFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
+        txtDni.setEditable(false);
         try {
             btnEliminar.setEnabled(true);
             btnModificar.setEnabled(true);
@@ -301,11 +317,13 @@ public class FormularioAlumno extends javax.swing.JInternalFrame {
             txtId.setText(""+aux.getIdAlumno());
             txtApellido.setText(aux.getApellido());
             txtNombre.setText(aux.getNombre());
-
-       
-
-              java.util.Date fecha = new Date(2323,02,03);
-                 datechooser.setDate(fecha);
+            
+            
+            LocalDate localDate = aux.getFechaNacimiento();
+            java.util.Date utilDate = java.util.Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+            
+            datechooser.setDate(utilDate);
+//
 
 
         } catch (Exception ex) {
@@ -355,11 +373,19 @@ public class FormularioAlumno extends javax.swing.JInternalFrame {
         
     }//GEN-LAST:event_btnModificarActionPerformed
 
+    private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
+        
+        btnGuardar.setEnabled(true);
+        txtDni.setEditable(true);
+        limpiar();
+    }//GEN-LAST:event_btnNuevoActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnModificar;
+    private javax.swing.JButton btnNuevo;
     private com.toedter.calendar.JDateChooser datechooser;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton5;
@@ -379,10 +405,12 @@ public class FormularioAlumno extends javax.swing.JInternalFrame {
     // End of variables declaration//GEN-END:variables
 
     public void limpiar() {
+        txtId.setText("");
         txtApellido.setText("");
         txtDni.setText("");
         txtNombre.setText("");
         radioBestado.setSelected(false);
+        datechooser.setDate(null);
         //Falta la fecha
     }
 }
