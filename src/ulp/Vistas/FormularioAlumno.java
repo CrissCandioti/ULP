@@ -32,7 +32,14 @@ public class FormularioAlumno extends javax.swing.JInternalFrame {
         btnEliminar.setEnabled(false);
         btnModificar.setEnabled(false);
         txtId.setVisible(true);
+<<<<<<< Updated upstream
         txtId.setEditable(false);
+=======
+        datechooser.getDateEditor().setEnabled(false);
+        txtId.setEditable(false);
+               
+
+>>>>>>> Stashed changes
     }
 
     /**
@@ -318,6 +325,8 @@ public class FormularioAlumno extends javax.swing.JInternalFrame {
             LocalDate localDate = aux.getFechaNacimiento();
             java.util.Date utilDate = java.util.Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
             datechooser.setDate(utilDate);
+            
+            
 
         } catch (NullPointerException ex) {
             JOptionPane.showMessageDialog(this, "No se encontro ese alumno en la base de datos");
@@ -360,7 +369,11 @@ public class FormularioAlumno extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnModificarActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+<<<<<<< Updated upstream
         txtDni.setEditable(true);
+=======
+        
+>>>>>>> Stashed changes
         btnGuardar.setEnabled(true);
         btnEliminar.setEnabled(false);
         btnModificar.setEnabled(false);

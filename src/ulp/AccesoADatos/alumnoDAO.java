@@ -51,12 +51,16 @@ public final class alumnoDAO extends DAO {
                 LocalDate localDate = fechaSQL.toLocalDate();
                 // Se setea la fecha al alumno a retornar
                 aux.setFechaNacimiento(localDate);
+                
                 if (resultado.getInt(6) == 0) {
                     estado = false;
+                    
                 } else if (resultado.getInt(6) == 1) {
                     estado = true;
                 }
                 aux.setEstado(estado);
+                
+                
             }
             desconectarBaseDatos();
             return aux;
