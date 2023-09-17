@@ -287,7 +287,7 @@ public class FormularioAlumno extends javax.swing.JInternalFrame {
             btnEliminar.setEnabled(true);
             btnModificar.setEnabled(true);
             btnGuardar.setEnabled(false);
-
+            txtDni.setEnabled(false);
             alumnoService a = new alumnoService();
 
             int dni = Integer.parseInt(txtDni.getText());
@@ -298,61 +298,53 @@ public class FormularioAlumno extends javax.swing.JInternalFrame {
             aux = a.buscarAlumnoPorDNI(dni);
 
             // utilizamos la informacioon del alumno para setear los campos
-            txtId.setText(""+aux.getIdAlumno());
+            txtId.setText("" + aux.getIdAlumno());
             txtApellido.setText(aux.getApellido());
             txtNombre.setText(aux.getNombre());
+            //Forma de setear el DateChooser
+            LocalDate localDate = aux.getFechaNacimiento();
+            java.util.Date utilDate = java.util.Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+            datechooser.setDate(utilDate);
 
-       
-
-              java.util.Date fecha = new Date(2323,02,03);
-                 datechooser.setDate(fecha);
-
-
-        } catch (Exception ex) {
-
-            Logger.getLogger(FormularioAlumno.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NullPointerException ex) {
+            JOptionPane.showMessageDialog(this, "No se encontro ese alumno en la base de datos");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Ingrese el documento para su busqueda");
         }
-
-
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-       
         try {
             int id = Integer.parseInt(txtId.getText());
             alumnoService a = new alumnoService();
-            
             a.eliminarAlumno(id);
-            
+            limpiar();
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "No se encontro ningun alumno para su eliminacion");
         } catch (Exception ex) {
-            Logger.getLogger(FormularioAlumno.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, "Error al analizar los datos");
         }
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
-       
         try {
             alumnoService a = new alumnoService();
-            
             int id = Integer.parseInt(txtId.getText());
             int dni = Integer.parseInt(txtDni.getText());
             String apellido = txtApellido.getText();
             String nombre = txtNombre.getText();
             String fechaNac = ((JTextField) datechooser.getDateEditor().getUiComponent()).getText();
-
             boolean index = radioBestado.isSelected();
-            
             a.modificarAlumno(id, dni, apellido, nombre, LocalDate.parse(fechaNac), index);
-            
-            
-        } catch (NullPointerException ex) {
-            Logger.getLogger(FormularioAlumno.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (DateTimeException ex) {
-            Logger.getLogger(FormularioAlumno.class.getName()).log(Level.SEVERE, null, ex);
+            limpiar();
+        } catch (NumberFormatException b) {
+            JOptionPane.showMessageDialog(this, "Ingrese los datos numericos del documento correspondiente");
+        } catch (DateTimeException d) {
+            JOptionPane.showMessageDialog(this, "Ocurrio un error al analizar la fecha ingresada");
         } catch (Exception ex) {
-            Logger.getLogger(FormularioAlumno.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, "Ingrese correctamente los datos");
         }
-        
+
     }//GEN-LAST:event_btnModificarActionPerformed
 
 
@@ -379,10 +371,11 @@ public class FormularioAlumno extends javax.swing.JInternalFrame {
     // End of variables declaration//GEN-END:variables
 
     public void limpiar() {
+        txtId.setText("");
         txtApellido.setText("");
         txtDni.setText("");
         txtNombre.setText("");
         radioBestado.setSelected(false);
-        //Falta la fecha
+        datechooser.setDate(null);
     }
 }

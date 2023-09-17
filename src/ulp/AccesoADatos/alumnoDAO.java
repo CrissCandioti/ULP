@@ -38,6 +38,7 @@ public final class alumnoDAO extends DAO {
             String sql = "SELECT `idAlumno`, `dni`, `apellido`, `nombre`, `fechaNacimiento`, `estado` FROM `alumno` WHERE idAlumno = " + id;
             consultarBaseDatos(sql);
             alumno aux = null;
+            boolean estado = false;
             while (resultado.next()) {
                 aux = new alumno();
                 aux.setIdAlumno(resultado.getInt(1));
@@ -50,7 +51,12 @@ public final class alumnoDAO extends DAO {
                 LocalDate localDate = fechaSQL.toLocalDate();
                 // Se setea la fecha al alumno a retornar
                 aux.setFechaNacimiento(localDate);
-                aux.setEstado(true);
+                if (resultado.getInt(6) == 0) {
+                    estado = false;
+                } else if (resultado.getInt(6) == 1) {
+                    estado = true;
+                }
+                aux.setEstado(estado);
             }
             desconectarBaseDatos();
             return aux;
@@ -65,6 +71,7 @@ public final class alumnoDAO extends DAO {
             String sql = "SELECT `idAlumno`, `dni`, `apellido`, `nombre`, `fechaNacimiento`, `estado` FROM `alumno` WHERE dni = " + dni;
             consultarBaseDatos(sql);
             alumno aux = null;
+            boolean estado = false;
             while (resultado.next()) {
                 aux = new alumno();
                 aux.setIdAlumno(resultado.getInt(1));
@@ -77,7 +84,12 @@ public final class alumnoDAO extends DAO {
                 LocalDate localDate = fechaSQL.toLocalDate();
                 // Se setea la fecha al alumno a retornar
                 aux.setFechaNacimiento(localDate);
-                aux.setEstado(true);
+                if (resultado.getInt(6) == 0) {
+                    estado = false;
+                } else if (resultado.getInt(6) == 1) {
+                    estado = true;
+                }
+                aux.setEstado(estado);
             }
             desconectarBaseDatos();
             return aux;
@@ -93,6 +105,7 @@ public final class alumnoDAO extends DAO {
             consultarBaseDatos(sql);
             ArrayList<alumno> listaAlumnoARetornar = new ArrayList<>();
             alumno aux = null;
+            boolean estado = false;
             while (resultado.next()) {
                 aux = new alumno();
                 aux.setIdAlumno(resultado.getInt(1));
@@ -105,7 +118,12 @@ public final class alumnoDAO extends DAO {
                 LocalDate localDate = fechaSQL.toLocalDate();
                 // Se setea la fecha al alumno a retornar
                 aux.setFechaNacimiento(localDate);
-                aux.setEstado(true);
+                if (resultado.getInt(6) == 0) {
+                    estado = false;
+                } else if (resultado.getInt(6) == 1) {
+                    estado = true;
+                }
+                aux.setEstado(estado);
                 listaAlumnoARetornar.add(aux);
             }
             desconectarBaseDatos();

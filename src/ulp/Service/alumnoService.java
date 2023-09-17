@@ -7,6 +7,7 @@ package ulp.Service;
 
 import java.time.DateTimeException;
 import java.time.LocalDate;
+import java.time.Period;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import ulp.AccesoADatos.alumnoDAO;
@@ -22,10 +23,15 @@ public class alumnoService {
         try {
             int dniReglamentarioMinimo = 1234567;
             int dniReglamentarioMaximo = 123456789;
+            LocalDate mayorEdad = LocalDate.of(2005, 01, 01);
+            int edadMayor = 18;
 
             String cadenaDni = Integer.toString(dni);
             String cadenaDniReglamentarioMinimo = Integer.toString(dniReglamentarioMinimo);
             String cadenaDniReglamentarioMaximo = Integer.toString(dniReglamentarioMaximo);
+            Period edad = Period.between(mayorEdad, fechaNacimiento);
+            int años = edad.getYears();
+
             if (buscarAlumnoPorDNI(dni) != null) {
                 JOptionPane.showMessageDialog(null, "Tenemos registrado un alumno con el documento ingresado");
                 return;
@@ -42,6 +48,11 @@ public class alumnoService {
                 JOptionPane.showMessageDialog(null, "El documento ingresado es mayor al reglamentario");
                 return;
             }
+            if (años < edadMayor) {
+                JOptionPane.showMessageDialog(null, "Eres menor de edad para proseguir con el registro de inscripcion");
+                return;
+            }
+
             alumnoDAO dao = new alumnoDAO();
             alumno aux = new alumno();
             aux.setDni(dni);
@@ -65,9 +76,12 @@ public class alumnoService {
     public void eliminarAlumno(int id) throws NumberFormatException, Exception {
         try {
             alumnoDAO dao = new alumnoDAO();
+            if (dao.buscarAlumnoPorID(id).isEstado() == false) {
+                JOptionPane.showMessageDialog(null, "Alumno dado de baja previamente");
+                return;
+            }
             dao.eliminarEliminarAlumno(id);
-        } catch (NumberFormatException f) {
-            throw new NumberFormatException("Ingrese correctamente el ID");
+            JOptionPane.showMessageDialog(null, "Alumno fue dado de baja exitosamente");
         } catch (Exception e) {
             throw e;
         }
@@ -84,12 +98,10 @@ public class alumnoService {
         }
     }
 
-    public alumno buscarAlumnoPorDNI(int dni) throws NumberFormatException, Exception {
+    public alumno buscarAlumnoPorDNI(int dni) throws Exception {
         try {
             alumnoDAO dao = new alumnoDAO();
             return dao.buscarAlumnoPorDNI(dni);
-        } catch (NumberFormatException f) {
-            throw new NumberFormatException("Ingrese el DNI correspondiente para buscar al alumno deseado");
         } catch (Exception e) {
             throw e;
         }
@@ -106,6 +118,40 @@ public class alumnoService {
 
     public void modificarAlumno(int id, int dni, String apellido, String nombre, LocalDate fechaNacimiento, boolean estado) throws NumberFormatException, NullPointerException, DateTimeException, Exception {
         try {
+            int dniReglamentarioMinimo = 1234567;
+            int dniReglamentarioMaximo = 123456789;
+            LocalDate mayorEdad = LocalDate.of(2005, 01, 01);
+            int edadMayor = 18;
+
+            String cadenaDni = Integer.toString(dni);
+            String cadenaDniReglamentarioMinimo = Integer.toString(dniReglamentarioMinimo);
+            String cadenaDniReglamentarioMaximo = Integer.toString(dniReglamentarioMaximo);
+            Period edad = Period.between(mayorEdad, fechaNacimiento);
+            int años = edad.getYears();
+
+            if (buscarAlumnoPorDNI(dni) != null && buscarAlumnoPorDNI(dni).getDni() != dni) {
+                JOptionPane.showMessageDialog(null, "Tenemos registrado un alumno con el documento ingresado");
+                JOptionPane.showMessageDialog(null, "Recuerde ingresar correctamente el documento para su modificacion");
+                return;
+            }
+            if (nombre.length() < 3 || apellido.length() < 3) {
+                JOptionPane.showMessageDialog(null, "El nombre u apellido no pueden tener menos de 3 caracteres");
+                JOptionPane.showMessageDialog(null, "Debe tener presente el respetar los caracteres reglamentarios para su modificacion");
+                return;
+            }
+            if (cadenaDni.length() < cadenaDniReglamentarioMinimo.length()) {
+                JOptionPane.showMessageDialog(null, "El documento ingresado es menor al reglamentario");
+                return;
+            }
+            if (cadenaDni.length() > cadenaDniReglamentarioMaximo.length()) {
+                JOptionPane.showMessageDialog(null, "El documento ingresado es mayor al reglamentario");
+                return;
+            }
+//            if (años < edadMayor) {
+//                JOptionPane.showMessageDialog(null, "Eres menor de edad para proseguir con el registro de inscripcion");
+//                return;
+//            }
+
             alumnoDAO dao = new alumnoDAO();
             alumno aux = new alumno();
             aux.setIdAlumno(id);
@@ -121,14 +167,8 @@ public class alumnoService {
                 index = 0;
             }
             dao.modificarAlumno(aux, index);
-        } catch (NumberFormatException a) {
-            throw new NumberFormatException("Ingrese los numero correspondientes para su modificacion");
-        } catch (NullPointerException b) {
-            throw new NullPointerException("No deje ninguna celda vacia");
-        } catch (DateTimeException c) {
-            throw new DateTimeException("Error al analizar la fecha");
         } catch (Exception e) {
-            throw new Exception("Ingrese correctamente los datos para su modificacion");
+            throw e;
         }
     }
 }

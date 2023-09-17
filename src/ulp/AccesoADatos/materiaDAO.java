@@ -29,7 +29,8 @@ public final class materiaDAO extends DAO {
             consultarBaseDatos(sql);
             materia aux = null;
             while (resultado.next()) {
-                aux = new materia(resultado.getInt(1), resultado.getString(2), resultado.getInt(3), true);
+//                aux = new materia(resultado.getInt(1), resultado.getString(2), resultado.getInt(3), true);
+
             }
             
             return aux;
