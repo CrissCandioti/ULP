@@ -313,14 +313,24 @@ public class FormularioAlumno extends javax.swing.JInternalFrame {
             alumno aux = new alumno();
             //Guardamos en un alumno los valores obtenidos por el método
             aux = a.buscarAlumnoPorDNI(dni);
+            
             // utilizamos la informacioon del alumno para setear los campos
             txtId.setText("" + aux.getIdAlumno());
             txtApellido.setText(aux.getApellido());
             txtNombre.setText(aux.getNombre());
+            
             //Forma de setear el DateChooser
             LocalDate localDate = aux.getFechaNacimiento();
             java.util.Date utilDate = java.util.Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
             datechooser.setDate(utilDate);
+            
+            //Forma de setear el radioButon
+            if (aux.isEstado()==true) {
+                radioBestado.setSelected(true);
+            }else{
+                radioBestado.setSelected(false);
+            }
+            
         } catch (NullPointerException ex) {
             JOptionPane.showMessageDialog(this, "No se encontro ese alumno en la base de datos");
         } catch (Exception e) {
