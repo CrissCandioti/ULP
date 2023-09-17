@@ -28,16 +28,25 @@ public final class materiaDAO extends DAO {
             String sql = "SELECT `idMateria`, `nombre`, `año`, `estado` FROM `materia` WHERE idMateria = " + id;
             consultarBaseDatos(sql);
             materia aux = null;
+            boolean estado = false;
             while (resultado.next()) {
-//                aux = new materia(resultado.getInt(1), resultado.getString(2), resultado.getInt(3), true);
-
+                aux = new materia();
+                aux.setIdMateria(resultado.getInt(1));
+                aux.setNombre(resultado.getString(2));
+                aux.setAño(resultado.getInt(3));
+                if (resultado.getInt(4) == 0) {
+                    estado = false;
+                } else if (resultado.getInt(4) == 1) {
+                    estado = true;
+                }
+                aux.setEstado(estado);
             }
-            
+
             return aux;
         } catch (Exception e) {
             desconectarBaseDatos();
             throw e;
-        }finally{
+        } finally {
             desconectarBaseDatos();
         }
     }
@@ -87,5 +96,4 @@ public final class materiaDAO extends DAO {
             throw e;
         }
     }
-
 }
