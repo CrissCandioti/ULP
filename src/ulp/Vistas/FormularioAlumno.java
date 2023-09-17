@@ -32,14 +32,11 @@ public class FormularioAlumno extends javax.swing.JInternalFrame {
         btnEliminar.setEnabled(false);
         btnModificar.setEnabled(false);
         txtId.setVisible(true);
-<<<<<<< Updated upstream
         txtId.setEditable(false);
-=======
+
         datechooser.getDateEditor().setEnabled(false);
         txtId.setEditable(false);
-               
 
->>>>>>> Stashed changes
     }
 
     /**
@@ -303,7 +300,6 @@ public class FormularioAlumno extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-
         try {
             btnEliminar.setEnabled(true);
             btnModificar.setEnabled(true);
@@ -311,7 +307,7 @@ public class FormularioAlumno extends javax.swing.JInternalFrame {
             txtDni.setEditable(false);
             
             alumnoService a = new alumnoService();
-
+            
             int dni = Integer.parseInt(txtDni.getText());
             a.buscarAlumnoPorDNI(dni);
             alumno aux = new alumno();
@@ -325,9 +321,6 @@ public class FormularioAlumno extends javax.swing.JInternalFrame {
             LocalDate localDate = aux.getFechaNacimiento();
             java.util.Date utilDate = java.util.Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
             datechooser.setDate(utilDate);
-            
-            
-
         } catch (NullPointerException ex) {
             JOptionPane.showMessageDialog(this, "No se encontro ese alumno en la base de datos");
         } catch (Exception e) {
@@ -369,11 +362,7 @@ public class FormularioAlumno extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnModificarActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-<<<<<<< Updated upstream
         txtDni.setEditable(true);
-=======
-        
->>>>>>> Stashed changes
         btnGuardar.setEnabled(true);
         btnEliminar.setEnabled(false);
         btnModificar.setEnabled(false);
