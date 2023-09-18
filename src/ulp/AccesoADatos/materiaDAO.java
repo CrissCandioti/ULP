@@ -9,8 +9,11 @@ import java.util.ArrayList;
 import ulp.Entidades.materia;
 
 /**
+ * La clase materiaDAO tiene las mismas caracteristicas que la clase alumnoDAO.
+ * Ambas heredan las variables y los metodos de DAO, ambas son clases final, y
+ * ambas tienen metodos parecidos con ligeras diferencias en los comandos de los
+ * metodos.
  *
- * @author criss
  */
 public final class materiaDAO extends DAO {
 
