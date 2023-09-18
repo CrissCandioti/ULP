@@ -32,15 +32,14 @@ public class FormularioAlumno extends javax.swing.JInternalFrame {
         btnEliminar.setEnabled(false);
         btnModificar.setEnabled(false);
         txtId.setVisible(true);
-<<<<<<< Updated upstream
+
         txtId.setEditable(false);
-=======
+
         datechooser.getDateEditor().setEnabled(false);
         txtId.setEditable(false);
                
 
->>>>>>> Stashed changes
-    }
+  }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -369,11 +368,11 @@ public class FormularioAlumno extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnModificarActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-<<<<<<< Updated upstream
+
         txtDni.setEditable(true);
-=======
+
         
->>>>>>> Stashed changes
+
         btnGuardar.setEnabled(true);
         btnEliminar.setEnabled(false);
         btnModificar.setEnabled(false);
