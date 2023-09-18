@@ -75,6 +75,7 @@ public class FormularioNotas extends javax.swing.JInternalFrame {
         jLabel2.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel2.setText("Seleccione un alumno:");
 
+        comboAlumno.setMaximumRowCount(15);
         comboAlumno.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 comboAlumnoActionPerformed(evt);
@@ -116,6 +117,7 @@ public class FormularioNotas extends javax.swing.JInternalFrame {
         jLabel3.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel3.setText("Seleccione la nueva nota:");
 
+        comboNota.setMaximumRowCount(11);
         comboNota.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" }));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);

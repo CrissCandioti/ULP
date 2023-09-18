@@ -244,7 +244,7 @@ public class FormularioMateria extends javax.swing.JInternalFrame {
  
             
             m.guardarMateria(nombre, año  ,estado);
-            
+            JOptionPane.showMessageDialog(this, "materia Guardada con éxito");
             
         } catch (NullPointerException ex) {
             System.out.println("Ingrese datos"+ex);
