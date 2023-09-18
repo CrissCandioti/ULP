@@ -131,6 +131,11 @@ public class FormularioDeInscripcion extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tablaAlumno.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tablaAlumnoMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(tablaAlumno);
 
         getContentPane().add(jScrollPane2);
@@ -146,6 +151,11 @@ public class FormularioDeInscripcion extends javax.swing.JInternalFrame {
         btnInscribir.setBounds(18, 390, 110, 28);
 
         btnAnular.setText("Anular Inscripcion");
+        btnAnular.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAnularActionPerformed(evt);
+            }
+        });
         getContentPane().add(btnAnular);
         btnAnular.setBounds(198, 390, 150, 28);
 
@@ -189,6 +199,7 @@ public class FormularioDeInscripcion extends javax.swing.JInternalFrame {
     private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
         //activo y desactivo botones correspondientes
         btnAnular.setVisible(true);
+        btnAnular.setEnabled(false);
         btnInscribir.setVisible(false);
 
         try {
@@ -197,7 +208,7 @@ public class FormularioDeInscripcion extends javax.swing.JInternalFrame {
 
             //Instancio una clase "inscripcionService" para poder acceder a sus metodos
             inscripcionService ins = new inscripcionService();
-           
+
             ArrayList materias = ins.obtenerMateriaCursadas(id);
 
             //le otorgo un modelo a la tabla
@@ -228,9 +239,10 @@ public class FormularioDeInscripcion extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
-        
-           //activo y desactivo botones correspondientes
+
+        //activo y desactivo botones correspondientes
         btnAnular.setVisible(false);
+        btnInscribir.setEnabled(false);
         btnInscribir.setVisible(true);
         try {
             int id = comboBoxAlumno.getItemAt(comboBoxAlumno.getSelectedIndex()).getIdAlumno();
@@ -273,21 +285,56 @@ public class FormularioDeInscripcion extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_comboBoxAlumnoActionPerformed
 
+    //Método para INSCRIBIR un alumno a una materia
     private void btnInscribirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInscribirActionPerformed
-        
+
         try {
-            int idAlumno= comboBoxAlumno.getItemAt(comboBoxAlumno.getSelectedIndex()).getIdAlumno();
-            
-            
+            //Creo un modelo y le asigno ese modelo a la jtable
+            DefaultTableModel modelo = (DefaultTableModel) tablaAlumno.getModel();
+
+            //guardo en una variable el id del alumno que esta en el combobox
+            int idAlumno = comboBoxAlumno.getItemAt(comboBoxAlumno.getSelectedIndex()).getIdAlumno();
+            //obtengo el indice 0 (donde está el id de la materia) de la fila seleccionada en la tabla y lo guardo en una variable
+            int idMateria = (int) modelo.getValueAt(tablaAlumno.getSelectedRow(), 0);
+
+            //Instancio IscripcionService, con las variables obtenidas, para acceder al método "crearInscripcion()"
             inscripcionService ins = new inscripcionService();
-            ins.crearInscripcion(1 ,idAlumno,3);
-            
+
+            ins.crearInscripcion(0, idAlumno, idMateria);
+            JOptionPane.showMessageDialog(this, "Alumno Inscripto");
+
         } catch (NullPointerException ex) {
             Logger.getLogger(FormularioDeInscripcion.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Exception ex) {
             Logger.getLogger(FormularioDeInscripcion.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnInscribirActionPerformed
+
+    //Metodo para habilitar los botones al hacer click en las materias
+    private void tablaAlumnoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaAlumnoMouseClicked
+        btnAnular.setEnabled(true);
+        btnInscribir.setEnabled(true);
+    }//GEN-LAST:event_tablaAlumnoMouseClicked
+
+    private void btnAnularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnularActionPerformed
+      
+        if (JOptionPane.showConfirmDialog(null, "ESTA SEGURO DE ELIMINAR INSCRIPCION?", "SALIR", JOptionPane.YES_NO_CANCEL_OPTION) == 0){
+        
+        try {
+            
+            DefaultTableModel modelo = (DefaultTableModel) tablaAlumno.getModel();
+            int idMateria = (int) modelo.getValueAt(tablaAlumno.getSelectedRow(), 0);
+            int idAlumno = comboBoxAlumno.getItemAt(comboBoxAlumno.getSelectedIndex()).getIdAlumno();
+            
+            inscripcionService ins = new inscripcionService();
+            
+            ins.borrarInscripcionAlumnoMateria(idAlumno, idMateria);
+            
+        } catch (Exception ex) {
+            Logger.getLogger(FormularioDeInscripcion.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        }
+    }//GEN-LAST:event_btnAnularActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

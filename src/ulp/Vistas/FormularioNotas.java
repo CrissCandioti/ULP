@@ -5,17 +5,40 @@
  */
 package ulp.Vistas;
 
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import ulp.Entidades.alumno;
+import ulp.Entidades.inscripcion;
+import ulp.Entidades.materia;
+import ulp.Service.alumnoService;
+import ulp.Service.inscripcionService;
+
 /**
  *
  * @author Cristian
  */
 public class FormularioNotas extends javax.swing.JInternalFrame {
 
+    
+//    DefaultTableModel model = new DefaultTableModel() {
+//    @Override
+//    public boolean isCellEditable(int rowIndex, int columnIndex) {
+//        return columnIndex == 0; // Esto hará que solo la primera columna sea editable
+//    }
+//};
+
     /**
      * Creates new form FormularioNotas
      */
     public FormularioNotas() {
         initComponents();
+        llenarComboBoxAlumno();
+        llenarTabla();
+        btnGuardar.setEnabled(false);
+        comboNota.setVisible(false);
     }
 
     /**
@@ -31,15 +54,18 @@ public class FormularioNotas extends javax.swing.JInternalFrame {
         jLabel1 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel2 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        comboAlumno = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tablaAlumno = new javax.swing.JTable();
         btnGuardar = new javax.swing.JButton();
         btnSalir = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        comboNota = new javax.swing.JComboBox<>();
 
         setClosable(true);
         setIconifiable(true);
         setTitle("Gestión Notas");
+        setPreferredSize(new java.awt.Dimension(510, 530));
 
         jPanel1.setBackground(new java.awt.Color(18, 123, 77));
 
@@ -49,9 +75,13 @@ public class FormularioNotas extends javax.swing.JInternalFrame {
         jLabel2.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel2.setText("Seleccione un alumno:");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboAlumno.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboAlumnoActionPerformed(evt);
+            }
+        });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tablaAlumno.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -62,9 +92,19 @@ public class FormularioNotas extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        tablaAlumno.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tablaAlumnoMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tablaAlumno);
 
-        btnGuardar.setText("Guardar");
+        btnGuardar.setText("Modificar Nota");
+        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarActionPerformed(evt);
+            }
+        });
 
         btnSalir.setText("Salir");
         btnSalir.addActionListener(new java.awt.event.ActionListener() {
@@ -72,6 +112,11 @@ public class FormularioNotas extends javax.swing.JInternalFrame {
                 btnSalirActionPerformed(evt);
             }
         });
+
+        jLabel3.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel3.setText("Seleccione la nueva nota:");
+
+        comboNota.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" }));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -86,19 +131,24 @@ public class FormularioNotas extends javax.swing.JInternalFrame {
                         .addGap(39, 39, 39)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 418, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addComponent(jLabel2)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 418, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(25, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(83, 83, 83)
-                .addComponent(btnGuardar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(90, 90, 90))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(comboAlumno, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 418, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addComponent(jLabel3))))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addContainerGap()
+                            .addComponent(comboNota, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                            .addGap(77, 77, 77)
+                            .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(89, 89, 89)
+                            .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(41, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -110,14 +160,18 @@ public class FormularioNotas extends javax.swing.JInternalFrame {
                 .addGap(29, 29, 29)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(comboAlumno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(comboNota, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(21, 21, 21)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnGuardar)
                     .addComponent(btnSalir))
-                .addGap(115, 115, 115))
+                .addGap(86, 86, 86))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -128,7 +182,7 @@ public class FormularioNotas extends javax.swing.JInternalFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 485, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 499, Short.MAX_VALUE)
         );
 
         pack();
@@ -138,16 +192,97 @@ public class FormularioNotas extends javax.swing.JInternalFrame {
         this.dispose();
     }//GEN-LAST:event_btnSalirActionPerformed
 
+    private void comboAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboAlumnoActionPerformed
+        llenarTabla();
+    }//GEN-LAST:event_comboAlumnoActionPerformed
+
+    private void tablaAlumnoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaAlumnoMouseClicked
+        comboNota.setVisible(true);
+        btnGuardar.setEnabled(true);
+    }//GEN-LAST:event_tablaAlumnoMouseClicked
+
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+        
+        try {
+            inscripcionService ins = new inscripcionService();
+            
+            DefaultTableModel modelo = (DefaultTableModel) tablaAlumno.getModel();
+            int idMateria = (int) modelo.getValueAt(tablaAlumno.getSelectedRow(), 0);
+            int nota =Integer.parseInt(comboNota.getSelectedItem().toString());
+            int idAlumno = comboAlumno.getItemAt(comboAlumno.getSelectedIndex()).getIdAlumno();
+            
+            
+            ins.actualizarNota(idAlumno, idMateria, nota);
+            JOptionPane.showMessageDialog(this, "Nota actualizada");
+            llenarTabla();
+        } catch (Exception ex) {
+            Logger.getLogger(FormularioNotas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnGuardarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnSalir;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<alumno> comboAlumno;
+    private javax.swing.JComboBox<String> comboNota;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable tablaAlumno;
     // End of variables declaration//GEN-END:variables
+
+ public void llenarComboBoxAlumno() {
+        alumnoService a = new alumnoService();
+
+        try {
+            for (alumno o : a.listarAlumno()) {
+                comboAlumno.addItem(o);
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(FormularioDeInscripcion.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+ 
+ public void llenarTabla(){
+     
+     btnGuardar.setEnabled(false);
+     comboNota.setSelectedIndex(0);
+     comboNota.setVisible(false);
+     try {
+            //guardo en una variable el id recogido del alumno del combobox
+            int id = comboAlumno.getItemAt(comboAlumno.getSelectedIndex()).getIdAlumno();
+
+            //Instancio una clase "inscripcionService" para poder acceder a sus metodos
+            inscripcionService ins = new inscripcionService();
+           
+            ArrayList inscripciones = ins.obtenerInscripcionPorAlumno(id);
+
+            //le otorgo un modelo a la tabla
+            DefaultTableModel modelo = new DefaultTableModel();          
+            modelo.addColumn("Id");
+            modelo.addColumn("Nombre");
+            modelo.addColumn("Nota");
+            tablaAlumno.setModel(modelo);
+            
+            //creo un vector para guardar los datos del array y que luego el modelo de la tabla pueda agregarlo a la tabla.
+            Object insc[] = null;
+            for (int i = 0; i < inscripciones.size(); i++) {
+                modelo.addRow(insc);
+                inscripcion geti = (inscripcion) inscripciones.get(i);
+                
+                modelo.setValueAt(geti.getIdMateria().getIdMateria(), i, 0);
+                modelo.setValueAt(geti.getIdMateria().getNombre(), i, 1);
+                modelo.setValueAt(geti.getNota(), i, 2);
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "eerroorr" + ex.getLocalizedMessage());
+
+        }
+ 
 }
+}
+
