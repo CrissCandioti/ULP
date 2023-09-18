@@ -5,6 +5,18 @@
  */
 package ulp.Vistas;
 
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import ulp.Entidades.alumno;
+import ulp.Entidades.inscripcion;
+import ulp.Entidades.materia;
+import ulp.Service.alumnoService;
+import ulp.Service.inscripcionService;
+import ulp.Service.materiaService;
+
 /**
  *
  * @author Cristian
@@ -16,6 +28,8 @@ public class FormularioConsulta extends javax.swing.JInternalFrame {
      */
     public FormularioConsulta() {
         initComponents();
+        llenarComboBoxAlumno();
+        llenarTabla();
     }
 
     /**
@@ -33,7 +47,7 @@ public class FormularioConsulta extends javax.swing.JInternalFrame {
         jLabel2 = new javax.swing.JLabel();
         comboBoxMateria = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tablaAlumno = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
 
         jPanel1.setBackground(new java.awt.Color(18, 123, 77));
@@ -44,9 +58,13 @@ public class FormularioConsulta extends javax.swing.JInternalFrame {
         jLabel2.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel2.setText("Seleccione una Materia : ");
 
-        comboBoxMateria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboBoxMateria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboBoxMateriaActionPerformed(evt);
+            }
+        });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tablaAlumno.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -57,9 +75,14 @@ public class FormularioConsulta extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tablaAlumno);
 
         jButton1.setText("Salir");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -117,15 +140,78 @@ public class FormularioConsulta extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void comboBoxMateriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxMateriaActionPerformed
+        
+        llenarTabla();
+    }//GEN-LAST:event_comboBoxMateriaActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> comboBoxMateria;
+    private javax.swing.JComboBox<materia> comboBoxMateria;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable tablaAlumno;
     // End of variables declaration//GEN-END:variables
+public void llenarComboBoxAlumno() {
+        materiaService m = new materiaService();
+        
+
+        try {
+            for (materia o : m.listarMateria()) {
+                comboBoxMateria.addItem(o);
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(FormularioDeInscripcion.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+ public void llenarTabla(){
+     
+   
+     try {
+            //guardo en una variable el id recogido del alumno del combobox
+            int id = comboBoxMateria.getItemAt(comboBoxMateria.getSelectedIndex()).getIdMateria();
+
+            //Instancio una clase "inscripcionService" para poder acceder a sus metodos
+            inscripcionService ins = new inscripcionService();
+           
+            ArrayList alumnos = ins.obtenerAlumnoPorMateria(id) ;
+
+            //le otorgo un modelo a la tabla
+            DefaultTableModel modelo = new DefaultTableModel();          
+            modelo.addColumn("Id");
+            modelo.addColumn("Nombre");
+            modelo.addColumn("Apellido");
+            modelo.addColumn("Dni");
+            modelo.addColumn("Fecha Nacimiento");
+            modelo.addColumn("Estado");
+            tablaAlumno.setModel(modelo);
+            
+            //creo un vector para guardar los datos del array y que luego el modelo de la tabla pueda agregarlo a la tabla.
+            Object alum[] = null;
+            for (int i = 0; i < alumnos.size(); i++) {
+                modelo.addRow(alum);
+                alumno getal = (alumno) alumnos.get(i);
+                
+                modelo.setValueAt(getal.getIdAlumno(), i, 0);
+                modelo.setValueAt(getal.getNombre(), i, 1);
+                modelo.setValueAt(getal.getApellido(), i, 2);
+                modelo.setValueAt(getal.getDni(), i, 3);
+                modelo.setValueAt(getal.getFechaNacimiento(), i, 4);
+                modelo.setValueAt(getal.isEstado(), i, 5);
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "eerroorr" + ex.getLocalizedMessage());
+
+        }
+ 
+}
 }
