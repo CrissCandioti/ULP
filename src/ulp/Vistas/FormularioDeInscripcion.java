@@ -227,9 +227,10 @@ public class FormularioDeInscripcion extends javax.swing.JInternalFrame {
                 modelo.setValueAt(getm.getNombre(), i, 1);
                 modelo.setValueAt(getm.getAño(), i, 2);
             }
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, "eerroorr" + ex.getLocalizedMessage());
-
+        } catch (NullPointerException ex) {
+            JOptionPane.showMessageDialog(null, "No se registra ninguna materia inscripta");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
         }
     }//GEN-LAST:event_jRadioButton1ActionPerformed
 
@@ -273,10 +274,9 @@ public class FormularioDeInscripcion extends javax.swing.JInternalFrame {
 
             }
         } catch (NullPointerException ex) {
-            JOptionPane.showMessageDialog(null, "eerroorr" + ex.getLocalizedMessage());
-
-        } catch (Exception ex) {
-            Logger.getLogger(FormularioDeInscripcion.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "No se registran materias a la cual inscribirse");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
         }
     }//GEN-LAST:event_jRadioButton2ActionPerformed
 
@@ -303,10 +303,12 @@ public class FormularioDeInscripcion extends javax.swing.JInternalFrame {
             ins.crearInscripcion(0, idAlumno, idMateria);
             JOptionPane.showMessageDialog(this, "Alumno Inscripto");
 
-        } catch (NullPointerException ex) {
-            Logger.getLogger(FormularioDeInscripcion.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (Exception ex) {
-            Logger.getLogger(FormularioDeInscripcion.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ArrayIndexOutOfBoundsException ex) {
+            JOptionPane.showMessageDialog(null, "Seleccione una materia para su inscripcion");
+        } catch (NullPointerException f) {
+            JOptionPane.showMessageDialog(null, "Seleccione un alumno para continuar con la inscripcion ");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
         }
     }//GEN-LAST:event_btnInscribirActionPerformed
 
@@ -317,22 +319,24 @@ public class FormularioDeInscripcion extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_tablaAlumnoMouseClicked
 
     private void btnAnularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnularActionPerformed
-      
-        if (JOptionPane.showConfirmDialog(null, "ESTA SEGURO DE ELIMINAR INSCRIPCION?", "SALIR", JOptionPane.YES_NO_CANCEL_OPTION) == 0){
-        
-        try {
-            
-            DefaultTableModel modelo = (DefaultTableModel) tablaAlumno.getModel();
-            int idMateria = (int) modelo.getValueAt(tablaAlumno.getSelectedRow(), 0);
-            int idAlumno = comboBoxAlumno.getItemAt(comboBoxAlumno.getSelectedIndex()).getIdAlumno();
-            
-            inscripcionService ins = new inscripcionService();
-            
-            ins.borrarInscripcionAlumnoMateria(idAlumno, idMateria);
-            
-        } catch (Exception ex) {
-            Logger.getLogger(FormularioDeInscripcion.class.getName()).log(Level.SEVERE, null, ex);
-        }
+
+        if (JOptionPane.showConfirmDialog(null, "ESTA SEGURO DE ELIMINAR INSCRIPCION?", "SALIR", JOptionPane.YES_NO_CANCEL_OPTION) == 0) {
+
+            try {
+
+                DefaultTableModel modelo = (DefaultTableModel) tablaAlumno.getModel();
+                int idMateria = (int) modelo.getValueAt(tablaAlumno.getSelectedRow(), 0);
+                int idAlumno = comboBoxAlumno.getItemAt(comboBoxAlumno.getSelectedIndex()).getIdAlumno();
+
+                inscripcionService ins = new inscripcionService();
+
+                ins.borrarInscripcionAlumnoMateria(idAlumno, idMateria);
+
+            } catch (ArrayIndexOutOfBoundsException e) {
+                JOptionPane.showMessageDialog(null, "No selecciono ninguna materia para anular su inscripcion");
+            } catch (Exception ex) {
+
+            }
         }
     }//GEN-LAST:event_btnAnularActionPerformed
 

@@ -33,7 +33,6 @@ public class FormularioAlumno extends javax.swing.JInternalFrame {
         btnModificar.setEnabled(false);
         txtId.setVisible(true);
         txtId.setEditable(false);
-
         datechooser.getDateEditor().setEnabled(false);
         txtId.setEditable(false);
 
@@ -313,24 +312,20 @@ public class FormularioAlumno extends javax.swing.JInternalFrame {
             btnGuardar.setEnabled(false);
             txtDni.setEditable(false);
             
-            alumnoService a = new alumnoService();
-            
+            alumnoService a = new alumnoService();           
             int dni = Integer.parseInt(txtDni.getText());
             a.buscarAlumnoPorDNI(dni);
             alumno aux = new alumno();
             //Guardamos en un alumno los valores obtenidos por el método
-            aux = a.buscarAlumnoPorDNI(dni);
-            
+            aux = a.buscarAlumnoPorDNI(dni);       
             // utilizamos la informacioon del alumno para setear los campos
             txtId.setText("" + aux.getIdAlumno());
             txtApellido.setText(aux.getApellido());
-            txtNombre.setText(aux.getNombre());
-            
+            txtNombre.setText(aux.getNombre());        
             //Forma de setear el DateChooser
             LocalDate localDate = aux.getFechaNacimiento();
             java.util.Date utilDate = java.util.Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
-            datechooser.setDate(utilDate);
-            
+            datechooser.setDate(utilDate);       
             //Forma de setear el radioButon
             if (aux.isEstado()==true) {
                 radioBestado.setSelected(true);

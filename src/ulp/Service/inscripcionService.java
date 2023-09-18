@@ -6,6 +6,7 @@
 package ulp.Service;
 
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import ulp.AccesoADatos.inscripcionDAO;
 import ulp.Entidades.alumno;
 import ulp.Entidades.inscripcion;
@@ -60,12 +61,10 @@ public class inscripcionService {
         }
     }
 
-    public ArrayList<materia> obtenerMateriaCursadas(int idAlumno) throws NumberFormatException, Exception {
+    public ArrayList<materia> obtenerMateriaCursadas(int idAlumno) throws NumberFormatException, NullPointerException, Exception {
         try {
             inscripcionDAO dao = new inscripcionDAO();
             return dao.obtenerMateriaCursadas(idAlumno);
-        } catch (NumberFormatException e) {
-            throw e;
         } catch (Exception ex) {
             throw ex;
         }
@@ -75,8 +74,6 @@ public class inscripcionService {
         try {
             inscripcionDAO dao = new inscripcionDAO();
             return dao.obtenerMateriaNoCursada(idAlumno);
-        } catch (NumberFormatException e) {
-            throw e;
         } catch (Exception ex) {
             throw ex;
         }
@@ -84,6 +81,10 @@ public class inscripcionService {
 
     public void borrarInscripcionAlumnoMateria(int idAlumno, int idMateria) throws NumberFormatException, Exception {
         try {
+            if (idAlumno == 0 && idMateria == 0) {
+                JOptionPane.showMessageDialog(null, "No selecciono ningun alumno y ninguna materia");
+                return;
+            }
             inscripcionDAO dao = new inscripcionDAO();
             dao.borrarInscripcionAlumnoMateria(idAlumno, idMateria);
         } catch (NumberFormatException e) {
