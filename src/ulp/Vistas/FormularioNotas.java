@@ -22,14 +22,12 @@ import ulp.Service.inscripcionService;
  */
 public class FormularioNotas extends javax.swing.JInternalFrame {
 
-    
 //    DefaultTableModel model = new DefaultTableModel() {
 //    @Override
 //    public boolean isCellEditable(int rowIndex, int columnIndex) {
 //        return columnIndex == 0; // Esto hará que solo la primera columna sea editable
 //    }
 //};
-
     /**
      * Creates new form FormularioNotas
      */
@@ -210,15 +208,14 @@ public class FormularioNotas extends javax.swing.JInternalFrame {
             
             DefaultTableModel modelo = (DefaultTableModel) tablaAlumno.getModel();
             int idMateria = (int) modelo.getValueAt(tablaAlumno.getSelectedRow(), 0);
-            int nota =Integer.parseInt(comboNota.getSelectedItem().toString());
+            int nota = Integer.parseInt(comboNota.getSelectedItem().toString());
             int idAlumno = comboAlumno.getItemAt(comboAlumno.getSelectedIndex()).getIdAlumno();
-            
             
             ins.actualizarNota(idAlumno, idMateria, nota);
             JOptionPane.showMessageDialog(this, "Nota actualizada");
             llenarTabla();
         } catch (Exception ex) {
-            Logger.getLogger(FormularioNotas.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, ex);
         }
     }//GEN-LAST:event_btnGuardarActionPerformed
 
@@ -237,39 +234,39 @@ public class FormularioNotas extends javax.swing.JInternalFrame {
     private javax.swing.JTable tablaAlumno;
     // End of variables declaration//GEN-END:variables
 
- public void llenarComboBoxAlumno() {
+    public void llenarComboBoxAlumno() {
         alumnoService a = new alumnoService();
-
+        
         try {
             for (alumno o : a.listarAlumno()) {
                 comboAlumno.addItem(o);
             }
         } catch (Exception ex) {
-            Logger.getLogger(FormularioDeInscripcion.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, ex);
         }
     }
- 
- public void llenarTabla(){
-     
-     btnGuardar.setEnabled(false);
-     comboNota.setSelectedIndex(0);
-     comboNota.setVisible(false);
-     try {
+    
+    public void llenarTabla() {
+        
+        btnGuardar.setEnabled(false);
+        comboNota.setSelectedIndex(0);
+        comboNota.setVisible(false);
+        try {
             //guardo en una variable el id recogido del alumno del combobox
             int id = comboAlumno.getItemAt(comboAlumno.getSelectedIndex()).getIdAlumno();
 
             //Instancio una clase "inscripcionService" para poder acceder a sus metodos
             inscripcionService ins = new inscripcionService();
-           
+            
             ArrayList inscripciones = ins.obtenerInscripcionPorAlumno(id);
 
             //le otorgo un modelo a la tabla
-            DefaultTableModel modelo = new DefaultTableModel();          
+            DefaultTableModel modelo = new DefaultTableModel();
             modelo.addColumn("Id");
             modelo.addColumn("Nombre");
             modelo.addColumn("Nota");
             tablaAlumno.setModel(modelo);
-            
+
             //creo un vector para guardar los datos del array y que luego el modelo de la tabla pueda agregarlo a la tabla.
             Object insc[] = null;
             for (int i = 0; i < inscripciones.size(); i++) {
@@ -281,10 +278,7 @@ public class FormularioNotas extends javax.swing.JInternalFrame {
                 modelo.setValueAt(geti.getNota(), i, 2);
             }
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, "eerroorr" + ex.getLocalizedMessage());
-
+            JOptionPane.showMessageDialog(null, "Inabilitamos temporalmente la manipulacion de notas al no tener alumnos registrados");
         }
- 
+    }
 }
-}
-

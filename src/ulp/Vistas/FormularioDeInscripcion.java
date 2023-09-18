@@ -301,7 +301,6 @@ public class FormularioDeInscripcion extends javax.swing.JInternalFrame {
             inscripcionService ins = new inscripcionService();
 
             ins.crearInscripcion(0, idAlumno, idMateria);
-            JOptionPane.showMessageDialog(this, "Alumno Inscripto");
 
         } catch (ArrayIndexOutOfBoundsException ex) {
             JOptionPane.showMessageDialog(null, "Seleccione una materia para su inscripcion");
@@ -334,8 +333,10 @@ public class FormularioDeInscripcion extends javax.swing.JInternalFrame {
 
             } catch (ArrayIndexOutOfBoundsException e) {
                 JOptionPane.showMessageDialog(null, "No selecciono ninguna materia para anular su inscripcion");
+            } catch (NullPointerException f) {
+                JOptionPane.showMessageDialog(null, "No se registraron los datos del alumno y la materia para anular su inscripcion");
             } catch (Exception ex) {
-
+                JOptionPane.showMessageDialog(null, ex);
             }
         }
     }//GEN-LAST:event_btnAnularActionPerformed
@@ -389,7 +390,7 @@ public class FormularioDeInscripcion extends javax.swing.JInternalFrame {
                 comboBoxAlumno.addItem(o);
             }
         } catch (Exception ex) {
-            Logger.getLogger(FormularioDeInscripcion.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, ex);
         }
     }
 

@@ -20,6 +20,12 @@ public class inscripcionService {
 
     public void crearInscripcion(int nota, int id_Alumno, int id_Materia) throws NumberFormatException, NullPointerException, Exception {
         try {
+            for (inscripcion aux : obtenerInscripciones()) {
+                if (aux.getIdAlumno().getIdAlumno() == id_Alumno && aux.getIdMateria().getIdMateria() == id_Materia) {
+                    JOptionPane.showMessageDialog(null, "El alumno ya esta inscripto a esa materia");
+                    return;
+                }
+            }
             alumnoService as = new alumnoService();
             materiaService ms = new materiaService();
             inscripcionDAO dao = new inscripcionDAO();
@@ -32,12 +38,9 @@ public class inscripcionService {
             ex.setIdAlumno(aux);
             ex.setIdMateria(index);
             dao.guardarInscripcion(ex);
-        } catch (NumberFormatException a) {
-            throw new NumberFormatException("Ingrese los numero correspondientes");
-        } catch (NullPointerException b) {
-            throw new NullPointerException("No deje ninguna celda vacia");
+            JOptionPane.showMessageDialog(null, "Alumno Inscripto");
         } catch (Exception e) {
-            throw new Exception("Ingrese correctamente los datos");
+            throw e;
         }
     }
 
@@ -54,8 +57,6 @@ public class inscripcionService {
         try {
             inscripcionDAO dao = new inscripcionDAO();
             return dao.obtenerInscripcionPorAlumno(id_Alumno);
-        } catch (NumberFormatException f) {
-            throw new NumberFormatException("Ingrese el id del alumno correspondiente");
         } catch (Exception ex) {
             throw ex;
         }
@@ -81,14 +82,10 @@ public class inscripcionService {
 
     public void borrarInscripcionAlumnoMateria(int idAlumno, int idMateria) throws NumberFormatException, Exception {
         try {
-            if (idAlumno == 0 && idMateria == 0) {
-                JOptionPane.showMessageDialog(null, "No selecciono ningun alumno y ninguna materia");
-                return;
-            }
+            //Se necesita actualizar la tabla para esta opcion.
             inscripcionDAO dao = new inscripcionDAO();
             dao.borrarInscripcionAlumnoMateria(idAlumno, idMateria);
-        } catch (NumberFormatException e) {
-            throw new NumberFormatException("Ingrese los numeros correcto para eliminar la inscripcion");
+            JOptionPane.showMessageDialog(null, "Anulamos con exito la incripcion");
         } catch (Exception ex) {
             throw ex;
         }
@@ -98,8 +95,6 @@ public class inscripcionService {
         try {
             inscripcionDAO dao = new inscripcionDAO();
             dao.actualizarNota(idAlumno, idMateria, nota);
-        } catch (NumberFormatException e) {
-            throw new NumberFormatException("Ingrese los datos correctamentes para borrar la inscripcion");
         } catch (Exception ex) {
             throw ex;
         }

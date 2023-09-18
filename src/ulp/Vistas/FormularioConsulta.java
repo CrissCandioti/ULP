@@ -141,7 +141,7 @@ public class FormularioConsulta extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void comboBoxMateriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxMateriaActionPerformed
-        
+
         llenarTabla();
     }//GEN-LAST:event_comboBoxMateriaActionPerformed
 
@@ -162,7 +162,6 @@ public class FormularioConsulta extends javax.swing.JInternalFrame {
     // End of variables declaration//GEN-END:variables
 public void llenarComboBoxAlumno() {
         materiaService m = new materiaService();
-        
 
         try {
             for (materia o : m.listarMateria()) {
@@ -172,21 +171,20 @@ public void llenarComboBoxAlumno() {
             Logger.getLogger(FormularioDeInscripcion.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
- public void llenarTabla(){
-     
-   
-     try {
+
+    public void llenarTabla() {
+
+        try {
             //guardo en una variable el id recogido del alumno del combobox
             int id = comboBoxMateria.getItemAt(comboBoxMateria.getSelectedIndex()).getIdMateria();
 
             //Instancio una clase "inscripcionService" para poder acceder a sus metodos
             inscripcionService ins = new inscripcionService();
-           
-            ArrayList alumnos = ins.obtenerAlumnoPorMateria(id) ;
+
+            ArrayList alumnos = ins.obtenerAlumnoPorMateria(id);
 
             //le otorgo un modelo a la tabla
-            DefaultTableModel modelo = new DefaultTableModel();          
+            DefaultTableModel modelo = new DefaultTableModel();
             modelo.addColumn("Id");
             modelo.addColumn("Nombre");
             modelo.addColumn("Apellido");
@@ -194,13 +192,13 @@ public void llenarComboBoxAlumno() {
             modelo.addColumn("Fecha Nacimiento");
             modelo.addColumn("Estado");
             tablaAlumno.setModel(modelo);
-            
+
             //creo un vector para guardar los datos del array y que luego el modelo de la tabla pueda agregarlo a la tabla.
             Object alum[] = null;
             for (int i = 0; i < alumnos.size(); i++) {
                 modelo.addRow(alum);
                 alumno getal = (alumno) alumnos.get(i);
-                
+
                 modelo.setValueAt(getal.getIdAlumno(), i, 0);
                 modelo.setValueAt(getal.getNombre(), i, 1);
                 modelo.setValueAt(getal.getApellido(), i, 2);
@@ -208,10 +206,11 @@ public void llenarComboBoxAlumno() {
                 modelo.setValueAt(getal.getFechaNacimiento(), i, 4);
                 modelo.setValueAt(getal.isEstado(), i, 5);
             }
+        } catch (NullPointerException e) {
+            JOptionPane.showMessageDialog(null, "No tenemos registros de materias en la base de datos");
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, "eerroorr" + ex.getLocalizedMessage());
-
+            JOptionPane.showMessageDialog(null, ex);
         }
- 
-}
+
+    }
 }
