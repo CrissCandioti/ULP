@@ -5,6 +5,8 @@
  */
 package ulp.Vistas;
 
+import ulp.ImagenFondo;
+
 /**
  *
  * @author Cristian
@@ -16,6 +18,8 @@ public class Principal extends javax.swing.JFrame {
      */
     public Principal() {
         initComponents();
+        Escritorio.setBorder(new ImagenFondo());
+        this.setExtendedState(Principal.NORMAL);
     }
 
     /**
@@ -47,7 +51,7 @@ public class Principal extends javax.swing.JFrame {
         Escritorio.setLayout(EscritorioLayout);
         EscritorioLayout.setHorizontalGroup(
             EscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1000, Short.MAX_VALUE)
+            .addGap(0, 999, Short.MAX_VALUE)
         );
         EscritorioLayout.setVerticalGroup(
             EscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
