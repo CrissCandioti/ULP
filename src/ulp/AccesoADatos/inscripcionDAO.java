@@ -13,10 +13,14 @@ import ulp.Entidades.materia;
 import ulp.Service.materiaService;
 
 /**
+ * La clase inscripcionDAO se encarga de la relaciones entre entre las dos
+ * entidades creadas con anterioridad, las cuales son alumno y materia. Al igual
+ * que las otras clases DAO esta hereda las variables y metodos de su clase
+ * padre que es DAO.
  *
- * @author criss
  */
 public final class inscripcionDAO extends DAO {
+//Este metodo utiliza los comandos correspondientes para guardar la inscripcion que previamente fue creada y la recibe por medio de parametro.
 
     public void guardarInscripcion(inscripcion aux) throws Exception {
         try {
@@ -26,34 +30,55 @@ public final class inscripcionDAO extends DAO {
             throw e;
         }
     }
+//Este metodo retorna la lista de inscripciones realizadas. En su interior contiene instanciaciones de las clases
+//services de alumno y materia, la cual van a utilizar sus metodos propios para encontrar y retornar la materia 
+//u alumno de la relacion establecida.    
 
     public ArrayList<inscripcion> obtenerInscripcion() throws Exception {
         try {
+            //Se crean las instancias de alumnoService y materiaSerivce
             alumnoService as = new alumnoService();
             materiaService ms = new materiaService();
+            //Se realiza el comando correspondiente para traer de la base de datos la informacion
             String sql = "SELECT `idInscripto`, `nota`, `idAlumno`, `idMateria` FROM `inscripcion`";
+            //Se realiza la consulta a la base de datos.
             consultarBaseDatos(sql);
+            //Se crea el arrayList que va a contener la informacion a retornar.
             ArrayList<inscripcion> obtenerListaIncripcionesARetornar = new ArrayList<>();
+            //Se crea pero se iguala a null una inscripcion.
             inscripcion aux = null;
+            //Se crea un bucle while para recorrer la informacion y obtener los datos.
             while (resultado.next()) {
+                //A la inscripcion creada anteriormente la hacemos nacer para comenzar a setearles los datos.    
                 aux = new inscripcion();
                 aux.setIdInscripto(resultado.getInt(1));
                 aux.setNota(resultado.getInt(2));
+                //Debido a que nuestra base de datos contiene un tipo de dato entero con el ID del alumno.
+                //Se crea una variable tomando ese datos.
                 Integer idAlumno = resultado.getInt(3);
+                //Luego creamos ese alumno y utilizamos a alumnoService para que lo busque y lo traiga.    
                 alumno alumno = as.buscarAlumnoPorID(idAlumno);
+                //Una vez encontrado lo seteamos.
+                //Debido a que nuestra arrayList debe contener inscripciones, estas inscripciones contiene a un alumno
+                //y no a un tipo de dato entero llamado ID que es lo que extraemos de la base de datos.
                 aux.setIdAlumno(alumno);
+                //El proceso con alumno se vuelve a repetir con materia.    
                 Integer idMateria = resultado.getInt(4);
                 materia materia = ms.buscarMateria(idMateria);
                 aux.setIdMateria(materia);
                 obtenerListaIncripcionesARetornar.add(aux);
             }
+            //Una vez finalizado nos desconectamos a la base de datos.
             desconectarBaseDatos();
+            //Retornamos la lista de inscripciones que creamos al inicio del metodo.
             return obtenerListaIncripcionesARetornar;
         } catch (Exception e) {
             desconectarBaseDatos();
             throw e;
         }
     }
+//Este metodo se encarga de retornar un arrayList con todas las incripciones de un unico alumno, la cual 
+//resive ese dato por parametro.    
 
     public ArrayList<inscripcion> obtenerInscripcionPorAlumno(int id_Alumno) throws Exception {
         try {
@@ -82,6 +107,8 @@ public final class inscripcionDAO extends DAO {
             throw e;
         }
     }
+//Este metodo se encarga de retornar una lista de materias con la que esta asociada a ese alumno.
+//Para este metodo la consulta que hacemos a la base de datos aplicamos un INNER JOIN.    
 
     public ArrayList<materia> obtenerMateriaCursadas(int idAlumno) throws Exception {
         try {
@@ -103,6 +130,8 @@ public final class inscripcionDAO extends DAO {
             desconectarBaseDatos();
         }
     }
+//Este metodo actua muy similar al anterior con la diferencia que dentro del comando que creamos para
+//consultar a la base de datos utilizamos un NOT IN, la cual nos retorna una lista de materias que el alumno no esta inscripto.    
 
     public ArrayList<materia> obtenerMateriaNoCursada(int idAlumno) throws Exception {
         try {
@@ -124,6 +153,7 @@ public final class inscripcionDAO extends DAO {
         }
 
     }
+//Este metodo se encarga de eliminar esa relacion, es decir de eliminar la inscripcion.
 
     public void borrarInscripcionAlumnoMateria(int idAlumno, int idMateria) throws Exception {
         try {
@@ -133,6 +163,8 @@ public final class inscripcionDAO extends DAO {
             throw e;
         }
     }
+//Este metodo tiene el trabajo de actualizar la nota de la materia que el alumno se inscribio.
+//Dentro de la consulta a la base de datos utilizamos un UPDATE para realizar dicha actualizacion.    
 
     public void actualizarNota(int idAlumno, int idMateria, int nota) throws Exception {
         try {
@@ -142,6 +174,8 @@ public final class inscripcionDAO extends DAO {
             throw e;
         }
     }
+//Este metodo actua muy similar a materia por alumno. Este metodo retornara una lista de alumnos que esta inscrito a esa materia.
+//Dentro de la consulta que se realiza a la base de datos utilizamos un INNER JOIN    
 
     public ArrayList<alumno> obtenerAlumnoPorMateria(int idMateria) throws Exception {
         try {
