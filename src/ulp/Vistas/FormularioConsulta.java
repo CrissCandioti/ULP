@@ -197,6 +197,7 @@ public void llenarComboBoxAlumno() {
             
             //creo un vector para guardar los datos del array y que luego el modelo de la tabla pueda agregarlo a la tabla.
             Object alum[] = null;
+            
             for (int i = 0; i < alumnos.size(); i++) {
                 modelo.addRow(alum);
                 alumno getal = (alumno) alumnos.get(i);
