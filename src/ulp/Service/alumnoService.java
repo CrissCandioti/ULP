@@ -5,7 +5,6 @@
  */
 package ulp.Service;
 
-import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
@@ -25,7 +24,11 @@ import ulp.Entidades.alumno;
 public class alumnoService {
 
 //El metodo "crearAlumno" recibe toda la informacion establecida en la vistas para completar el registro de los alumnos
+<<<<<<< HEAD
     public void crearAlumno(int dni, String apellido, String nombre, LocalDate fechaNacimiento, boolean estado) throws NumberFormatException, NullPointerException, DateTimeException, Exception {
+=======
+    public void crearAlumno(int dni, String apellido, String nombre, LocalDate fechaNacimiento, boolean estado) {
+>>>>>>> CrissCandioti
 //Dentro de un bloque try-catch el metodo procede a analizar estos datos con las restricciones,        
         try {
 //Se crean dos variables con los nombre dniReglamentarioMinimo y dniReglamentarioMaximo, estas variables de tipo
@@ -89,13 +92,13 @@ public class alumnoService {
 //Por ultimo se muestra un mensaje completando el registro            
             JOptionPane.showMessageDialog(null, "El alumno fue registrado correctamente");
         } catch (Exception e) {
-            throw e;
+            JOptionPane.showMessageDialog(null, "No se pudo registrar correctamente el alumno");
         }
     }
 
 //El metodo eliminarAlumno se encarga de setear el estado del alumno, este no elimina fisicamente el alumno
 //sino cambia su estado a inactivo     
-    public void eliminarAlumno(int id) throws NumberFormatException, Exception {
+    public void eliminarAlumno(int id) {
         try {
             alumnoDAO dao = new alumnoDAO();
 //Se crea una restriccion encargada de de verificar si el alumno esta inactivo.            
@@ -107,44 +110,63 @@ public class alumnoService {
             dao.eliminarEliminarAlumno(id);
             JOptionPane.showMessageDialog(null, "Alumno fue dado de baja exitosamente");
         } catch (Exception e) {
-            throw e;
+            JOptionPane.showMessageDialog(null, "Tuvimos un incoveniente al eliminar el alumno");
         }
     }
 //El metodo buscarAlumnoPorID se encarga de buscar un alumno que recibe por parametro el id, y este retornara al alumno si lo encuentra
 
+<<<<<<< HEAD
     public alumno buscarAlumnoPorID(int id) throws NumberFormatException, Exception {
+=======
+    public alumno buscarAlumnoPorID(int id) {
+>>>>>>> CrissCandioti
         try {
             alumnoDAO dao = new alumnoDAO();
             return dao.buscarAlumnoPorID(id);
         } catch (Exception e) {
-            throw e;
+            JOptionPane.showMessageDialog(null, "No encontramos un id relacionado");
         }
+        return null;
     }
 //El metodo buscarAlumnoPorDNI tiene un desempeño similar al metodo anterior con la peculiar diferencia que busca
 //a este alumno por el documento    
 
+<<<<<<< HEAD
     public alumno buscarAlumnoPorDNI(int dni) throws Exception {
+=======
+    public alumno buscarAlumnoPorDNI(int dni) {
+>>>>>>> CrissCandioti
         try {
             alumnoDAO dao = new alumnoDAO();
             return dao.buscarAlumnoPorDNI(dni);
         } catch (Exception e) {
-            throw e;
+            JOptionPane.showMessageDialog(null, "No encontramos ningun documento relacionado");
         }
+        return null;
     }
 //El metodo listarAlumno se encarga de mostrar a todos los alumno registrados en la base de datos, esten tanto activo como inactivos
 
+<<<<<<< HEAD
     public ArrayList<alumno> listarAlumno() throws Exception {
+=======
+    public ArrayList<alumno> listarAlumno() {
+>>>>>>> CrissCandioti
         try {
             alumnoDAO dao = new alumnoDAO();
             return dao.listarAlumno();
         } catch (Exception e) {
-            throw e;
+            JOptionPane.showMessageDialog(null, "No encontramos alumnos en la base de datos");
         }
+        return null;
     }
 //El metodo modificar tiene un desempeño muy similar al crear alumno,con la diferencia que en la comunicacion con el
 //paquete "Acceso a Datos" el metodo que va a recibir toda esta informacion es modificarAlumno y no guardar como en el metodo crearAlumno.    
 
+<<<<<<< HEAD
     public void modificarAlumno(int id, int dni, String apellido, String nombre, LocalDate fechaNacimiento, boolean estado) throws NumberFormatException, NullPointerException, DateTimeException, Exception {
+=======
+    public void modificarAlumno(int id, int dni, String apellido, String nombre, LocalDate fechaNacimiento, boolean estado) {
+>>>>>>> CrissCandioti
         try {
             int dniReglamentarioMinimo = 1234567;
             int dniReglamentarioMaximo = 123456789;
@@ -195,7 +217,7 @@ public class alumnoService {
             dao.modificarAlumno(aux, index);
             JOptionPane.showMessageDialog(null, "Se modifico exitosamente el alumno");
         } catch (Exception e) {
-            throw e;
+            JOptionPane.showMessageDialog(null, "Tuvimos un incoveniente al modificar el alumno deseado");
         }
     }
 }

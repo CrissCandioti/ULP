@@ -7,6 +7,7 @@ package ulp.AccesoADatos;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import ulp.Entidades.alumno;
 
 /**
@@ -23,28 +24,28 @@ public final class alumnoDAO extends DAO {
 //realizar el comando para insertar y llamar al metodo insertarModificarEliminarBaseDatos
 //de la clase que hereda.    
 
-    public void guardarAlumno(alumno aux, int index) throws Exception {
+    public void guardarAlumno(alumno aux, int index) {
         try {
             String sql = "INSERT INTO `alumno`(`dni`, `apellido`, `nombre`, `fechaNacimiento`, `estado`) VALUES ('" + aux.getDni() + "','" + aux.getApellido() + "','" + aux.getNombre() + "','" + aux.getFechaNacimiento() + "', " + index + ")";
             insertarModificarEliminarBaseDatos(sql);
         } catch (Exception e) {
-            throw e;
+            JOptionPane.showMessageDialog(null, "Se produjo un error al intentar guardar el alumno en la base de datos");
         }
     }
 //El metodo eliminarEliminarAlumno recibe por parametro un dato entero llamado id
 //este metodo se encarga de eliminar el alumno pero no fisicamente sino seteando su estado.    
 
-    public void eliminarEliminarAlumno(int id) throws Exception {
+    public void eliminarEliminarAlumno(int id) {
         try {
             String sql = "UPDATE `alumno` SET `estado`= 0 WHERE idAlumno = " + id;
             insertarModificarEliminarBaseDatos(sql);
         } catch (Exception e) {
-            throw e;
+            JOptionPane.showMessageDialog(null, "Se produjo un error al intentar eliminar en la base de datos");
         }
     }
 //Este metodo recibe por parametro un dato entero llamado id, la cual se encarga de
 //buscar al alumno y retornarlo.    
-    public alumno buscarAlumnoPorID(int id) throws Exception {
+    public alumno buscarAlumnoPorID(int id) {
         try {
             String sql = "SELECT `idAlumno`, `dni`, `apellido`, `nombre`, `fechaNacimiento`, `estado` FROM `alumno` WHERE idAlumno = " + id;
             consultarBaseDatos(sql);
@@ -80,11 +81,12 @@ public final class alumnoDAO extends DAO {
         } catch (Exception e) {
 //Si se produce una excepcion primero nos desconectamos de la base de datos, luego mostramos el error producido.            
             desconectarBaseDatos();
-            throw e;
+            JOptionPane.showMessageDialog(null, "Se produjo un error al buscar el alumno por ID en la base de datos");
         }
+        return null;
     }
 //Este metodo es muy parecido al anterior con la modificacion que el comando busca al alumno por medio del documento
-    public alumno buscarAlumnoPorDNI(int dni) throws Exception {
+    public alumno buscarAlumnoPorDNI(int dni) {
         try {
             String sql = "SELECT `idAlumno`, `dni`, `apellido`, `nombre`, `fechaNacimiento`, `estado` FROM `alumno` WHERE dni = " + dni;
             consultarBaseDatos(sql);
@@ -113,11 +115,12 @@ public final class alumnoDAO extends DAO {
             return aux;
         } catch (Exception e) {
             desconectarBaseDatos();
-            throw e;
+            JOptionPane.showMessageDialog(null, "Se produjo un error al buscar el alumno por DNI en la base de datos");
         }
+        return null;
     }
 //Este metodo me retorna una lista de alumno, sean con estado activo o inactivo la lista me mostrara a todos los alumnos.
-    public ArrayList<alumno> listarAlumno() throws Exception {
+    public ArrayList<alumno> listarAlumno() {
         try {
             String sql = "SELECT `idAlumno`, `dni`, `apellido`, `nombre`, `fechaNacimiento`, `estado` FROM `alumno` where estado = 1 ORDER BY apellido ASC ";
             consultarBaseDatos(sql);
@@ -148,17 +151,18 @@ public final class alumnoDAO extends DAO {
             return listaAlumnoARetornar;
         } catch (Exception e) {
             desconectarBaseDatos();
-            throw e;
+            JOptionPane.showMessageDialog(null, "No pudimos reornar ningun alumno de la base de datos");
         }
+        return null;
     }
 //Este metodo se encarga de actualizar o mejor dicho modificar el alumno que esta en la base de datos.
 //La principal diferencia con respecto al metodo guardarAlumno es que el comando usa un UPDATE y no insert into.    
-    public void modificarAlumno(alumno aux, int index) throws Exception {
+    public void modificarAlumno(alumno aux, int index) {
         try {
             String sql = "UPDATE `alumno` SET `dni`='" + aux.getDni() + "',`apellido`='" + aux.getApellido() + "',`nombre`='" + aux.getNombre() + "',`fechaNacimiento`='" + aux.getFechaNacimiento() + "',`estado`='" + index + "' WHERE idAlumno = " + aux.getIdAlumno();
             insertarModificarEliminarBaseDatos(sql);
         } catch (Exception e) {
-            throw e;
+            JOptionPane.showMessageDialog(null, "Tuvimos un incoveniente al modificar el alumno en la base de datos");
         }
     }
 }

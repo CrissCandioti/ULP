@@ -48,7 +48,7 @@ public abstract class DAO {
     }
 
     //Metodo que va a heredar a sus clases hijas la cual realiza la desconeccion a la base de datos.
-    protected void desconectarBaseDatos() throws Exception {
+    protected void desconectarBaseDatos() {
         try {
             //Estos condicionales if se encargan de cerrar la comunicacion y coneccion con la base de datos.
             if (resultado != null) {
@@ -62,11 +62,12 @@ public abstract class DAO {
             }
             System.out.println("Desconectado");
         } catch (Exception e) {
-            throw e;
+            System.out.println("No pudimos desconectarnos desconectado");
         }
     }
 //Metodo creado para encargarse de las operaciones con la base de datos, estas son las de insertar,modificar,eliminar. 
 //El metodo recibe por parametro la consulta
+
     protected void insertarModificarEliminarBaseDatos(String sql) throws SQLException, ClassNotFoundException, Exception {
         try {
             coneccionBaseDatos();//Realizamos una coneccion a la base de datos
@@ -80,6 +81,7 @@ public abstract class DAO {
     }
 //Metodo creado para encargarse de las consulta, busca y retorna la informacion solicitada.
 //Este metodo tambien recibe por parametro la consulta.    
+
     protected void consultarBaseDatos(String sql) throws Exception {
         try {
             coneccionBaseDatos();//Llama al metodo "coneccionBaseDatos" para establecer una comunicacion con la base de datos. 
