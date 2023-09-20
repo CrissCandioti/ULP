@@ -24,11 +24,9 @@ import ulp.Entidades.alumno;
 public class alumnoService {
 
 //El metodo "crearAlumno" recibe toda la informacion establecida en la vistas para completar el registro de los alumnos
-<<<<<<< HEAD
-    public void crearAlumno(int dni, String apellido, String nombre, LocalDate fechaNacimiento, boolean estado) throws NumberFormatException, NullPointerException, DateTimeException, Exception {
-=======
+
     public void crearAlumno(int dni, String apellido, String nombre, LocalDate fechaNacimiento, boolean estado) {
->>>>>>> CrissCandioti
+
 //Dentro de un bloque try-catch el metodo procede a analizar estos datos con las restricciones,        
         try {
 //Se crean dos variables con los nombre dniReglamentarioMinimo y dniReglamentarioMaximo, estas variables de tipo
@@ -115,11 +113,9 @@ public class alumnoService {
     }
 //El metodo buscarAlumnoPorID se encarga de buscar un alumno que recibe por parametro el id, y este retornara al alumno si lo encuentra
 
-<<<<<<< HEAD
-    public alumno buscarAlumnoPorID(int id) throws NumberFormatException, Exception {
-=======
+
     public alumno buscarAlumnoPorID(int id) {
->>>>>>> CrissCandioti
+
         try {
             alumnoDAO dao = new alumnoDAO();
             return dao.buscarAlumnoPorID(id);
@@ -131,11 +127,9 @@ public class alumnoService {
 //El metodo buscarAlumnoPorDNI tiene un desempeño similar al metodo anterior con la peculiar diferencia que busca
 //a este alumno por el documento    
 
-<<<<<<< HEAD
-    public alumno buscarAlumnoPorDNI(int dni) throws Exception {
-=======
+
     public alumno buscarAlumnoPorDNI(int dni) {
->>>>>>> CrissCandioti
+
         try {
             alumnoDAO dao = new alumnoDAO();
             return dao.buscarAlumnoPorDNI(dni);
@@ -146,11 +140,9 @@ public class alumnoService {
     }
 //El metodo listarAlumno se encarga de mostrar a todos los alumno registrados en la base de datos, esten tanto activo como inactivos
 
-<<<<<<< HEAD
-    public ArrayList<alumno> listarAlumno() throws Exception {
-=======
+
     public ArrayList<alumno> listarAlumno() {
->>>>>>> CrissCandioti
+
         try {
             alumnoDAO dao = new alumnoDAO();
             return dao.listarAlumno();
@@ -162,11 +154,9 @@ public class alumnoService {
 //El metodo modificar tiene un desempeño muy similar al crear alumno,con la diferencia que en la comunicacion con el
 //paquete "Acceso a Datos" el metodo que va a recibir toda esta informacion es modificarAlumno y no guardar como en el metodo crearAlumno.    
 
-<<<<<<< HEAD
-    public void modificarAlumno(int id, int dni, String apellido, String nombre, LocalDate fechaNacimiento, boolean estado) throws NumberFormatException, NullPointerException, DateTimeException, Exception {
-=======
+
     public void modificarAlumno(int id, int dni, String apellido, String nombre, LocalDate fechaNacimiento, boolean estado) {
->>>>>>> CrissCandioti
+
         try {
             int dniReglamentarioMinimo = 1234567;
             int dniReglamentarioMaximo = 123456789;
