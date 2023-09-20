@@ -6,6 +6,7 @@
 package ulp.AccesoADatos;
 
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import ulp.Entidades.alumno;
 import ulp.Service.alumnoService;
 import ulp.Entidades.inscripcion;
@@ -22,19 +23,19 @@ import ulp.Service.materiaService;
 public final class inscripcionDAO extends DAO {
 //Este metodo utiliza los comandos correspondientes para guardar la inscripcion que previamente fue creada y la recibe por medio de parametro.
 
-    public void guardarInscripcion(inscripcion aux) throws Exception {
+    public void guardarInscripcion(inscripcion aux) {
         try {
             String sql = "INSERT INTO `inscripcion`(`nota`, `idAlumno`, `idMateria`) VALUES ('" + aux.getNota() + "','" + aux.getIdAlumno().getIdAlumno() + "','" + aux.getIdMateria().getIdMateria() + "')";
             insertarModificarEliminarBaseDatos(sql);
         } catch (Exception e) {
-            throw e;
+            JOptionPane.showMessageDialog(null, "No pudimos guardar la inscripcion en la base de datos");
         }
     }
 //Este metodo retorna la lista de inscripciones realizadas. En su interior contiene instanciaciones de las clases
 //services de alumno y materia, la cual van a utilizar sus metodos propios para encontrar y retornar la materia 
 //u alumno de la relacion establecida.    
 
-    public ArrayList<inscripcion> obtenerInscripcion() throws Exception {
+    public ArrayList<inscripcion> obtenerInscripcion() {
         try {
             //Se crean las instancias de alumnoService y materiaSerivce
             alumnoService as = new alumnoService();
@@ -74,13 +75,14 @@ public final class inscripcionDAO extends DAO {
             return obtenerListaIncripcionesARetornar;
         } catch (Exception e) {
             desconectarBaseDatos();
-            throw e;
+            JOptionPane.showMessageDialog(null, "No pudimos obtener la inscripcion de la base de datos");
         }
+        return null;
     }
 //Este metodo se encarga de retornar un arrayList con todas las incripciones de un unico alumno, la cual 
 //resive ese dato por parametro.    
 
-    public ArrayList<inscripcion> obtenerInscripcionPorAlumno(int id_Alumno) throws Exception {
+    public ArrayList<inscripcion> obtenerInscripcionPorAlumno(int id_Alumno) {
         try {
             String sql = "SELECT `idInscripto`, `nota`, `idAlumno`, `idMateria` FROM `inscripcion` WHERE idAlumno = " + id_Alumno;
             consultarBaseDatos(sql);
@@ -103,14 +105,15 @@ public final class inscripcionDAO extends DAO {
             desconectarBaseDatos();
             return listaInscripcionPorAlumnoARetornar;
         } catch (Exception e) {
-
-            throw e;
+            desconectarBaseDatos();
+            JOptionPane.showMessageDialog(null, "No pudimos obtener las inscripciones por alumno de la base de datos");
         }
+        return null;
     }
 //Este metodo se encarga de retornar una lista de materias con la que esta asociada a ese alumno.
 //Para este metodo la consulta que hacemos a la base de datos aplicamos un INNER JOIN.    
 
-    public ArrayList<materia> obtenerMateriaCursadas(int idAlumno) throws Exception {
+    public ArrayList<materia> obtenerMateriaCursadas(int idAlumno) {
         try {
             String sql = "SELECT materia.idMateria FROM inscripcion INNER JOIN materia ON inscripcion.idMateria = materia.idMateria WHERE idAlumno = " + idAlumno;
             consultarBaseDatos(sql);
@@ -121,19 +124,18 @@ public final class inscripcionDAO extends DAO {
                 materia materia = ms.buscarMateria(idMateria);
                 listaARetornarDeMateriasCursadas.add(materia);
             }
-
+            desconectarBaseDatos();
             return listaARetornarDeMateriasCursadas;
         } catch (Exception e) {
-
-            throw e;
-        } finally {
             desconectarBaseDatos();
+            JOptionPane.showMessageDialog(null, "Tuvimos incovenientes al obtener las inscripcion por alumno en la base de datos");
         }
+        return null;
     }
 //Este metodo actua muy similar al anterior con la diferencia que dentro del comando que creamos para
 //consultar a la base de datos utilizamos un NOT IN, la cual nos retorna una lista de materias que el alumno no esta inscripto.    
 
-    public ArrayList<materia> obtenerMateriaNoCursada(int idAlumno) throws Exception {
+    public ArrayList<materia> obtenerMateriaNoCursada(int idAlumno) {
         try {
             String sql = "SELECT materia.idMateria FROM materia WHERE materia.idMateria NOT IN (SELECT inscripcion.idMateria FROM inscripcion WHERE inscripcion.idAlumno = " + idAlumno + " );";
             consultarBaseDatos(sql);
@@ -144,40 +146,39 @@ public final class inscripcionDAO extends DAO {
                 materia materia = ms.buscarMateria(idMateria);
                 listaARetornarDeMateriasNoCursadas.add(materia);
             }
-
+            desconectarBaseDatos();
             return listaARetornarDeMateriasNoCursadas;
-
         } catch (Exception e) {
-
-            throw e;
+            desconectarBaseDatos();
+            JOptionPane.showMessageDialog(null, "Tuvimos problemas al obtener las materias no cursada en la base de datos");
         }
-
+        return null;
     }
 //Este metodo se encarga de eliminar esa relacion, es decir de eliminar la inscripcion.
 
-    public void borrarInscripcionAlumnoMateria(int idAlumno, int idMateria) throws Exception {
+    public void borrarInscripcionAlumnoMateria(int idAlumno, int idMateria) {
         try {
             String sql = "DELETE FROM `inscripcion` WHERE idAlumno = " + idAlumno + " AND idMateria = " + idMateria + "";
             insertarModificarEliminarBaseDatos(sql);
         } catch (Exception e) {
-            throw e;
+            JOptionPane.showMessageDialog(null, "Tuvimos un incovenientes al borrar la inscripcion del Alumno sobre la materia deseada en la base de datos");
         }
     }
 //Este metodo tiene el trabajo de actualizar la nota de la materia que el alumno se inscribio.
 //Dentro de la consulta a la base de datos utilizamos un UPDATE para realizar dicha actualizacion.    
 
-    public void actualizarNota(int idAlumno, int idMateria, int nota) throws Exception {
+    public void actualizarNota(int idAlumno, int idMateria, int nota) {
         try {
             String sql = "UPDATE `inscripcion` SET `nota` = " + nota + " WHERE idAlumno = " + idAlumno + " AND idMateria = " + idMateria + " ";
             insertarModificarEliminarBaseDatos(sql);
         } catch (Exception e) {
-            throw e;
+            JOptionPane.showMessageDialog(null, "Tuvimos problemas al intentar actualizar la nota en la base de datos");
         }
     }
 //Este metodo actua muy similar a materia por alumno. Este metodo retornara una lista de alumnos que esta inscrito a esa materia.
 //Dentro de la consulta que se realiza a la base de datos utilizamos un INNER JOIN    
 
-    public ArrayList<alumno> obtenerAlumnoPorMateria(int idMateria) throws Exception {
+    public ArrayList<alumno> obtenerAlumnoPorMateria(int idMateria) {
         try {
             String sql = "SELECT alumno.idAlumno FROM inscripcion INNER JOIN alumno ON inscripcion.idAlumno = alumno.idAlumno WHERE idMateria = " + idMateria;
             consultarBaseDatos(sql);
@@ -192,7 +193,8 @@ public final class inscripcionDAO extends DAO {
             return listaAlumnoPorMateriaARetornar;
         } catch (Exception e) {
             desconectarBaseDatos();
-            throw e;
+            JOptionPane.showMessageDialog(null, "Tuvimos problemas al intentar obtener los alumno por materia en la base de datos");
         }
+        return null;
     }
 }
