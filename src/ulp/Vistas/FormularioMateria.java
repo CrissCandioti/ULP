@@ -116,6 +116,11 @@ public class FormularioMateria extends javax.swing.JInternalFrame {
         });
 
         btnNuevo.setText("Modificar");
+        btnNuevo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNuevoActionPerformed(evt);
+            }
+        });
 
         btnGuardar.setText("Guardar");
         btnGuardar.addActionListener(new java.awt.event.ActionListener() {
@@ -125,6 +130,11 @@ public class FormularioMateria extends javax.swing.JInternalFrame {
         });
 
         btnEliminar.setText("Eliminar");
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarActionPerformed(evt);
+            }
+        });
 
         btnSalir.setText("Salir");
         btnSalir.addActionListener(new java.awt.event.ActionListener() {
@@ -155,47 +165,49 @@ public class FormularioMateria extends javax.swing.JInternalFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(btnSalir))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(184, 184, 184)
-                        .addComponent(jLabel1))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(42, 42, 42)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 388, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel5)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel4))
-                                .addGap(47, 47, 47)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGap(184, 184, 184)
+                                .addComponent(jLabel1))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(42, 42, 42)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 388, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(btnGuardar)
-                                        .addGap(26, 26, 26)
-                                        .addComponent(btnNuevo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(btnEliminar)
-                                        .addGap(17, 17, 17))
-                                    .addComponent(txtAnio)
-                                    .addComponent(txtNombre)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(radioActivo)
-                                        .addGap(0, 0, Short.MAX_VALUE))
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnSalir, javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel5)
+                                            .addComponent(jLabel2)
+                                            .addComponent(jLabel3)
+                                            .addComponent(jLabel4))
+                                        .addGap(47, 47, 47)
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                                .addComponent(btnGuardar)
+                                                .addGap(26, 26, 26)
+                                                .addComponent(btnNuevo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addComponent(btnEliminar)
+                                                .addGap(17, 17, 17))
+                                            .addComponent(txtAnio)
+                                            .addComponent(txtNombre)
+                                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                                .addComponent(radioActivo)
+                                                .addGap(0, 0, Short.MAX_VALUE))
+                                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                                .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(116, 116, 116))))
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 408, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -268,28 +280,24 @@ public class FormularioMateria extends javax.swing.JInternalFrame {
 //            }
             
               boolean estado = radioActivo.isSelected();
+      
+              m.guardarMateria(nombre, año  ,estado);
             
             
-           
- 
-            
-            m.guardarMateria(nombre, año  ,estado);
-            
-            
-        } catch (NullPointerException ex) {
-            System.out.println("Ingrese datos"+ex);
-        } catch (DateTimeException ex) {
-            System.out.println(ex);
-        } catch (NumberFormatException ex) {          
-             JOptionPane.showMessageDialog(null, "ingrese numeros en año "+ex);
-        } catch (Exception ex) {
-            Logger.getLogger(FormularioMateria.class.getName()).log(Level.SEVERE, null, ex);
-        }
+            } catch (NullPointerException ex) {
+                System.out.println("Ingrese datos"+ex);
+            } catch (DateTimeException ex) {
+                System.out.println(ex);
+            } catch (NumberFormatException ex) {          
+                 JOptionPane.showMessageDialog(null, "ingrese numeros en año "+ex);
+            } catch (Exception ex) {
+                Logger.getLogger(FormularioMateria.class.getName()).log(Level.SEVERE, null, ex);
+            }
                 
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void radioActivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioActivoActionPerformed
-        // TODO add your handling code here:
+  
     }//GEN-LAST:event_radioActivoActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
@@ -297,7 +305,12 @@ public class FormularioMateria extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-            
+        
+        /*este evento es para cargar la tabla con los datos de materia para 
+        seleccionarlas y realizar modificaciones o eliminarlas digtalmente
+        Es por esto qye se desactiva el boton guardar y se activan los 
+        botones eliminar y modificar (nuevo)
+        */
         tablaMaterias.setVisible(true);
         btnGuardar.setEnabled(false);
         btnEliminar.setEnabled(true);
@@ -305,25 +318,99 @@ public class FormularioMateria extends javax.swing.JInternalFrame {
         
         armarTabla();
         
-        //materiaService mate= new materiaService();
-        
-        
-       
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void jPanel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MouseClicked
-        // btnEliminar.setEnabled(false);
+        
+        /*este evento es para dejar la vista preparada para cargar una nueva
+        materia, se activa cargar y se desactiva eliminar y modificar (nuevo)
+        */
+
         btnNuevo.setEnabled(false);
         btnEliminar.setEnabled(false);
         btnGuardar.setEnabled(true);
+        limpiar();
         
         
     }//GEN-LAST:event_jPanel1MouseClicked
 
     private void tablaMateriasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaMateriasMouseClicked
- 
+       /* en este evento, una vez cargada la tabla con las materias, 
+        se d a click en una columna para que los daros pasen a los 
+        txtField, para modificarlos
+        */
+        
+        int filaSel=tablaMaterias.getSelectedRow();
+        if(filaSel!=-1){
+        int idMateria=(Integer)tablaMaterias.getValueAt(filaSel,0);
+        String nombre=(String)tablaMaterias.getValueAt(filaSel, 1);
+        int año=(Integer)tablaMaterias.getValueAt(filaSel, 2);
+        txtCodigo.setText(idMateria+"");
+        txtNombre.setText(nombre);
+        txtAnio.setText(año+"");
+        radioActivo.isSelected();
+        
+        
+        }
+        
         
     }//GEN-LAST:event_tablaMateriasMouseClicked
+
+    private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
+       /* evento de modificacion de la informacion recojida en los txtField y 
+        cargadas en la BD
+        */
+       
+        try {
+          //  alumnoService a = new alumnoService();
+            materiaService ms= new  materiaService();
+            int idMateria = Integer.parseInt(txtCodigo.getText());
+            String nombre= txtNombre.getText();
+            int anio= Integer.parseInt(txtAnio.getText());
+            boolean index= radioActivo.isSelected();
+            ms.modificarMateria(idMateria, nombre, anio, isIcon);
+            
+            JOptionPane.showMessageDialog(this,"La materia ha sido modificada");
+            limpiar();
+            
+        } catch (NumberFormatException b) {
+            JOptionPane.showMessageDialog(this, "Ingrese los datos numericos del documento correspondiente");
+        } catch (DateTimeException d) {
+            JOptionPane.showMessageDialog(this, "Ocurrio un error al analizar la fecha ingresada");
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "Ingrese correctamente los datos");
+        }
+    }                                            
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+        txtCodigo.setEditable(true);
+        btnGuardar.setEnabled(true);
+        btnEliminar.setEnabled(false);
+        btnNuevo.setEnabled(false);
+        limpiar();
+        
+        
+    }//GEN-LAST:event_btnNuevoActionPerformed
+
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+        /* evento para eliminar la materia, en forma digital
+         */
+        
+        try {
+            int idMateria = Integer.parseInt(txtCodigo.getText());
+            materiaService ms=new materiaService();
+            ms.eliminarMateria(idMateria);
+            JOptionPane.showMessageDialog(this,"La materia ha sido eliminada");
+
+            limpiar();
+            } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "No se encontro ninguna materia para su eliminacion");
+            } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "Error al analizar los datos");
+            }
+        
+   
+    }//GEN-LAST:event_btnEliminarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -355,8 +442,8 @@ private void armarCabecera(){
 
 
 private void armarTabla(){
-  
-        try {
+
+    try {
             //Instancio una clase "materiaService" para poder acceder a sus metodos
             materiaService mat = new materiaService();
             
@@ -365,7 +452,11 @@ private void armarTabla(){
             
             //le otorgo un modelo a la tabla
             DefaultTableModel modMat = new DefaultTableModel();          
+            modMat.addColumn("IdMateria");
             modMat.addColumn("nombre");
+            modMat.addColumn("año");
+            
+            
             tablaMaterias.setModel(modMat);
             
             //creo un vector para guardar los datos del array y que luego el modelo de la tabla pueda agregarlo a la tabla.
@@ -375,18 +466,21 @@ private void armarTabla(){
                 modMat.addRow(vecMat);
                 
                 materia getm = (materia)mater.get(i);
+                modMat.setValueAt(getm.getIdMateria(), i, 0);
+                modMat.setValueAt(getm.getNombre(), i, 1);
+                modMat.setValueAt(getm.getAño(), i, 2);
                 
-                modMat.setValueAt(getm.getNombre(), i, 0);
             }
             
         } catch (Exception ex) {
             Logger.getLogger(FormularioMateria.class.getName()).log(Level.SEVERE, null, ex);
         }
- 
-    
-    
-    
-    
-}   
-
 }
+        private void limpiar(){
+        
+            txtCodigo.setText("");
+            txtNombre.setText("");
+            txtAnio.setText("");
+  
+        }
+    }   
