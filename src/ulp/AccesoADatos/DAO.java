@@ -32,7 +32,7 @@ public abstract class DAO {
 
     private final String USER = "root";
     private final String PASSWORD = "";
-    private final String DATABASE = "ulap";
+    private final String DATABASE = "ulp";
     private final String DRIVER = "org.mariadb.jdbc.Driver";
 
     //Metodo que va a heredar a sus clases hijas la cual realiza la coneccion a la base de datos.
