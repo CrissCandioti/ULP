@@ -119,7 +119,7 @@ public final class alumnoDAO extends DAO {
 //Este metodo me retorna una lista de alumno, sean con estado activo o inactivo la lista me mostrara a todos los alumnos.
     public ArrayList<alumno> listarAlumno() throws Exception {
         try {
-            String sql = "SELECT `idAlumno`, `dni`, `apellido`, `nombre`, `fechaNacimiento`, `estado` FROM `alumno` where estado = 1 ";
+            String sql = "SELECT `idAlumno`, `dni`, `apellido`, `nombre`, `fechaNacimiento`, `estado` FROM `alumno` where estado = 1 ORDER BY apellido ASC ";
             consultarBaseDatos(sql);
             ArrayList<alumno> listaAlumnoARetornar = new ArrayList<>();
             alumno aux = null;

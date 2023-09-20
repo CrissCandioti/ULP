@@ -106,7 +106,7 @@ public final class inscripcionDAO extends DAO {
 
     public ArrayList<materia> obtenerMateriaNoCursada(int idAlumno) throws Exception {
         try {
-            String sql = "SELECT materia.idMateria FROM materia WHERE materia.idMateria NOT IN (SELECT inscripcion.idMateria FROM inscripcion WHERE inscripcion.idAlumno = " + idAlumno + " );";
+            String sql = "SELECT materia.idMateria FROM materia WHERE materia.idMateria NOT IN (SELECT inscripcion.idMateria FROM inscripcion WHERE inscripcion.idAlumno = " + idAlumno + " ) ORDER BY materia.nombre ASC;";
             consultarBaseDatos(sql);
             ArrayList<materia> listaARetornarDeMateriasNoCursadas = new ArrayList<>();
             materiaService ms = new materiaService();
