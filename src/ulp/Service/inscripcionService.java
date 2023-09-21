@@ -24,7 +24,7 @@ public class inscripcionService {
 //Este metodo crea una inscripcion, dentro del metodo tendremos las instanciaciones de alumnoSerivce,materiaService
 //y con la comunicacion a base de datos inscripcionDAO    
 
-    public void crearInscripcion(int nota, int id_Alumno, int id_Materia) {
+    public void crearInscripcion(double nota, int id_Alumno, int id_Materia) {
         try {
             //Esta restriccion creada realiza el trabajo que el alumno no se vuelva a inscribir a esa materia
             //que ya esta inscripto
@@ -115,7 +115,7 @@ public class inscripcionService {
 //Este metodo recibe por parametro el id del alumno, la materia y la nota a modificar, la cual le enviara esta informacion
 //a inscripcionDAO actualizarNota    
 
-    public void actualizarNota(int idAlumno, int idMateria, int nota) {
+    public void actualizarNota(int idAlumno, int idMateria, double nota) {
         try {
             inscripcionDAO dao = new inscripcionDAO();
             dao.actualizarNota(idAlumno, idMateria, nota);

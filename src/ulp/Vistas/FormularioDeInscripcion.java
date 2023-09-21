@@ -54,9 +54,9 @@ public class FormularioDeInscripcion extends javax.swing.JInternalFrame {
         btnSalir = new javax.swing.JButton();
         btnAnular = new javax.swing.JButton();
         btnInscribir = new javax.swing.JButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
-        radioTodasLasMaterias = new javax.swing.JRadioButton();
-        jRadioButton1 = new javax.swing.JRadioButton();
+        rdbMateriasNoInsc = new javax.swing.JRadioButton();
+        rdbTodasLasMaterias = new javax.swing.JRadioButton();
+        rdbMateriasInsc = new javax.swing.JRadioButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         tablaAlumno = new javax.swing.JTable();
         jSeparator1 = new javax.swing.JSeparator();
@@ -117,32 +117,33 @@ public class FormularioDeInscripcion extends javax.swing.JInternalFrame {
         });
         jPanel1.add(btnInscribir, new org.netbeans.lib.awtextra.AbsoluteConstraints(47, 387, 110, -1));
 
-        buttonGroup1.add(jRadioButton2);
-        jRadioButton2.setText("Materias no Inscriptas");
-        jRadioButton2.addActionListener(new java.awt.event.ActionListener() {
+        buttonGroup1.add(rdbMateriasNoInsc);
+        rdbMateriasNoInsc.setText("Materias no Inscriptas");
+        rdbMateriasNoInsc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton2ActionPerformed(evt);
+                rdbMateriasNoInscActionPerformed(evt);
             }
         });
-        jPanel1.add(jRadioButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(185, 140, -1, -1));
+        jPanel1.add(rdbMateriasNoInsc, new org.netbeans.lib.awtextra.AbsoluteConstraints(185, 140, -1, -1));
 
-        buttonGroup1.add(radioTodasLasMaterias);
-        radioTodasLasMaterias.setText("Todas las materias");
-        radioTodasLasMaterias.addActionListener(new java.awt.event.ActionListener() {
+        buttonGroup1.add(rdbTodasLasMaterias);
+        rdbTodasLasMaterias.setText("Todas las materias");
+        rdbTodasLasMaterias.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                radioTodasLasMateriasActionPerformed(evt);
+                rdbTodasLasMateriasActionPerformed(evt);
             }
         });
-        jPanel1.add(radioTodasLasMaterias, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 140, -1, -1));
+        jPanel1.add(rdbTodasLasMaterias, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 140, -1, -1));
 
-        buttonGroup1.add(jRadioButton1);
-        jRadioButton1.setText("Materias Inscriptas");
-        jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
+        buttonGroup1.add(rdbMateriasInsc);
+        rdbMateriasInsc.setSelected(true);
+        rdbMateriasInsc.setText("Materias Inscriptas");
+        rdbMateriasInsc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton1ActionPerformed(evt);
+                rdbMateriasInscActionPerformed(evt);
             }
         });
-        jPanel1.add(jRadioButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(47, 140, -1, -1));
+        jPanel1.add(rdbMateriasInsc, new org.netbeans.lib.awtextra.AbsoluteConstraints(47, 140, -1, -1));
 
         tablaAlumno.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -165,6 +166,11 @@ public class FormularioDeInscripcion extends javax.swing.JInternalFrame {
         jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(47, 164, 430, 214));
         jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(88, 52, 402, 10));
 
+        comboBoxAlumno.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                comboBoxAlumnoMouseReleased(evt);
+            }
+        });
         comboBoxAlumno.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 comboBoxAlumnoActionPerformed(evt);
@@ -187,7 +193,7 @@ public class FormularioDeInscripcion extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     //Método para llenar la tabla con las materias en la que está inscripto el alumno.
-    private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
+    private void rdbMateriasInscActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdbMateriasInscActionPerformed
         //activo y desactivo botones correspondientes
         btnAnular.setVisible(true);
         btnAnular.setEnabled(false);
@@ -195,26 +201,33 @@ public class FormularioDeInscripcion extends javax.swing.JInternalFrame {
         llenarMateriasCursadas();
 
 //     
-    }//GEN-LAST:event_jRadioButton1ActionPerformed
+    }//GEN-LAST:event_rdbMateriasInscActionPerformed
 
     //Método para cerrar la ventana
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
         this.dispose();
     }//GEN-LAST:event_btnSalirActionPerformed
 
-    private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
+    private void rdbMateriasNoInscActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdbMateriasNoInscActionPerformed
 
         //activo y desactivo botones correspondientes
         btnAnular.setVisible(false);
         btnInscribir.setEnabled(false);
         btnInscribir.setVisible(true);
         llenarMateriasNoCursadas();
-     
-    }//GEN-LAST:event_jRadioButton2ActionPerformed
+
+    }//GEN-LAST:event_rdbMateriasNoInscActionPerformed
 
 
     private void comboBoxAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxAlumnoActionPerformed
-        // TODO add your handling code here:
+
+        if (rdbMateriasInsc.isSelected()) {
+            llenarMateriasCursadas();
+        } else if (rdbMateriasNoInsc.isSelected()) {
+            llenarMateriasNoCursadas();
+        } else {
+            llenarTodasLasMaterias();
+        }
     }//GEN-LAST:event_comboBoxAlumnoActionPerformed
 
     //Método para INSCRIBIR un alumno a una materia
@@ -223,17 +236,21 @@ public class FormularioDeInscripcion extends javax.swing.JInternalFrame {
         try {
             //Creo un modelo y le asigno ese modelo a la jtable
             DefaultTableModel modelo = (DefaultTableModel) tablaAlumno.getModel();
+            boolean estado = (boolean) modelo.getValueAt(tablaAlumno.getSelectedRow(), 3);
+            //guardo en una variable booleana el estado de la materia
+            if (estado == false) {//si el estado es "false" significa que la materia está eliminada.
+                JOptionPane.showMessageDialog(this, "No se puede inscribir en esta Materia por que está Eliminada");
+            } else {//Si es "true" prosigo con la inscripción
+                //guardo en una variable el id del alumno que esta en el combobox
+                int idAlumno = comboBoxAlumno.getItemAt(comboBoxAlumno.getSelectedIndex()).getIdAlumno();
+                //obtengo el indice 0 (donde está el id de la materia) de la fila seleccionada en la tabla y lo guardo en una variable
+                int idMateria = (int) modelo.getValueAt(tablaAlumno.getSelectedRow(), 0);
 
-            //guardo en una variable el id del alumno que esta en el combobox
-            int idAlumno = comboBoxAlumno.getItemAt(comboBoxAlumno.getSelectedIndex()).getIdAlumno();
-            //obtengo el indice 0 (donde está el id de la materia) de la fila seleccionada en la tabla y lo guardo en una variable
-            int idMateria = (int) modelo.getValueAt(tablaAlumno.getSelectedRow(), 0);
+                //Instancio IscripcionService, con las variables obtenidas, para acceder al método "crearInscripcion()"
+                inscripcionService ins = new inscripcionService();
 
-            //Instancio IscripcionService, con las variables obtenidas, para acceder al método "crearInscripcion()"
-            inscripcionService ins = new inscripcionService();
-
-            ins.crearInscripcion(0, idAlumno, idMateria);
-
+                ins.crearInscripcion(0, idAlumno, idMateria);
+            }
         } catch (ArrayIndexOutOfBoundsException ex) {
             JOptionPane.showMessageDialog(null, "Seleccione una materia para su inscripcion");
         } catch (NullPointerException f) {
@@ -241,7 +258,7 @@ public class FormularioDeInscripcion extends javax.swing.JInternalFrame {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
         }
-        
+
         llenarMateriasNoCursadas();
     }//GEN-LAST:event_btnInscribirActionPerformed
 
@@ -252,17 +269,17 @@ public class FormularioDeInscripcion extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_tablaAlumnoMouseClicked
 
     private void btnAnularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnularActionPerformed
-            
+
         //Muestro un mensaje de conformacion si qiuiero elimnar la inscricpcion
         if (JOptionPane.showConfirmDialog(null, "ESTA SEGURO DE ELIMINAR INSCRIPCION?", "SALIR", JOptionPane.YES_NO_CANCEL_OPTION) == 0) {
 
             try {
-                
+
                 DefaultTableModel modelo = (DefaultTableModel) tablaAlumno.getModel();
                 //Guardo en variables el valor de idMateria e idAlumno para pasarselo al método
                 int idMateria = (int) modelo.getValueAt(tablaAlumno.getSelectedRow(), 0);
                 int idAlumno = comboBoxAlumno.getItemAt(comboBoxAlumno.getSelectedIndex()).getIdAlumno();
-                
+
                 //Instancio una inscripción service para acceder al método
                 inscripcionService ins = new inscripcionService();
                 //llamo al método y le paso los parametros
@@ -279,13 +296,17 @@ public class FormularioDeInscripcion extends javax.swing.JInternalFrame {
         llenarMateriasCursadas();
     }//GEN-LAST:event_btnAnularActionPerformed
 
-    private void radioTodasLasMateriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioTodasLasMateriasActionPerformed
+    private void rdbTodasLasMateriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdbTodasLasMateriasActionPerformed
         btnAnular.setVisible(false);
         btnInscribir.setEnabled(false);
         btnInscribir.setVisible(false);
-        
+
         llenarTodasLasMaterias();
-    }//GEN-LAST:event_radioTodasLasMateriasActionPerformed
+    }//GEN-LAST:event_rdbTodasLasMateriasActionPerformed
+
+    private void comboBoxAlumnoMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_comboBoxAlumnoMouseReleased
+
+    }//GEN-LAST:event_comboBoxAlumnoMouseReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -299,19 +320,18 @@ public class FormularioDeInscripcion extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JRadioButton radioTodasLasMaterias;
+    private javax.swing.JRadioButton rdbMateriasInsc;
+    private javax.swing.JRadioButton rdbMateriasNoInsc;
+    private javax.swing.JRadioButton rdbTodasLasMaterias;
     private javax.swing.JTable tablaAlumno;
     // End of variables declaration//GEN-END:variables
 
-    public void llenarTodasLasMaterias(){
+    public void llenarTodasLasMaterias() {
         try {
-            
 
             materiaService ma = new materiaService();
             //Guardo el arraylist que me retorna en una variable para usar luego la variable 
@@ -346,7 +366,8 @@ public class FormularioDeInscripcion extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, e);
         }
     }
-    public void llenarMateriasCursadas(){
+
+    public void llenarMateriasCursadas() {
         try {
             //guardo en una variable el id recogido del alumno del combobox
             int id = comboBoxAlumno.getItemAt(comboBoxAlumno.getSelectedIndex()).getIdAlumno();
@@ -378,8 +399,9 @@ public class FormularioDeInscripcion extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, e);
         }
     }
+
     public void llenarMateriasNoCursadas() {
- try {
+        try {
             int id = comboBoxAlumno.getItemAt(comboBoxAlumno.getSelectedIndex()).getIdAlumno();
 
             inscripcionService ins = new inscripcionService();
@@ -391,6 +413,8 @@ public class FormularioDeInscripcion extends javax.swing.JInternalFrame {
             modelo.addColumn("Id");
             modelo.addColumn("Nombre");
             modelo.addColumn("Año");
+            modelo.addColumn("Estado");
+
             tablaAlumno.setModel(modelo);
 
             for (Object object : materias) {
@@ -405,6 +429,7 @@ public class FormularioDeInscripcion extends javax.swing.JInternalFrame {
                 modelo.setValueAt(getm.getIdMateria(), i, 0);
                 modelo.setValueAt(getm.getNombre(), i, 1);
                 modelo.setValueAt(getm.getAño(), i, 2);
+                modelo.setValueAt(getm.isEstado(), i, 3);
 
             }
         } catch (NullPointerException ex) {

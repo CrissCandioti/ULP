@@ -12,14 +12,14 @@ package ulp.Entidades;
 public class inscripcion {
 
     private int idInscripto;
-    private int nota;
+    private double nota;
     private alumno idAlumno;
     private materia idMateria;
 
     public inscripcion() {
     }
 
-    public inscripcion(int idInscripto, int nota, alumno idAlumno, materia idMateria) {
+    public inscripcion(int idInscripto, double nota, alumno idAlumno, materia idMateria) {
         this.idInscripto = idInscripto;
         this.nota = nota;
         this.idAlumno = idAlumno;
@@ -34,11 +34,11 @@ public class inscripcion {
         this.idInscripto = idInscripto;
     }
 
-    public int getNota() {
+    public double getNota() {
         return nota;
     }
 
-    public void setNota(int nota) {
+    public void setNota(double nota) {
         this.nota = nota;
     }
 

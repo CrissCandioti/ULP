@@ -53,7 +53,7 @@ public final class inscripcionDAO extends DAO {
                 //A la inscripcion creada anteriormente la hacemos nacer para comenzar a setearles los datos.    
                 aux = new inscripcion();
                 aux.setIdInscripto(resultado.getInt(1));
-                aux.setNota(resultado.getInt(2));
+                aux.setNota(resultado.getDouble(2));
                 //Debido a que nuestra base de datos contiene un tipo de dato entero con el ID del alumno.
                 //Se crea una variable tomando ese datos.
                 Integer idAlumno = resultado.getInt(3);
@@ -93,7 +93,7 @@ public final class inscripcionDAO extends DAO {
             while (resultado.next()) {
                 aux = new inscripcion();
                 aux.setIdInscripto(resultado.getInt(1));
-                aux.setNota(resultado.getInt(2));
+                aux.setNota(resultado.getDouble(2));
                 Integer idAlumno = resultado.getInt(3);
                 alumno alumno = as.buscarAlumnoPorID(idAlumno);
                 aux.setIdAlumno(alumno);
@@ -167,7 +167,7 @@ public final class inscripcionDAO extends DAO {
 //Este metodo tiene el trabajo de actualizar la nota de la materia que el alumno se inscribio.
 //Dentro de la consulta a la base de datos utilizamos un UPDATE para realizar dicha actualizacion.    
 
-    public void actualizarNota(int idAlumno, int idMateria, int nota) {
+    public void actualizarNota(int idAlumno, int idMateria, double nota) {
         try {
             String sql = "UPDATE `inscripcion` SET `nota` = " + nota + " WHERE idAlumno = " + idAlumno + " AND idMateria = " + idMateria + " ";
             insertarModificarEliminarBaseDatos(sql);
