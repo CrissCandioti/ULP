@@ -21,8 +21,6 @@ import ulp.Service.materiaService;
  */
 public class FormularioMateria extends javax.swing.JInternalFrame {
 
-  
-
     /**
      * Creates new form FormularioMateria
      */
@@ -218,20 +216,19 @@ public class FormularioMateria extends javax.swing.JInternalFrame {
             String nombre = txtNombre.getText();
             int año = Integer.parseInt(txtAnio.getText());
             boolean estado = radioActivo.isSelected();
-
+            if (nombre.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "La celda del nombre esta vacia");
+                return;
+            }
             m.guardarMateria(nombre, año, estado);
-            JOptionPane.showMessageDialog(this, "Materia agregada");
             limpiar();
         } catch (NullPointerException ex) {
-            System.out.println("Ingrese datos" + ex);
-        } catch (DateTimeException ex) {
-            System.out.println(ex);
+            JOptionPane.showMessageDialog(null, "No deje ninguna celda vacia");
         } catch (NumberFormatException ex) {
-            JOptionPane.showMessageDialog(null, "ingrese numeros en año " + ex);
+            JOptionPane.showMessageDialog(null, "Ingrese los datos correspondientes en el año");
         } catch (Exception ex) {
-            Logger.getLogger(FormularioMateria.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Ingrese correctamente los datos");
         }
-
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void radioActivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioActivoActionPerformed
@@ -248,9 +245,8 @@ public class FormularioMateria extends javax.swing.JInternalFrame {
         btnModificar.setEnabled(true);
         btnEliminar.setEnabled(true);
         btnGuardar.setEnabled(false);
-        
+
         llenarTodasLasMaterias();
-        
 
 
     }//GEN-LAST:event_btnBuscarActionPerformed
@@ -266,70 +262,67 @@ public class FormularioMateria extends javax.swing.JInternalFrame {
         try {
             DefaultTableModel modelo = (DefaultTableModel) tablaMaterias.getModel();
             int idMateria = (int) modelo.getValueAt(tablaMaterias.getSelectedRow(), 0);
-            
+
             materiaService mate = new materiaService();
             materia m = new materia();
-            
-            m=mate.buscarMateria(idMateria);
-            
-            txtCodigo.setText(""+ m.getIdMateria());
+
+            m = mate.buscarMateria(idMateria);
+
+            txtCodigo.setText("" + m.getIdMateria());
             txtNombre.setText(m.getNombre());
-            txtAnio.setText(""+m.getAño());
-            
-            if (m.isEstado()==true) {
+            txtAnio.setText("" + m.getAño());
+
+            if (m.isEstado() == true) {
                 radioActivo.setSelected(true);
-            }else{
+            } else {
                 radioActivo.setSelected(false);
             }
-            
-            
+
         } catch (Exception ex) {
-            Logger.getLogger(FormularioMateria.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Se produjo un error al intentar seleccionar la materia");
         }
-          
+
     }//GEN-LAST:event_tablaMateriasMouseClicked
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
-       
-        
+
         try {
             materiaService mate = new materiaService();
-            
+
             int id = Integer.parseInt(txtCodigo.getText());
             String nombre = txtNombre.getText();
             int anio = Integer.parseInt(txtAnio.getText());
             boolean estado = radioActivo.isSelected();
-            
+
             mate.modificarMateria(id, nombre, anio, estado);
-            JOptionPane.showMessageDialog(this, "Materia modificada");
             limpiar();
-            
-        } catch (NullPointerException ex) {
-            Logger.getLogger(FormularioMateria.class.getName()).log(Level.SEVERE, null, ex);
+
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Seleccione una materia para modificarla");
         } catch (Exception ex) {
-            Logger.getLogger(FormularioMateria.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Ingrese los datos correctos para su modificacion");
         }
-       
-        
-        
+
     }//GEN-LAST:event_btnModificarActionPerformed
 
     private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
-       limpiar();
+        limpiar();
     }//GEN-LAST:event_btnNuevoActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         if (JOptionPane.showConfirmDialog(null, "ESTA SEGURO DE ELIMINAR MATERIA?", "SALIR", JOptionPane.YES_NO_CANCEL_OPTION) == 0) {
-        try {
-            materiaService mate = new materiaService();
-            int id = Integer.parseInt(txtCodigo.getText());
-            
-            mate.eliminarMateria(id);
-            JOptionPane.showMessageDialog(this, "Materia Eliminada");
-            limpiar();
-        } catch (Exception ex) {
-            Logger.getLogger(FormularioMateria.class.getName()).log(Level.SEVERE, null, ex);
-        }
+            try {
+                materiaService mate = new materiaService();
+                int id = Integer.parseInt(txtCodigo.getText());
+
+                mate.eliminarMateria(id);
+
+                limpiar();
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(null, "Seleccione una materia para su eliminacion");
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(null, "Error al analizar los datos");
+            }
         }
     }//GEN-LAST:event_btnEliminarActionPerformed
 
@@ -357,16 +350,15 @@ public class FormularioMateria extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtCodigo;
     private javax.swing.JTextField txtNombre;
     // End of variables declaration//GEN-END:variables
-    
-    public void limpiar(){
+
+    public void limpiar() {
         txtAnio.setText("");
         txtCodigo.setText("");
         txtNombre.setText("");
     }
- 
-    public void llenarTodasLasMaterias(){
+
+    public void llenarTodasLasMaterias() {
         try {
-            
 
             materiaService ma = new materiaService();
             //Guardo el arraylist que me retorna en una variable para usar luego la variable 

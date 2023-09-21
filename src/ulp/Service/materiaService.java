@@ -6,6 +6,7 @@
 package ulp.Service;
 
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import ulp.AccesoADatos.materiaDAO;
 import ulp.Entidades.materia;
 
@@ -15,8 +16,22 @@ import ulp.Entidades.materia;
  */
 public class materiaService {
 
-    public void guardarMateria(String nombre, int año, boolean estado) throws NumberFormatException, NullPointerException, Exception {
+    public void guardarMateria(String nombre, int año, boolean estado) {
         try {
+            // Comprueba si el primer carácter es un dígito numérico (0-9)
+            char primerCaracter = nombre.charAt(0);
+            if (Character.isDigit(primerCaracter)) {
+                JOptionPane.showMessageDialog(null, "El nombre no puede comenzar con numeros");
+                return;
+            }
+            if (nombre.length() < 3) {
+                JOptionPane.showMessageDialog(null, "El nombre de la materia no debe contener menos de 3 caracteres");
+                return;
+            }
+            if (año <= 0) {
+                JOptionPane.showMessageDialog(null, "El año no puede ser 0 o menor");
+                return;
+            }
             materiaDAO dao = new materiaDAO();
             materia aux = new materia();
             aux.setNombre(nombre);
@@ -29,28 +44,41 @@ public class materiaService {
                 index = 0;
             }
             dao.guardarMateria(aux, index);
-        } catch (NumberFormatException a) {
-            throw new NumberFormatException("Ingrese el año correctamente");
-        } catch (NullPointerException b) {
-            throw new NullPointerException("Ingrese el nombre de la materia correctamente");
+            JOptionPane.showMessageDialog(null, "Se guardo con exito la materia");
         } catch (Exception e) {
-            throw e;
+            JOptionPane.showMessageDialog(null, "Se produjo un error al intentar guardar la materia");
         }
     }
 
-    public materia buscarMateria(int id) throws NumberFormatException, Exception {
+    public materia buscarMateria(int id) {
         try {
             materiaDAO dao = new materiaDAO();
             return dao.buscarMateria(id);
-        } catch (NumberFormatException e) {
-            throw new NumberFormatException("Ingrese el ID correspondiente para buscar su materia");
         } catch (Exception ex) {
-            throw ex;
+            JOptionPane.showMessageDialog(null, "Se produjo un error al intentar buscar la materia");
         }
+        return null;
     }
 
-    public void modificarMateria(int idMateria, String nombre, int año, boolean estado) throws NumberFormatException, NullPointerException, Exception {
+    public void modificarMateria(int idMateria, String nombre, int año, boolean estado) {
         try {
+            char primerCaracter = nombre.charAt(0);
+            if (Character.isDigit(primerCaracter)) {
+                JOptionPane.showMessageDialog(null, "El nuevo nombre no puede comenzar con numeros");
+                return;
+            }
+            if (nombre.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "El nuevo nombre de la materia no puede estar vacio");
+                return;
+            }
+            if (nombre.length() < 3) {
+                JOptionPane.showMessageDialog(null, "El nuevo nombre de la materia no puede tener menos de 3 caracteres");
+                return;
+            }
+            if (año <= 0) {
+                JOptionPane.showMessageDialog(null, "El nuevo año no puede ser 0 o menor");
+                return;
+            }
             materiaDAO dao = new materiaDAO();
             materia aux = new materia();
             aux.setIdMateria(idMateria);
@@ -64,33 +92,34 @@ public class materiaService {
                 index = 0;
             }
             dao.modificarMateria(aux, index);
-        } catch (NumberFormatException a) {
-            throw new NumberFormatException("Ingrese los datos numericos correctos");
-        } catch (NullPointerException b) {
-            throw new NullPointerException("Ingrese el nombre de la materia correctamente");
+            JOptionPane.showMessageDialog(null, "Se modifico con exito la materia seleccionada");
         } catch (Exception e) {
-            throw e;
+            JOptionPane.showMessageDialog(null, "Se produjo un error al intentar modificar la materia");
         }
     }
 
-    public void eliminarMateria(int id) throws NumberFormatException, Exception {
+    public void eliminarMateria(int id) {
         try {
+            if (buscarMateria(id).isEstado() == false) {
+                JOptionPane.showMessageDialog(null, "La materia seleccionada ya fue eliminada");
+                return;
+            }
             materiaDAO dao = new materiaDAO();
             dao.eliminarMateria(id);
-        } catch (NumberFormatException e) {
-            throw new NumberFormatException("Introduce el ID correctamente para eliminar la materia deseada");
+            JOptionPane.showMessageDialog(null, "Materia Eliminada");
         } catch (Exception ex) {
-            throw ex;
+            JOptionPane.showMessageDialog(null, "No pudimos eliminar la materia seleccionada");
         }
     }
 
-    public ArrayList<materia> listarMateria() throws Exception {
+    public ArrayList<materia> listarMateria() {
         try {
             materiaDAO dao = new materiaDAO();
             return dao.listarMateria();
         } catch (Exception e) {
-            throw e;
+            JOptionPane.showMessageDialog(null, "Se produjo un error al intentar obtener la lista de materias");
         }
+        return null;
     }
 
 }

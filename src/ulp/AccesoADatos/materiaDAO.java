@@ -6,6 +6,7 @@
 package ulp.AccesoADatos;
 
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import ulp.Entidades.materia;
 
 /**
@@ -17,12 +18,12 @@ import ulp.Entidades.materia;
  */
 public final class materiaDAO extends DAO {
 
-    public void guardarMateria(materia aux, int index) throws Exception {
+    public void guardarMateria(materia aux, int index) {
         try {
             String sql = "INSERT INTO `materia`(`nombre`, `año`, `estado`) VALUES ('" + aux.getNombre() + "','" + aux.getAño() + "', " + index + " )";
             insertarModificarEliminarBaseDatos(sql);
         } catch (Exception e) {
-            throw e;
+            JOptionPane.showMessageDialog(null, "Se produjo un error al intentar guardar la materia en la base de datos");
         }
     }
 
@@ -44,35 +45,34 @@ public final class materiaDAO extends DAO {
                 }
                 aux.setEstado(estado);
             }
-
+            desconectarBaseDatos();
             return aux;
         } catch (Exception e) {
             desconectarBaseDatos();
-            throw e;
-        } finally {
-            desconectarBaseDatos();
+            JOptionPane.showMessageDialog(null, "Se produjo un error al buscar la materia en la base de datos");
         }
+        return null;
     }
 
-    public void modificarMateria(materia aux, int index) throws Exception {
+    public void modificarMateria(materia aux, int index) {
         try {
             String sql = "UPDATE `materia` SET `nombre`='" + aux.getNombre() + "',`año`='" + aux.getAño() + "',`estado`='" + index + "' WHERE idMateria = " + aux.getIdMateria();
             insertarModificarEliminarBaseDatos(sql);
         } catch (Exception e) {
-            throw e;
+            JOptionPane.showMessageDialog(null, "Se produjo un error al modificar la materia en la base de datos");
         }
     }
 
-    public void eliminarMateria(int id) throws Exception {
+    public void eliminarMateria(int id) {
         try {
             String sql = "UPDATE `materia` SET `estado`= 0 WHERE idMateria = " + id;
             insertarModificarEliminarBaseDatos(sql);
         } catch (Exception e) {
-            throw e;
+            JOptionPane.showMessageDialog(null, "Se produjo un error al intentar eliminar la materia seleccionada en la base de datos");
         }
     }
 
-    public ArrayList<materia> listarMateria() throws Exception {
+    public ArrayList<materia> listarMateria() {
         try {
             String sql = "SELECT `idMateria`, `nombre`, `año`, `estado` FROM `materia`";
             consultarBaseDatos(sql);
@@ -96,7 +96,8 @@ public final class materiaDAO extends DAO {
             return listaMateriaARetornar;
         } catch (Exception e) {
             desconectarBaseDatos();
-            throw e;
+            JOptionPane.showMessageDialog(null, "Se produjo un error al intentar traer todas las materias de la base de datos");
         }
+        return null;
     }
 }

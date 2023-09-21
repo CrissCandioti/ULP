@@ -24,7 +24,6 @@ import ulp.Entidades.alumno;
 public class alumnoService {
 
 //El metodo "crearAlumno" recibe toda la informacion establecida en la vistas para completar el registro de los alumnos
-
     public void crearAlumno(int dni, String apellido, String nombre, LocalDate fechaNacimiento, boolean estado) {
 
 //Dentro de un bloque try-catch el metodo procede a analizar estos datos con las restricciones,        
@@ -36,19 +35,19 @@ public class alumnoService {
 //Se crea una variable LocalDate la cual se utiliza para la restriccion de la edad, el programa solo admite alumnos
 //mayores de 18 años de edad
             LocalDate mayorEdad = LocalDate.of(2005, 01, 01);
-                //Se procede a pasar el dato dni y las variables cadenaDniReglamentarioMinimo y cadenaDniReglamentarioMaximo a cadena
-                //de texto para proceder con su restriccion
+            //Se procede a pasar el dato dni y las variables cadenaDniReglamentarioMinimo y cadenaDniReglamentarioMaximo a cadena
+            //de texto para proceder con su restriccion
             String cadenaDni = Integer.toString(dni);
             String cadenaDniReglamentarioMinimo = Integer.toString(dniReglamentarioMinimo);
             String cadenaDniReglamentarioMaximo = Integer.toString(dniReglamentarioMaximo);
             boolean limiteEdad = fechaNacimiento.isAfter(mayorEdad);
-                //Las restricciones realizada mas adelante se encargan de desempeñar distintas condiciones.
-                //Esta restriccion se encarga de buscar un dni en la base de datos para no registrar un alumno con ese documento
+            //Las restricciones realizada mas adelante se encargan de desempeñar distintas condiciones.
+            //Esta restriccion se encarga de buscar un dni en la base de datos para no registrar un alumno con ese documento
             if (buscarAlumnoPorDNI(dni) != null) {
                 JOptionPane.showMessageDialog(null, "Tenemos registrado un alumno con el documento ingresado");
                 return;
             }
-                //Esta restriccion se encarga de analizar la cantidad de caracteres que se ingresa por el documento.            
+            //Esta restriccion se encarga de analizar la cantidad de caracteres que se ingresa por el documento.            
             if (cadenaDni.length() > cadenaDniReglamentarioMaximo.length()) {
                 JOptionPane.showMessageDialog(null, "El documento ingresado es mayor al reglamentario");
                 return;
@@ -66,6 +65,29 @@ public class alumnoService {
             if (limiteEdad == true) {
                 JOptionPane.showMessageDialog(null, "Eres menor de edad para proseguir con el registro de inscripcion");
                 return;
+            }
+            char primerCaracterN = nombre.charAt(0);
+            char primerCaracterA = apellido.charAt(0);
+            if (Character.isDigit(primerCaracterN)) {
+                JOptionPane.showMessageDialog(null, "El nombre no puede comenzar con numeros");
+                return;
+            }
+            if (Character.isDigit(primerCaracterA)) {
+                JOptionPane.showMessageDialog(null, "El apellido no puede comenzar con numeros");
+                return;
+            }
+//Esta restriccion esta creada para que el usuario no ingrese un nombre o apellido con caracteres numericos.
+            for (char caracter : nombre.toCharArray()) {
+                if (Character.isDigit(caracter)) {
+                    JOptionPane.showMessageDialog(null, "El nombre no puede contener caractere numericos");
+                    return;
+                }
+            }
+            for (char caracter : apellido.toCharArray()) {
+                if (Character.isDigit(caracter)) {
+                    JOptionPane.showMessageDialog(null, "El apellido no puede contener caractere numericos");
+                    return;
+                }
             }
 //Una vez cumplida las restricciones el metodo se encarga de instanciar un alumno con esos datos obtenidos            
             alumnoDAO dao = new alumnoDAO();
@@ -113,7 +135,6 @@ public class alumnoService {
     }
 //El metodo buscarAlumnoPorID se encarga de buscar un alumno que recibe por parametro el id, y este retornara al alumno si lo encuentra
 
-
     public alumno buscarAlumnoPorID(int id) {
 
         try {
@@ -127,7 +148,6 @@ public class alumnoService {
 //El metodo buscarAlumnoPorDNI tiene un desempeño similar al metodo anterior con la peculiar diferencia que busca
 //a este alumno por el documento    
 
-
     public alumno buscarAlumnoPorDNI(int dni) {
 
         try {
@@ -139,7 +159,6 @@ public class alumnoService {
         return null;
     }
 //El metodo listarAlumno se encarga de mostrar a todos los alumno registrados en la base de datos, esten tanto activo como inactivos
-
 
     public ArrayList<alumno> listarAlumno() {
 
@@ -154,7 +173,6 @@ public class alumnoService {
 //El metodo modificar tiene un desempeño muy similar al crear alumno,con la diferencia que en la comunicacion con el
 //paquete "Acceso a Datos" el metodo que va a recibir toda esta informacion es modificarAlumno y no guardar como en el metodo crearAlumno.    
 
-
     public void modificarAlumno(int id, int dni, String apellido, String nombre, LocalDate fechaNacimiento, boolean estado) {
 
         try {
@@ -166,6 +184,9 @@ public class alumnoService {
             String cadenaDniReglamentarioMinimo = Integer.toString(dniReglamentarioMinimo);
             String cadenaDniReglamentarioMaximo = Integer.toString(dniReglamentarioMaximo);
             boolean limiteEdad = fechaNacimiento.isAfter(mayorEdad);
+
+            char primerCaracterN = nombre.charAt(0);
+            char primerCaracterA = apellido.charAt(0);
 
             if (buscarAlumnoPorDNI(dni) != null && buscarAlumnoPorDNI(dni).getDni() != dni) {
                 JOptionPane.showMessageDialog(null, "Tenemos registrado un alumno con el documento ingresado");
@@ -190,6 +211,27 @@ public class alumnoService {
                 return;
             }
 
+            if (Character.isDigit(primerCaracterN)) {
+                JOptionPane.showMessageDialog(null, "El nuevo nombre no puede comenzar con numeros");
+                return;
+            }
+            if (Character.isDigit(primerCaracterA)) {
+                JOptionPane.showMessageDialog(null, "El nuevo apellido no puede comenzar con numeros");
+                return;
+            }
+
+            for (char caracter : nombre.toCharArray()) {
+                if (Character.isDigit(caracter)) {
+                    JOptionPane.showMessageDialog(null, "El nuevo nombre no puede contener caractere numericos");
+                    return;
+                }
+            }
+            for (char caracter : apellido.toCharArray()) {
+                if (Character.isDigit(caracter)) {
+                    JOptionPane.showMessageDialog(null, "El nuevo apellido no puede contener caractere numericos");
+                    return;
+                }
+            }
             alumnoDAO dao = new alumnoDAO();
             alumno aux = new alumno();
             aux.setIdAlumno(id);

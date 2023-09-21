@@ -6,14 +6,9 @@
 package ulp.Vistas;
 
 import com.toedter.calendar.JTextFieldDateEditor;
-import java.sql.Date;
 import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
-import static java.time.temporal.TemporalQueries.localDate;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import ulp.Entidades.alumno;
