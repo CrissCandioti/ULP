@@ -110,7 +110,7 @@ public class inscripcionService {
             inscripcionDAO dao = new inscripcionDAO();
             return dao.obtenerMateriaCursadas(idAlumno);
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, "No pudimis obtener las materias no cursadas");
+            JOptionPane.showMessageDialog(null, "No pudimos obtener las materias no cursadas");
         }
         return null;
     }

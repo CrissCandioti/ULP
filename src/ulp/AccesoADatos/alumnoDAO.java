@@ -177,8 +177,9 @@ public final class alumnoDAO extends DAO {
             return listaAlumnoARetornar;
         } catch (Exception e) {
             desconectarBaseDatos();
-            JOptionPane.showMessageDialog(null, "No pudimos reornar ningun alumno de la base de datos");
+            JOptionPane.showMessageDialog(null, "No pudimos retornar ningun alumno de la base de datos");
         }
+
         return null;
     }
 

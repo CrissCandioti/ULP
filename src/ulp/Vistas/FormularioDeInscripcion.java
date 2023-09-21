@@ -450,7 +450,7 @@ public class FormularioDeInscripcion extends javax.swing.JInternalFrame {
                 comboBoxAlumno.addItem(o);
             }
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, ex);
+            JOptionPane.showMessageDialog(null, "Inhabilitamos temporalmente la seleccion del alumno");
         }
     }
 
