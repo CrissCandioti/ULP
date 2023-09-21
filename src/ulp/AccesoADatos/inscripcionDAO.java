@@ -115,7 +115,7 @@ public final class inscripcionDAO extends DAO {
 
     public ArrayList<materia> obtenerMateriaCursadas(int idAlumno) {
         try {
-            String sql = "SELECT materia.idMateria FROM inscripcion INNER JOIN materia ON inscripcion.idMateria = materia.idMateria WHERE idAlumno = " + idAlumno;
+            String sql = "SELECT materia.idMateria FROM inscripcion INNER JOIN materia ON inscripcion.idMateria = materia.idMateria WHERE idAlumno = " + idAlumno + " AND materia.estado = 1 " + " ORDER BY materia.nombre ASC ";
             consultarBaseDatos(sql);
             ArrayList<materia> listaARetornarDeMateriasCursadas = new ArrayList<>();
             materiaService ms = new materiaService();
