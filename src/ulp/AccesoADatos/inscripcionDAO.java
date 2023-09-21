@@ -21,8 +21,12 @@ import ulp.Service.materiaService;
  *
  */
 public final class inscripcionDAO extends DAO {
-//Este metodo utiliza los comandos correspondientes para guardar la inscripcion que previamente fue creada y la recibe por medio de parametro.
 
+    /*
+     * Este metodo utiliza los comandos correspondientes para guardar la
+     * inscripcion que previamente fue creada y la recibe por medio de
+     * parametro.
+     */
     public void guardarInscripcion(inscripcion aux) {
         try {
             String sql = "INSERT INTO `inscripcion`(`nota`, `idAlumno`, `idMateria`) VALUES ('" + aux.getNota() + "','" + aux.getIdAlumno().getIdAlumno() + "','" + aux.getIdMateria().getIdMateria() + "')";
@@ -31,10 +35,13 @@ public final class inscripcionDAO extends DAO {
             JOptionPane.showMessageDialog(null, "No pudimos guardar la inscripcion en la base de datos");
         }
     }
-//Este metodo retorna la lista de inscripciones realizadas. En su interior contiene instanciaciones de las clases
-//services de alumno y materia, la cual van a utilizar sus metodos propios para encontrar y retornar la materia 
-//u alumno de la relacion establecida.    
 
+    /*
+     * Este metodo retorna la lista de inscripciones realizadas. En su interior
+     * contiene instanciaciones de las clases services de alumno y materia, la
+     * cual van a utilizar sus metodos propios para encontrar y retornar la
+     * materia u alumno de la relacion establecida.
+     */
     public ArrayList<inscripcion> obtenerInscripcion() {
         try {
             //Se crean las instancias de alumnoService y materiaSerivce
@@ -54,14 +61,20 @@ public final class inscripcionDAO extends DAO {
                 aux = new inscripcion();
                 aux.setIdInscripto(resultado.getInt(1));
                 aux.setNota(resultado.getDouble(2));
-                //Debido a que nuestra base de datos contiene un tipo de dato entero con el ID del alumno.
-                //Se crea una variable tomando ese datos.
+                /**
+                 * Debido a que nuestra base de datos contiene un tipo de dato
+                 * entero con el ID del alumno. Se crea una variable tomando ese
+                 * datos.
+                 */
                 Integer idAlumno = resultado.getInt(3);
                 //Luego creamos ese alumno y utilizamos a alumnoService para que lo busque y lo traiga.    
                 alumno alumno = as.buscarAlumnoPorID(idAlumno);
-                //Una vez encontrado lo seteamos.
-                //Debido a que nuestra arrayList debe contener inscripciones, estas inscripciones contiene a un alumno
-                //y no a un tipo de dato entero llamado ID que es lo que extraemos de la base de datos.
+                /**
+                 * Una vez encontrado lo seteamos. Debido a que nuestra
+                 * arrayList debe contener inscripciones, estas inscripciones
+                 * contiene a un alumno y no a un tipo de dato entero llamado ID
+                 * que es lo que extraemos de la base de datos.
+                 */
                 aux.setIdAlumno(alumno);
                 //El proceso con alumno se vuelve a repetir con materia.    
                 Integer idMateria = resultado.getInt(4);
@@ -79,9 +92,11 @@ public final class inscripcionDAO extends DAO {
         }
         return null;
     }
-//Este metodo se encarga de retornar un arrayList con todas las incripciones de un unico alumno, la cual 
-//resive ese dato por parametro.    
 
+    /*
+     * Este metodo se encarga de retornar un arrayList con todas las
+     * incripciones de un unico alumno, la cual resive ese dato por parametro.
+     */
     public ArrayList<inscripcion> obtenerInscripcionPorAlumno(int id_Alumno) {
         try {
             String sql = "SELECT `idInscripto`, `nota`, `idAlumno`, `idMateria` FROM `inscripcion` WHERE idAlumno = " + id_Alumno;
@@ -110,9 +125,12 @@ public final class inscripcionDAO extends DAO {
         }
         return null;
     }
-//Este metodo se encarga de retornar una lista de materias con la que esta asociada a ese alumno.
-//Para este metodo la consulta que hacemos a la base de datos aplicamos un INNER JOIN.    
 
+    /*
+     * Este metodo se encarga de retornar una lista de materias con la que esta
+     * asociada a ese alumno. Para este metodo la consulta que hacemos a la base
+     * de datos aplicamos un INNER JOIN.
+     */
     public ArrayList<materia> obtenerMateriaCursadas(int idAlumno) {
         try {
             String sql = "SELECT materia.idMateria FROM inscripcion INNER JOIN materia ON inscripcion.idMateria = materia.idMateria WHERE idAlumno = " + idAlumno + " AND materia.estado = 1 " + " ORDER BY materia.nombre ASC ";
@@ -132,9 +150,13 @@ public final class inscripcionDAO extends DAO {
         }
         return null;
     }
-//Este metodo actua muy similar al anterior con la diferencia que dentro del comando que creamos para
-//consultar a la base de datos utilizamos un NOT IN, la cual nos retorna una lista de materias que el alumno no esta inscripto.    
 
+    /*
+     * Este metodo actua muy similar al anterior con la diferencia que dentro
+     * del comando que creamos para consultar a la base de datos utilizamos un
+     * NOT IN, la cual nos retorna una lista de materias que el alumno no esta
+     * inscripto.
+     */
     public ArrayList<materia> obtenerMateriaNoCursada(int idAlumno) {
         try {
             String sql = "SELECT materia.idMateria FROM materia WHERE materia.idMateria NOT IN (SELECT inscripcion.idMateria FROM inscripcion WHERE inscripcion.idAlumno = " + idAlumno + " ) ORDER BY materia.nombre ASC;";
@@ -154,8 +176,11 @@ public final class inscripcionDAO extends DAO {
         }
         return null;
     }
-//Este metodo se encarga de eliminar esa relacion, es decir de eliminar la inscripcion.
 
+    /*
+     * Este metodo se encarga de eliminar esa relacion, es decir de eliminar la
+     * inscripcion.
+     */
     public void borrarInscripcionAlumnoMateria(int idAlumno, int idMateria) {
         try {
             String sql = "DELETE FROM `inscripcion` WHERE idAlumno = " + idAlumno + " AND idMateria = " + idMateria + "";
@@ -164,9 +189,12 @@ public final class inscripcionDAO extends DAO {
             JOptionPane.showMessageDialog(null, "Tuvimos un incovenientes al borrar la inscripcion del Alumno sobre la materia deseada en la base de datos");
         }
     }
-//Este metodo tiene el trabajo de actualizar la nota de la materia que el alumno se inscribio.
-//Dentro de la consulta a la base de datos utilizamos un UPDATE para realizar dicha actualizacion.    
 
+    /*
+     * Este metodo tiene el trabajo de actualizar la nota de la materia que el
+     * alumno se inscribio. Dentro de la consulta a la base de datos utilizamos
+     * un UPDATE para realizar dicha actualizacion.
+     */
     public void actualizarNota(int idAlumno, int idMateria, double nota) {
         try {
             String sql = "UPDATE `inscripcion` SET `nota` = " + nota + " WHERE idAlumno = " + idAlumno + " AND idMateria = " + idMateria + " ";
@@ -175,9 +203,12 @@ public final class inscripcionDAO extends DAO {
             JOptionPane.showMessageDialog(null, "Tuvimos problemas al intentar actualizar la nota en la base de datos");
         }
     }
-//Este metodo actua muy similar a materia por alumno. Este metodo retornara una lista de alumnos que esta inscrito a esa materia.
-//Dentro de la consulta que se realiza a la base de datos utilizamos un INNER JOIN    
 
+    /*
+     * Este metodo actua muy similar a materia por alumno. Este metodo retornara
+     * una lista de alumnos que esta inscrito a esa materia. Dentro de la
+     * consulta que se realiza a la base de datos utilizamos un INNER JOIN
+     */
     public ArrayList<alumno> obtenerAlumnoPorMateria(int idMateria) {
         try {
             String sql = "SELECT alumno.idAlumno FROM inscripcion INNER JOIN alumno ON inscripcion.idAlumno = alumno.idAlumno WHERE idMateria = " + idMateria;

@@ -18,7 +18,9 @@ public class materiaService {
 
     public void guardarMateria(String nombre, int año, boolean estado) {
         try {
-            // Comprueba si el primer carácter es un dígito numérico (0-9)
+            /**
+             * Comprueba si el primer carácter es un dígito numérico (0-9)
+             */
             char primerCaracter = nombre.charAt(0);
             if (Character.isDigit(primerCaracter)) {
                 JOptionPane.showMessageDialog(null, "El nombre no puede comenzar con numeros");

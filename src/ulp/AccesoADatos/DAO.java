@@ -35,7 +35,10 @@ public abstract class DAO {
     private final String DATABASE = "ulap";
     private final String DRIVER = "org.mariadb.jdbc.Driver";
 
-    //Metodo que va a heredar a sus clases hijas la cual realiza la coneccion a la base de datos.
+    /*
+     * Metodo que va a heredar a sus clases hijas la cual realiza la coneccion a
+     * la base de datos.
+     */
     protected void coneccionBaseDatos() throws ClassNotFoundException, SQLException {
         try {
             Class.forName(DRIVER);
@@ -47,10 +50,16 @@ public abstract class DAO {
         }
     }
 
-    //Metodo que va a heredar a sus clases hijas la cual realiza la desconeccion a la base de datos.
+    /*
+     * Metodo que va a heredar a sus clases hijas la cual realiza la
+     * desconeccion a la base de datos.
+     */
     protected void desconectarBaseDatos() {
         try {
-            //Estos condicionales if se encargan de cerrar la comunicacion y coneccion con la base de datos.
+            /**
+             * Estos condicionales if se encargan de cerrar la comunicacion y
+             * coneccion con la base de datos.
+             */
             if (resultado != null) {
                 resultado.close();
             }
@@ -65,9 +74,12 @@ public abstract class DAO {
             System.out.println("No pudimos desconectarnos desconectado");
         }
     }
-//Metodo creado para encargarse de las operaciones con la base de datos, estas son las de insertar,modificar,eliminar. 
-//El metodo recibe por parametro la consulta
 
+    /*
+     * Metodo creado para encargarse de las operaciones con la base de datos,
+     * estas son las de insertar,modificar,eliminar. El metodo recibe por
+     * parametro la consulta
+     */
     protected void insertarModificarEliminarBaseDatos(String sql) throws SQLException, ClassNotFoundException, Exception {
         try {
             coneccionBaseDatos();//Realizamos una coneccion a la base de datos
@@ -79,9 +91,12 @@ public abstract class DAO {
             desconectarBaseDatos();//Una vez terminada, se haya producido una excepcion o no, se desconecta de la base de datos.
         }
     }
-//Metodo creado para encargarse de las consulta, busca y retorna la informacion solicitada.
-//Este metodo tambien recibe por parametro la consulta.    
 
+    /*
+     * Metodo creado para encargarse de las consulta, busca y retorna la
+     * informacion solicitada. Este metodo tambien recibe por parametro la
+     * consulta.
+     */
     protected void consultarBaseDatos(String sql) throws Exception {
         try {
             coneccionBaseDatos();//Llama al metodo "coneccionBaseDatos" para establecer una comunicacion con la base de datos. 
@@ -91,5 +106,8 @@ public abstract class DAO {
             throw e;
         }
     }
-//La desconeccion de la base de datos con el metodo consultar la haremos dentro de los metodos de las clases hijas de DAO.
+    /**
+     * La desconeccion de la base de datos con el metodo consultar la haremos
+     * dentro de los metodos de las clases hijas de DAO.
+     */
 }
