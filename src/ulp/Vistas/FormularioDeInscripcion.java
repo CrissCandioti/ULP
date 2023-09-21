@@ -80,6 +80,8 @@ public class FormularioDeInscripcion extends javax.swing.JInternalFrame {
         setClosable(true);
         setIconifiable(true);
         setTitle("Formulario de Inscrpción");
+        setToolTipText("inscripcion");
+        setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/alumno.jpg"))); // NOI18N
         setPreferredSize(new java.awt.Dimension(630, 500));
         getContentPane().setLayout(null);
 
@@ -182,9 +184,10 @@ public class FormularioDeInscripcion extends javax.swing.JInternalFrame {
         jLabel3.setText("Listado de Materias");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(185, 113, -1, -1));
 
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/ulp,fondo,forms.jpg"))); // NOI18N
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Ulp.inscripcion(chica).jpg"))); // NOI18N
         jLabel4.setText("jLabel4");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 610, 460));
+        jLabel4.setPreferredSize(new java.awt.Dimension(700, 500));
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 620, 460));
 
         getContentPane().add(jPanel1);
         jPanel1.setBounds(0, 0, 620, 460);
