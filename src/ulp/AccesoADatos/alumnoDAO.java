@@ -80,7 +80,6 @@ public final class alumnoDAO extends DAO {
                  */
                 if (resultado.getInt(6) == 0) {
                     estado = false;
-
                 } else if (resultado.getInt(6) == 1) {
                     estado = true;
                 }

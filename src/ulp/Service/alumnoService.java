@@ -109,13 +109,13 @@ public class alumnoService {
              */
             for (char caracter : nombre.toCharArray()) {
                 if (Character.isDigit(caracter)) {
-                    JOptionPane.showMessageDialog(null, "El nombre no puede contener caractere numericos");
+                    JOptionPane.showMessageDialog(null, "El nombre no puede contener caracteres numericos");
                     return;
                 }
             }
             for (char caracter : apellido.toCharArray()) {
                 if (Character.isDigit(caracter)) {
-                    JOptionPane.showMessageDialog(null, "El apellido no puede contener caractere numericos");
+                    JOptionPane.showMessageDialog(null, "El apellido no puede contener caracteres numericos");
                     return;
                 }
             }
