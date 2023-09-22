@@ -9,9 +9,8 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import ulp.Entidades.alumno;
-import ulp.Entidades.materia;
+
 import ulp.Service.alumnoService;
-import ulp.Service.materiaService;
 
 /**
  *
@@ -122,7 +121,7 @@ public class TdosAlumnos extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-       this.dispose();
+        this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
 
@@ -135,7 +134,7 @@ public class TdosAlumnos extends javax.swing.JInternalFrame {
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 
-public void llenarTodosLosAlumnos() {
+    public void llenarTodosLosAlumnos() {
         try {
 
             alumnoService alu = new alumnoService();
@@ -152,11 +151,12 @@ public void llenarTodosLosAlumnos() {
             modelo.addColumn("estado");
             jTable1.setModel(modelo);
 
-            for (Object object : alumnos) {
+            //Este era un metodo para que imprima por consola el objeto
+            /*            for (Object object : alumnos) {
                 System.out.println(object);
-            }
+           }
+             */
             //creo un vector para guardar los datos del array y que luego el modelo de la tabla pueda agregarlo a la tabla.
-
             Object mate[] = null;
             for (int i = 0; i < alumnos.size(); i++) {
                 modelo.addRow(mate);

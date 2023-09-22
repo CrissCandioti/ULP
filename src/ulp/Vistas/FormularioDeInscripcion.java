@@ -98,7 +98,7 @@ public class FormularioDeInscripcion extends javax.swing.JInternalFrame {
         jLabel1.setText("Formulario de Inscripción");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(151, 21, -1, -1));
 
-        btnSalir.setText("Salir1");
+        btnSalir.setText("Salir");
         btnSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSalirActionPerformed(evt);
