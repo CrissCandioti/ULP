@@ -33,6 +33,8 @@ public class FormularioDeInscripcion extends javax.swing.JInternalFrame {
         initComponents();
 
         llenarComboBoxAlumno();
+        btnInscribir.setVisible(false);
+        btnAnular.setVisible(false);
 
     }
 
@@ -77,6 +79,7 @@ public class FormularioDeInscripcion extends javax.swing.JInternalFrame {
         ));
         jScrollPane1.setViewportView(jTable1);
 
+        setBorder(null);
         setClosable(true);
         setIconifiable(true);
         setTitle("Formulario de Inscrpción");

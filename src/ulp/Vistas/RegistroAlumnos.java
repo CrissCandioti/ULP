@@ -5,10 +5,16 @@
  */
 package ulp.Vistas;
 
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import ulp.Entidades.alumno;
+import ulp.Entidades.inscripcion;
+import ulp.Entidades.materia;
 import ulp.Service.alumnoService;
+import ulp.Service.inscripcionService;
 
 /**
  *
@@ -21,6 +27,7 @@ public class RegistroAlumnos extends javax.swing.JInternalFrame {
      */
     public RegistroAlumnos() {
         initComponents();
+        lblId.setVisible(false);
     }
 
     /**
@@ -32,6 +39,7 @@ public class RegistroAlumnos extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         txtDNI = new javax.swing.JTextField();
@@ -40,10 +48,20 @@ public class RegistroAlumnos extends javax.swing.JInternalFrame {
         lblApellido = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tablaMaterias = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
+        jRadioButton1 = new javax.swing.JRadioButton();
+        jRadioButton2 = new javax.swing.JRadioButton();
+        lblId = new javax.swing.JLabel();
 
-        jPanel1.setBackground(new java.awt.Color(51, 102, 255));
+        setBorder(null);
+        setClosable(true);
+        setIconifiable(true);
+        setTitle("Seccion Alumnos");
+        setToolTipText("");
+        setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/alumno.jpg"))); // NOI18N
+
+        jPanel1.setBackground(new java.awt.Color(135, 201, 179));
 
         jLabel1.setText("Ingrese DNI :");
 
@@ -54,7 +72,11 @@ public class RegistroAlumnos extends javax.swing.JInternalFrame {
             }
         });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        lblNombre.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+
+        lblApellido.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+
+        tablaMaterias.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -65,7 +87,7 @@ public class RegistroAlumnos extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tablaMaterias);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -84,42 +106,79 @@ public class RegistroAlumnos extends javax.swing.JInternalFrame {
         );
 
         jButton1.setText("Salir");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        buttonGroup1.add(jRadioButton1);
+        jRadioButton1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jRadioButton1.setSelected(true);
+        jRadioButton1.setText("Materias Inscriptas");
+        jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton1ActionPerformed(evt);
+            }
+        });
+
+        buttonGroup1.add(jRadioButton2);
+        jRadioButton2.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jRadioButton2.setText("Materias no inscriptas");
+        jRadioButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(54, 54, 54)
+                .addGap(42, 42, 42)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jButton1)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addComponent(jRadioButton1)
+                            .addGap(18, 18, 18)
+                            .addComponent(jRadioButton2)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(lblApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
+                                .addGap(28, 28, 28)
+                                .addComponent(lblApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(lblNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(txtDNI, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(62, Short.MAX_VALUE))
+                                .addGap(18, 18, 18)
+                                .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblId, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(74, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(72, 72, 72)
+                .addGap(38, 38, 38)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(txtDNI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnBuscar))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnBuscar)
+                    .addComponent(lblId, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(23, 23, 23)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(lblNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE)
+                    .addComponent(lblApellido, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(40, 40, 40)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jRadioButton1)
+                    .addComponent(jRadioButton2))
                 .addGap(18, 18, 18)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -131,7 +190,7 @@ public class RegistroAlumnos extends javax.swing.JInternalFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -150,26 +209,151 @@ public class RegistroAlumnos extends javax.swing.JInternalFrame {
             //Guardamos en un alumno los valores obtenidos por el método
             aux = a.buscarAlumnoPorDNI(dni);
             // utilizamos la informacioon del alumno para setear los campos
-            
+
             lblApellido.setText(aux.getApellido());
             lblNombre.setText(aux.getNombre());
-            
-        } catch (Exception ex) {
-            Logger.getLogger(RegistroAlumnos.class.getName()).log(Level.SEVERE, null, ex);
+            lblId.setText("" + aux.getIdAlumno());
+
+      } catch (NullPointerException ex) {
+            JOptionPane.showMessageDialog(this, "No se encontro ese alumno en la base de datos");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Ingrese el documento para su busqueda");
         }
+        llenarMateriasCursadas();
     }//GEN-LAST:event_btnBuscarActionPerformed
+
+    private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
+
+        llenarMateriasCursadas();
+    }//GEN-LAST:event_jRadioButton1ActionPerformed
+
+    private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
+
+        llenarMateriasNoCursadas();
+    }//GEN-LAST:event_jRadioButton2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JRadioButton jRadioButton1;
+    private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JLabel lblApellido;
+    private javax.swing.JLabel lblId;
     private javax.swing.JLabel lblNombre;
+    private javax.swing.JTable tablaMaterias;
     private javax.swing.JTextField txtDNI;
     // End of variables declaration//GEN-END:variables
+
+    public void llenarMateriasCursadas() {
+        try {
+//            //guardo en una variable el id recogido del alumno del combobox
+//            int id = Integer.parseInt(lblId.getText());
+//
+//            //Instancio una clase "inscripcionService" para poder acceder a sus metodos
+//            inscripcionService ins = new inscripcionService();
+//
+//            ArrayList materias = ins.obtenerMateriaCursadas(id);
+//
+//            //le otorgo un modelo a la tabla
+//            DefaultTableModel modelo = new DefaultTableModel();
+//            modelo.addColumn("Id");
+//            modelo.addColumn("Nombre");
+//            modelo.addColumn("Año");
+//            tablaMaterias.setModel(modelo);
+//
+//            //creo un vector para guardar los datos del array y que luego el modelo de la tabla pueda agregarlo a la tabla.
+//            Object mate[] = null;
+//            for (int i = 0; i < materias.size(); i++) {
+//                modelo.addRow(mate);
+//                materia getm = (materia) materias.get(i);
+//                modelo.setValueAt(getm.getIdMateria(), i, 0);
+//                modelo.setValueAt(getm.getNombre(), i, 1);
+//                modelo.setValueAt(getm.getAño(), i, 2);
+//                modelo.setValueAt(getm.getAño(), i, 2);
+//            }
+//        } catch (NullPointerException ex) {
+//            JOptionPane.showMessageDialog(null, "No se registra ninguna materia inscripta");
+//        } catch (Exception e) {
+//            JOptionPane.showMessageDialog(null, e);
+//        }
+
+//guardo en una variable el id recogido del alumno del combobox
+            int id = Integer.parseInt(lblId.getText());
+            //Instancio una clase "inscripcionService" para poder acceder a sus metodos
+            inscripcionService ins = new inscripcionService();
+
+            ArrayList inscripciones = ins.obtenerInscripcionPorAlumno(id);
+
+            //le otorgo un modelo a la tabla
+            DefaultTableModel modelo = new DefaultTableModel();
+            modelo.addColumn("Id");
+            modelo.addColumn("Nombre");
+            modelo.addColumn("Nota");
+            tablaMaterias.setModel(modelo);
+
+            //creo un vector para guardar los datos del array y que luego el modelo de la tabla pueda agregarlo a la tabla.
+            Object insc[] = null;
+            for (int i = 0; i < inscripciones.size(); i++) {
+                modelo.addRow(insc);
+                inscripcion geti = (inscripcion) inscripciones.get(i);
+
+                modelo.setValueAt(geti.getIdMateria().getIdMateria(), i, 0);
+                modelo.setValueAt(geti.getIdMateria().getNombre(), i, 1);
+                modelo.setValueAt(geti.getNota(), i, 2);
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Inabilitamos temporalmente la manipulacion de notas al no tener alumnos registrados");
+        }
+    }
+
+    public void llenarMateriasNoCursadas() {
+        try {
+
+            int id = Integer.parseInt(lblId.getText());
+
+            inscripcionService ins = new inscripcionService();
+            //Guardo el arraylist que me retorna en una variable para usar luego la variable 
+            //y no se esté conectando y desconectando de la base de datos si llamo al metodo varias veces
+            ArrayList materias = ins.obtenerMateriaNoCursadas(id);
+
+            DefaultTableModel modelo = new DefaultTableModel();
+            modelo.addColumn("Id");
+            modelo.addColumn("Nombre");
+            modelo.addColumn("Año");
+            modelo.addColumn("Estado");
+
+            tablaMaterias.setModel(modelo);
+
+            for (Object object : materias) {
+                System.out.println(object);
+            }
+            //creo un vector para guardar los datos del array y que luego el modelo de la tabla pueda agregarlo a la tabla.
+
+            Object mate[] = null;
+            for (int i = 0; i < materias.size(); i++) {
+                modelo.addRow(mate);
+                materia getm = (materia) materias.get(i);
+                modelo.setValueAt(getm.getIdMateria(), i, 0);
+                modelo.setValueAt(getm.getNombre(), i, 1);
+                modelo.setValueAt(getm.getAño(), i, 2);
+                modelo.setValueAt(getm.isEstado(), i, 3);
+
+            }
+        } catch (NullPointerException ex) {
+            JOptionPane.showMessageDialog(null, "No se registran materias a la cual inscribirse");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }
+
 }

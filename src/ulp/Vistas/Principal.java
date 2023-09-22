@@ -47,6 +47,8 @@ public class Principal extends javax.swing.JFrame {
         jMenuItem5 = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         jMenuItem4 = new javax.swing.JMenuItem();
+        MenuTodasLasMaterias = new javax.swing.JMenuItem();
+        MenuAlumnos = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
         jMenuItem6 = new javax.swing.JMenuItem();
 
@@ -131,6 +133,22 @@ public class Principal extends javax.swing.JFrame {
             }
         });
         jMenu4.add(jMenuItem4);
+
+        MenuTodasLasMaterias.setText("Todas Las Materias");
+        MenuTodasLasMaterias.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MenuTodasLasMateriasActionPerformed(evt);
+            }
+        });
+        jMenu4.add(MenuTodasLasMaterias);
+
+        MenuAlumnos.setText("Todos Los Alumnos");
+        MenuAlumnos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MenuAlumnosActionPerformed(evt);
+            }
+        });
+        jMenu4.add(MenuAlumnos);
 
         jMenuBar1.add(jMenu4);
 
@@ -219,6 +237,22 @@ public class Principal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
+    private void MenuTodasLasMateriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuTodasLasMateriasActionPerformed
+    
+        TodasMaterias tm = new TodasMaterias();
+        Escritorio.add(tm);
+        tm.show();
+        tm.setLocation(100,0);
+        
+    }//GEN-LAST:event_MenuTodasLasMateriasActionPerformed
+
+    private void MenuAlumnosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuAlumnosActionPerformed
+        TdosAlumnos al = new TdosAlumnos();
+        Escritorio.add(al);
+        al.show();
+        al.setLocation(150, 0);
+    }//GEN-LAST:event_MenuAlumnosActionPerformed
+
 //    /**
 //     * @param args the command line arguments
 //     */
@@ -256,6 +290,8 @@ public class Principal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane Escritorio;
+    private javax.swing.JMenuItem MenuAlumnos;
+    private javax.swing.JMenuItem MenuTodasLasMaterias;
     private javax.swing.JButton btnAlumnos;
     private com.toedter.calendar.JCalendar jCalendar1;
     private javax.swing.JMenu jMenu1;

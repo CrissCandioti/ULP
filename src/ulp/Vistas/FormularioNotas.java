@@ -59,14 +59,15 @@ public class FormularioNotas extends javax.swing.JInternalFrame {
         btnSalir = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         comboNota = new javax.swing.JComboBox<>();
-        jLabel5 = new javax.swing.JLabel();
 
+        setBorder(null);
         setClosable(true);
         setIconifiable(true);
         setTitle("Gestión Notas");
+        setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/materia.jpg"))); // NOI18N
         setPreferredSize(new java.awt.Dimension(512, 531));
 
-        jPanel1.setBackground(new java.awt.Color(18, 123, 77));
+        jPanel1.setBackground(new java.awt.Color(116, 180, 180));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
@@ -135,10 +136,6 @@ public class FormularioNotas extends javax.swing.JInternalFrame {
         });
         jPanel1.add(comboNota, new org.netbeans.lib.awtextra.AbsoluteConstraints(232, 401, 153, -1));
 
-        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Ulp.inscripcion(chica).jpg"))); // NOI18N
-        jLabel5.setText("jLabel5");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 500, 500));
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -187,19 +184,7 @@ public class FormularioNotas extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void comboNotaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboNotaActionPerformed
-//        ArrayList<Double> notas= new ArrayList<>();
-//        
-//        notas.add(0.1);
-//        notas.add(0.2);
-//        notas.add(0.3);
-//        notas.add(0.4);
-//        notas.add(0.5);
-//        notas.add(0.6);
-//        notas.add(0.7);
-//        
-//        for (Double nota : notas) {
-//            comboNota.addItem(""+nota);
-//        }
+
     }//GEN-LAST:event_comboNotaActionPerformed
 
 
@@ -211,7 +196,6 @@ public class FormularioNotas extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;

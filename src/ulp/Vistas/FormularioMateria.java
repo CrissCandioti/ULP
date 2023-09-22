@@ -58,6 +58,7 @@ public class FormularioMateria extends javax.swing.JInternalFrame {
         tablaMaterias = new javax.swing.JTable();
         jLabel6 = new javax.swing.JLabel();
 
+        setBorder(null);
         setClosable(true);
         setIconifiable(true);
         setResizable(true);
@@ -192,7 +193,7 @@ public class FormularioMateria extends javax.swing.JInternalFrame {
 
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/ulp,fondo,forms.jpg"))); // NOI18N
         jLabel6.setText("jLabel6");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 560, 510));
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 580, 520));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -256,6 +257,7 @@ public class FormularioMateria extends javax.swing.JInternalFrame {
         btnGuardar.setEnabled(true);
         btnModificar.setEnabled(false);
         btnEliminar.setEnabled(isIcon);
+        limpiar();
     }//GEN-LAST:event_jPanel1MouseClicked
 
     private void tablaMateriasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaMateriasMouseClicked
