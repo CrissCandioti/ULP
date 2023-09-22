@@ -212,7 +212,7 @@ public class RegistroAlumnos extends javax.swing.JInternalFrame {
             lblNombre.setText(aux.getNombre());
             lblId.setText("" + aux.getIdAlumno());
 
-      } catch (NullPointerException ex) {
+        } catch (NullPointerException ex) {
             JOptionPane.showMessageDialog(this, "No se encontro ese alumno en la base de datos");
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Ingrese el documento para su busqueda");
@@ -310,7 +310,7 @@ public class RegistroAlumnos extends javax.swing.JInternalFrame {
                 modelo.setValueAt(geti.getNota(), i, 2);
             }
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, "Inabilitamos temporalmente la manipulacion de notas al no tener alumnos registrados");
+            JOptionPane.showMessageDialog(null, "Al no tener seleccionado un alumno no podemos mostrar las inscripciones");
         }
     }
 
@@ -349,6 +349,8 @@ public class RegistroAlumnos extends javax.swing.JInternalFrame {
             }
         } catch (NullPointerException ex) {
             JOptionPane.showMessageDialog(null, "No se registran materias a la cual inscribirse");
+        } catch (NumberFormatException f) {
+            JOptionPane.showMessageDialog(null, "Al no tener un alumno seleccionado no podemos mostrar las materias a inscribirse");
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
         }
