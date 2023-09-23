@@ -176,7 +176,7 @@ public final class alumnoDAO extends DAO {
             return listaAlumnoARetornar;
         } catch (Exception e) {
             desconectarBaseDatos();
-            JOptionPane.showMessageDialog(null, "No pudimos retornar ningun alumno de la base de datos");
+            JOptionPane.showMessageDialog(null, "No pudimos retornar ningun alumno activo de la base de datos");
         }
 
         return null;
@@ -194,5 +194,42 @@ public final class alumnoDAO extends DAO {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Tuvimos un incoveniente al modificar el alumno en la base de datos");
         }
+    }
+
+    public ArrayList<alumno> listarTodosAlumno() {
+        try {
+            String sql = "SELECT `idAlumno`, `dni`, `apellido`, `nombre`, `fechaNacimiento`, `estado` FROM `alumno` ORDER BY apellido ASC ";
+            consultarBaseDatos(sql);
+            ArrayList<alumno> listaAlumnoARetornar = new ArrayList<>();
+            alumno aux = null;
+            boolean estado = false;
+            while (resultado.next()) {
+                aux = new alumno();
+                aux.setIdAlumno(resultado.getInt(1));
+                aux.setDni(resultado.getInt(2));
+                aux.setApellido(resultado.getString(3));
+                aux.setNombre(resultado.getString(4));
+                // Crear un objeto Date SQL
+                java.sql.Date fechaSQL = resultado.getDate(5);
+                // Se creal localDate con los valores
+                LocalDate localDate = fechaSQL.toLocalDate();
+                // Se setea la fecha al alumno a retornar
+                aux.setFechaNacimiento(localDate);
+                if (resultado.getInt(6) == 0) {
+                    estado = false;
+                } else if (resultado.getInt(6) == 1) {
+                    estado = true;
+                }
+                aux.setEstado(estado);
+                listaAlumnoARetornar.add(aux);
+            }
+            desconectarBaseDatos();
+            return listaAlumnoARetornar;
+        } catch (Exception e) {
+            desconectarBaseDatos();
+            JOptionPane.showMessageDialog(null, "No pudimos retornar ningun alumno de la base de datos");
+        }
+
+        return null;
     }
 }

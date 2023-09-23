@@ -226,7 +226,7 @@ public class alumnoService {
             alumnoDAO dao = new alumnoDAO();
             return dao.listarAlumno();
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "No encontramos alumnos en la base de datos");
+            JOptionPane.showMessageDialog(null, "No encontramos alumnos activos en la base de datos");
         }
         return null;
     }
@@ -315,6 +315,17 @@ public class alumnoService {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Tuvimos un incoveniente al modificar el alumno deseado");
         }
+    }
+
+    public ArrayList<alumno> listarTodosAlumno() {
+
+        try {
+            alumnoDAO dao = new alumnoDAO();
+            return dao.listarTodosAlumno();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "No encontramos alumnos en la base de datos");
+        }
+        return null;
     }
 }
 
