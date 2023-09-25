@@ -44,7 +44,6 @@ public abstract class DAO {
             Class.forName(DRIVER);
             String urlBaseDatos = "jdbc:mariadb://localhost:3306/" + DATABASE + "?zeroDateTimeBehavior=convertToNull";
             coneccion = DriverManager.getConnection(urlBaseDatos, USER, PASSWORD);
-            System.out.println("Conectado");
         } catch (ClassNotFoundException | SQLException e) {
             throw e;
         }
@@ -69,7 +68,6 @@ public abstract class DAO {
             if (coneccion != null) {
                 coneccion.close();
             }
-            System.out.println("Desconectado");
         } catch (Exception e) {
             System.out.println("No pudimos desconectarnos desconectado");
         }
