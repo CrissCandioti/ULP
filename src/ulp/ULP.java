@@ -5,6 +5,8 @@
  */
 package ulp;
 
+
+import com.formdev.flatlaf.intellijthemes.FlatArcIJTheme;
 import ulp.Vistas.Principal;
 
 /**
@@ -16,12 +18,18 @@ public class ULP {
     /**
      * @param args the command line arguments
      */
+    
     public static void main(String[] args) {
+    
+       FlatArcIJTheme.setup();
+        
         try {
             Principal p = new Principal();
             p.setVisible(true);
             p.setLocationRelativeTo(null);
         } catch (Exception e) {
         }
+        
+       
     }
 }

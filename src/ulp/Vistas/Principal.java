@@ -5,7 +5,7 @@
  */
 package ulp.Vistas;
 
-
+import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
 import ulp.ImagenFondo;
 
@@ -22,6 +22,8 @@ public class Principal extends javax.swing.JFrame {
         initComponents();
         Escritorio.setBorder(new ImagenFondo());
         this.setExtendedState(Principal.NORMAL);
+        btnAlumnos.setVisible(false);
+        setearBotones();
     }
 
     /**
@@ -36,6 +38,16 @@ public class Principal extends javax.swing.JFrame {
         jCalendar1 = new com.toedter.calendar.JCalendar();
         Escritorio = new javax.swing.JDesktopPane();
         btnAlumnos = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        btnAlumno = new javax.swing.JButton();
+        btnMateria = new javax.swing.JButton();
+        btnAdmin = new javax.swing.JButton();
+        BtnInscripcion = new javax.swing.JButton();
+        btnNotas = new javax.swing.JButton();
+        btnAlumno1 = new javax.swing.JButton();
+        btnCalumnos = new javax.swing.JButton();
+        btnCmaterias = new javax.swing.JButton();
+        btnCaxm = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         menuFormAlumno = new javax.swing.JMenuItem();
@@ -63,23 +75,161 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
+        jPanel1.setBorder(null);
+        jPanel1.setOpaque(false);
+
+        btnAlumno.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/iconoAlumno.png"))); // NOI18N
+        btnAlumno.setText("Alumno");
+        btnAlumno.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAlumnoActionPerformed(evt);
+            }
+        });
+
+        btnMateria.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/iconoMateria.png"))); // NOI18N
+        btnMateria.setText("Materia");
+        btnMateria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMateriaActionPerformed(evt);
+            }
+        });
+
+        btnAdmin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/iconoAdmin.png"))); // NOI18N
+        btnAdmin.setText("Administración");
+        btnAdmin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAdminActionPerformed(evt);
+            }
+        });
+
+        BtnInscripcion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/iconoInscripcion.png"))); // NOI18N
+        BtnInscripcion.setText("Inscripciones");
+        BtnInscripcion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnInscripcionActionPerformed(evt);
+            }
+        });
+
+        btnNotas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/iconoNotas.png"))); // NOI18N
+        btnNotas.setText("Notas");
+        btnNotas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNotasActionPerformed(evt);
+            }
+        });
+
+        btnAlumno1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/iconoConsultas.png"))); // NOI18N
+        btnAlumno1.setText("Consultas");
+        btnAlumno1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAlumno1ActionPerformed(evt);
+            }
+        });
+
+        btnCalumnos.setText("Alumnos");
+        btnCalumnos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCalumnosActionPerformed(evt);
+            }
+        });
+
+        btnCmaterias.setText("Materias");
+        btnCmaterias.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCmateriasActionPerformed(evt);
+            }
+        });
+
+        btnCaxm.setText("Alumnos por Materias");
+        btnCaxm.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCaxmActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(btnMateria, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(47, 47, 47)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(btnNotas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(BtnInscripcion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(btnCalumnos, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btnCmaterias, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(btnCaxm)))
+                        .addGap(23, 23, 23))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(btnAlumno, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(47, 47, 47)
+                        .addComponent(btnAdmin)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+                        .addComponent(btnAlumno1, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(13, 13, 13)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAlumno, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnAlumno1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(BtnInscripcion)
+                            .addComponent(btnCalumnos))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnNotas)
+                            .addComponent(btnCmaterias)))
+                    .addComponent(btnMateria, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnCaxm)
+                .addContainerGap(46, Short.MAX_VALUE))
+        );
+
         Escritorio.setLayer(btnAlumnos, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        Escritorio.setLayer(jPanel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout EscritorioLayout = new javax.swing.GroupLayout(Escritorio);
         Escritorio.setLayout(EscritorioLayout);
         EscritorioLayout.setHorizontalGroup(
             EscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(EscritorioLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(btnAlumnos)
-                .addContainerGap(862, Short.MAX_VALUE))
+                .addGroup(EscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(EscritorioLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(btnAlumnos))
+                    .addGroup(EscritorioLayout.createSequentialGroup()
+                        .addGap(268, 268, 268)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(232, Short.MAX_VALUE))
         );
         EscritorioLayout.setVerticalGroup(
             EscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(EscritorioLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(btnAlumnos)
-                .addContainerGap(509, Short.MAX_VALUE))
+                .addGroup(EscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(EscritorioLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(btnAlumnos))
+                    .addGroup(EscritorioLayout.createSequentialGroup()
+                        .addGap(127, 127, 127)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(212, Short.MAX_VALUE))
         );
 
         jMenu1.setText("Alumno");
@@ -200,6 +350,7 @@ public class Principal extends javax.swing.JFrame {
         FormularioNotas nota = new FormularioNotas();
         Escritorio.add(nota);
         nota.show();
+        nota.setDefaultCloseOperation(JInternalFrame.HIDE_ON_CLOSE);
 
     }//GEN-LAST:event_menuManipulacionNotasActionPerformed
 
@@ -240,19 +391,19 @@ public class Principal extends javax.swing.JFrame {
                 JOptionPane.YES_NO_OPTION
         );
 
-        if (confirm == JOptionPane.YES_OPTION){
-            
+        if (confirm == JOptionPane.YES_OPTION) {
+
             System.exit(0);
         }
     }//GEN-LAST:event_menuSalirActionPerformed
 
     private void MenuTodasLasMateriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuTodasLasMateriasActionPerformed
-    
+
         TodasMaterias tm = new TodasMaterias();
         Escritorio.add(tm);
         tm.show();
-        tm.setLocation(100,0);
-        
+        tm.setLocation(100, 0);
+
     }//GEN-LAST:event_MenuTodasLasMateriasActionPerformed
 
     private void MenuAlumnosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuAlumnosActionPerformed
@@ -261,6 +412,71 @@ public class Principal extends javax.swing.JFrame {
         al.show();
         al.setLocation(150, 0);
     }//GEN-LAST:event_MenuAlumnosActionPerformed
+
+    private void btnMateriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMateriaActionPerformed
+        
+        setearBotones();
+
+        FormularioMateria m = new FormularioMateria();
+        Escritorio.add(m);
+        m.show();
+    }//GEN-LAST:event_btnMateriaActionPerformed
+
+
+    private void btnAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlumnoActionPerformed
+      setearBotones();
+        FormularioAlumno alu = new FormularioAlumno();
+        Escritorio.add(alu);
+        alu.show();
+
+    }//GEN-LAST:event_btnAlumnoActionPerformed
+
+    private void btnAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdminActionPerformed
+        setearBotones();
+        
+        BtnInscripcion.setVisible(true);
+        btnNotas.setVisible(true);
+    }//GEN-LAST:event_btnAdminActionPerformed
+
+    private void BtnInscripcionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnInscripcionActionPerformed
+        FormularioDeInscripcion i = new FormularioDeInscripcion();
+        Escritorio.add(i);
+        i.show();
+    }//GEN-LAST:event_BtnInscripcionActionPerformed
+
+    private void btnNotasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNotasActionPerformed
+        FormularioNotas n = new FormularioNotas();
+        Escritorio.add(n);
+        n.show();
+    }//GEN-LAST:event_btnNotasActionPerformed
+
+    private void btnAlumno1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlumno1ActionPerformed
+        setearBotones();
+        
+        btnCalumnos.setVisible(true);
+        btnCmaterias.setVisible(true);
+        btnCaxm.setVisible(true);
+    }//GEN-LAST:event_btnAlumno1ActionPerformed
+
+    private void btnCalumnosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCalumnosActionPerformed
+         TdosAlumnos al = new TdosAlumnos();
+        Escritorio.add(al);
+        al.show();
+        al.setLocation(150, 0);
+    }//GEN-LAST:event_btnCalumnosActionPerformed
+
+    private void btnCmateriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCmateriasActionPerformed
+        TodasMaterias tm = new TodasMaterias();
+        Escritorio.add(tm);
+        tm.show();
+        tm.setLocation(100, 0);
+    }//GEN-LAST:event_btnCmateriasActionPerformed
+
+    private void btnCaxmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCaxmActionPerformed
+        FormularioConsulta c = new FormularioConsulta();
+        Escritorio.add(c);
+        c.show();
+    }//GEN-LAST:event_btnCaxmActionPerformed
 
 //    /**
 //     * @param args the command line arguments
@@ -298,11 +514,20 @@ public class Principal extends javax.swing.JFrame {
 //    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BtnInscripcion;
     private javax.swing.JDesktopPane Escritorio;
     private javax.swing.JMenuItem MenuAlumnos;
     private javax.swing.JMenuItem MenuAlumnosXmaterias;
     private javax.swing.JMenuItem MenuTodasLasMaterias;
+    private javax.swing.JButton btnAdmin;
+    private javax.swing.JButton btnAlumno;
+    private javax.swing.JButton btnAlumno1;
     private javax.swing.JButton btnAlumnos;
+    private javax.swing.JButton btnCalumnos;
+    private javax.swing.JButton btnCaxm;
+    private javax.swing.JButton btnCmaterias;
+    private javax.swing.JButton btnMateria;
+    private javax.swing.JButton btnNotas;
     private com.toedter.calendar.JCalendar jCalendar1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu3;
@@ -310,10 +535,19 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JMenuItem menuFormAlumno;
     private javax.swing.JMenuItem menuFormInscripciones;
     private javax.swing.JMenu menuFormMateria;
     private javax.swing.JMenuItem menuManipulacionNotas;
     private javax.swing.JMenuItem menuSalir;
     // End of variables declaration//GEN-END:variables
+
+    public void setearBotones(){
+        BtnInscripcion.setVisible(false);
+        btnNotas.setVisible(false);
+        btnCalumnos.setVisible(false);
+        btnCmaterias.setVisible(false);
+        btnCaxm.setVisible(false);
+    }
 }

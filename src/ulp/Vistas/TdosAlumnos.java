@@ -140,7 +140,7 @@ public class TdosAlumnos extends javax.swing.JInternalFrame {
             alumnoService alu = new alumnoService();
             //Guardo el arraylist que me retorna en una variable para usar luego la variable 
             //y no se esté conectando y desconectando de la base de datos si llamo al metodo varias veces
-            ArrayList alumnos = alu.listarAlumno();
+            ArrayList alumnos = alu.listarTodosAlumno();
 
             DefaultTableModel modelo = new DefaultTableModel();
             modelo.addColumn("ID");
