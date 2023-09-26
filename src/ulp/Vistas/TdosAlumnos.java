@@ -170,7 +170,7 @@ public class TdosAlumnos extends javax.swing.JInternalFrame {
 
             }
         } catch (NullPointerException ex) {
-            JOptionPane.showMessageDialog(null, ex);
+            JOptionPane.showMessageDialog(null, "Inhabilitamos temporalmente el acceso de todos los alumnos");
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
         }
