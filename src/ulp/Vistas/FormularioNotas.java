@@ -210,7 +210,7 @@ public class FormularioNotas extends javax.swing.JInternalFrame {
                 comboAlumno.addItem(o);
             }
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, ex);
+            JOptionPane.showMessageDialog(null, "No pudimos tener acceso al listado de alumnos");
         }
     }
     
@@ -246,7 +246,7 @@ public class FormularioNotas extends javax.swing.JInternalFrame {
                 modelo.setValueAt(geti.getNota(), i, 2);
             }
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, "Inabilitamos temporalmente la manipulacion de notas al no tener alumnos registrados");
+            JOptionPane.showMessageDialog(null, "Inabilitamos temporalmente la manipulacion de notas al no tener acceso al listado de los alumnos");
         }
     }
 }

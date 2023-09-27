@@ -145,7 +145,7 @@ public class TodasMaterias extends javax.swing.JInternalFrame {
 
             }
         } catch (NullPointerException ex) {
-            JOptionPane.showMessageDialog(null, "No se registran materias a la cual inscribirse");
+            JOptionPane.showMessageDialog(null, "Inhabilitamos temporalmente el acceso a todas las materias");
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
         }

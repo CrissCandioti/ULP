@@ -145,7 +145,7 @@ public void llenarComboBoxAlumno() {
                 comboBoxMateria.addItem(o);
             }
         } catch (Exception ex) {
-            Logger.getLogger(FormularioDeInscripcion.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Inhabilitamos temporalmente el listado de los alumnos por materia");
         }
     }
 
