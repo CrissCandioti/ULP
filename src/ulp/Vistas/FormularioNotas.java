@@ -60,7 +60,7 @@ public class FormularioNotas extends javax.swing.JInternalFrame {
         jLabel3 = new javax.swing.JLabel();
         comboNota = new javax.swing.JComboBox<>();
 
-        setBorder(null);
+        setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(0, 204, 204), new java.awt.Color(0, 0, 0), null, null));
         setClosable(true);
         setIconifiable(true);
         setTitle("Gestión Notas");

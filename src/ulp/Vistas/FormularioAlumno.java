@@ -67,7 +67,7 @@ public class FormularioAlumno extends javax.swing.JInternalFrame {
         btnNuevo = new javax.swing.JButton();
         labelFondo = new javax.swing.JLabel();
 
-        setBorder(null);
+        setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
         setClosable(true);
         setIconifiable(true);
         setResizable(true);

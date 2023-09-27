@@ -79,7 +79,7 @@ public class FormularioDeInscripcion extends javax.swing.JInternalFrame {
         ));
         jScrollPane1.setViewportView(jTable1);
 
-        setBorder(null);
+        setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, null, new java.awt.Color(0, 0, 0), null, null));
         setClosable(true);
         setIconifiable(true);
         setTitle("Formulario de Inscrpción");
@@ -350,10 +350,10 @@ public class FormularioDeInscripcion extends javax.swing.JInternalFrame {
             modelo.addColumn("Año");
             modelo.addColumn("estado");
             tablaAlumno.setModel(modelo);
-
-            for (Object object : materias) {
-                System.out.println(object);
-            }
+//
+//            for (Object object : materias) {
+//                System.out.println(object);
+//            }
             //creo un vector para guardar los datos del array y que luego el modelo de la tabla pueda agregarlo a la tabla.
 
             Object mate[] = null;

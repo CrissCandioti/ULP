@@ -129,10 +129,10 @@ public class TodasMaterias extends javax.swing.JInternalFrame {
             modelo.addColumn("estado");
             tablaMaterias.setModel(modelo);
 
-            for (Object object : materias) {
-                System.out.println(object);
-            }
-            //creo un vector para guardar los datos del array y que luego el modelo de la tabla pueda agregarlo a la tabla.
+//            for (Object object : materias) {
+//                System.out.println(object);
+//            }
+            // creo un vector para guardar los datos del array y que luego el modelo de la tabla pueda agregarlo a la tabla.
 
             Object mate[] = null;
             for (int i = 0; i < materias.size(); i++) {

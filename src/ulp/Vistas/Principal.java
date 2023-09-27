@@ -217,7 +217,7 @@ public class Principal extends javax.swing.JFrame {
                     .addGroup(EscritorioLayout.createSequentialGroup()
                         .addGap(268, 268, 268)
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(232, Short.MAX_VALUE))
+                .addContainerGap(356, Short.MAX_VALUE))
         );
         EscritorioLayout.setVerticalGroup(
             EscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -229,9 +229,10 @@ public class Principal extends javax.swing.JFrame {
                     .addGroup(EscritorioLayout.createSequentialGroup()
                         .addGap(127, 127, 127)
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(212, Short.MAX_VALUE))
+                .addContainerGap(450, Short.MAX_VALUE))
         );
 
+        jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/iconoAlumno.png"))); // NOI18N
         jMenu1.setText("Alumno");
 
         menuFormAlumno.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.CTRL_MASK));
@@ -245,6 +246,7 @@ public class Principal extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu1);
 
+        menuFormMateria.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/iconoMateria.png"))); // NOI18N
         menuFormMateria.setText("Materia");
 
         jMenuItem3.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_M, java.awt.event.InputEvent.CTRL_MASK));
@@ -258,6 +260,7 @@ public class Principal extends javax.swing.JFrame {
 
         jMenuBar1.add(menuFormMateria);
 
+        jMenu3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/iconoAdmin.png"))); // NOI18N
         jMenu3.setText("Administracion");
 
         menuFormInscripciones.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_I, java.awt.event.InputEvent.CTRL_MASK));
@@ -280,6 +283,7 @@ public class Principal extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu3);
 
+        jMenu4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/iconoConsultas.png"))); // NOI18N
         jMenu4.setText("Consultas");
 
         MenuAlumnosXmaterias.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_B, java.awt.event.InputEvent.ALT_MASK));
@@ -311,6 +315,7 @@ public class Principal extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu4);
 
+        jMenu5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/close-line.png"))); // NOI18N
         jMenu5.setText("Salir");
 
         menuSalir.setText("salir");

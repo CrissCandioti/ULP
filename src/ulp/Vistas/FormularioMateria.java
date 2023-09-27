@@ -58,7 +58,7 @@ public class FormularioMateria extends javax.swing.JInternalFrame {
         tablaMaterias = new javax.swing.JTable();
         jLabel6 = new javax.swing.JLabel();
 
-        setBorder(null);
+        setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, null, new java.awt.Color(0, 0, 0), null, new java.awt.Color(204, 204, 204)));
         setClosable(true);
         setIconifiable(true);
         setResizable(true);
@@ -373,9 +373,9 @@ public class FormularioMateria extends javax.swing.JInternalFrame {
             modelo.addColumn("Año");
             tablaMaterias.setModel(modelo);
 
-            for (Object object : materias) {
-                System.out.println(object);
-            }
+//            for (Object object : materias) {
+//                System.out.println(object);
+//            }
             //creo un vector para guardar los datos del array y que luego el modelo de la tabla pueda agregarlo a la tabla.
 
             Object mate[] = null;
