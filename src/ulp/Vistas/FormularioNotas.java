@@ -179,7 +179,7 @@ public class FormularioNotas extends javax.swing.JInternalFrame {
         }catch(NumberFormatException e){
             JOptionPane.showMessageDialog(this, "Escriba el decimal con punto");
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, ex);
+            JOptionPane.showMessageDialog(null, "Inhabilitado la modificacion de las notas");
         }
     }//GEN-LAST:event_btnGuardarActionPerformed
 

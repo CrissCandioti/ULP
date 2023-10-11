@@ -16,7 +16,10 @@ import java.sql.Statement;
  * nuestro programa y la base de datos creada con anterioridad. Esta clase va a
  * contener los metodos de conectarBaseDatos, desconectarBaseDatos,
  * insertarModificarEliminarBaseDatos y consultarBaseDatos.Esta misma clase va a
- * heredar a las otras clases DAO de las entidades creadas.
+ * heredar a las otras clases DAO de las entidades creadas. El patrón DAO (Data
+ * Access Object) es un patrón de diseño de software que se utiliza en la
+ * programación orientada a objetos para separar la lógica de acceso a datos de
+ * una aplicación.
  */
 public abstract class DAO {
 
@@ -32,7 +35,7 @@ public abstract class DAO {
 
     private final String USER = "root";
     private final String PASSWORD = "";
-    private final String DATABASE = "ulap";
+    private final String DATABASE = "ulp";
     private final String DRIVER = "org.mariadb.jdbc.Driver";
 
     /*
@@ -44,6 +47,8 @@ public abstract class DAO {
             Class.forName(DRIVER);
             String urlBaseDatos = "jdbc:mariadb://localhost:3306/" + DATABASE + "?zeroDateTimeBehavior=convertToNull";
             coneccion = DriverManager.getConnection(urlBaseDatos, USER, PASSWORD);
+            // Deshabilitar el modo de autocommit
+            coneccion.setAutoCommit(false);
         } catch (ClassNotFoundException | SQLException e) {
             throw e;
         }
@@ -66,9 +71,12 @@ public abstract class DAO {
                 sentencia.close();
             }
             if (coneccion != null) {
+                if (!coneccion.getAutoCommit()) {
+                    coneccion.rollback();
+                }
                 coneccion.close();
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
             System.out.println("No pudimos desconectarnos desconectado");
         }
     }
@@ -76,17 +84,35 @@ public abstract class DAO {
     /*
      * Metodo creado para encargarse de las operaciones con la base de datos,
      * estas son las de insertar,modificar,eliminar. El metodo recibe por
-     * parametro la consulta
+     * parametro la consulta. Cabe mencionar que el método
+     * insertarModificarEliminarBaseDatos no está sobrecargado de tareas, ya que
+     * esta diseñado para realizar una tarea específica: ejecutar una consulta
+     * SQL en la base de datos. Su función principal es ejecutar consultas SQL
+     * en la base de datos, y puede ser utilizado para realizar operaciones de
+     * inserción, modificación o eliminación de datos, dependiendo de la
+     * consulta SQL que se le pase como argumento.
      */
     protected void insertarModificarEliminarBaseDatos(String sql) throws SQLException, ClassNotFoundException, Exception {
         try {
-            coneccionBaseDatos();//Realizamos una coneccion a la base de datos
-            sentencia = coneccion.createStatement();//Debemos volcar lo que es la potencial creacion de una sentencia. Por tal motivo preparamos la variable sentencia para recibir una consulta.
-            sentencia.executeUpdate(sql);//Preparada la variable sentencia, recibe la consulta y la ejecuta 
+            coneccionBaseDatos();
+            sentencia = coneccion.createStatement();
+            /**
+             * El createStatement se utiliza para ejecutar una consulta SQL
+             * directamente tal como se proporciona. Esto significa que la
+             * consulta SQL se pasa como una cadena directamente en el método
+             * executeQuery o executeUpdate y se ejecuta tal cual. No se
+             * realizan preparaciones previas de la consulta.
+             */
+            sentencia.executeUpdate(sql);
+            // Confirmar la transacción
+            coneccion.commit();
         } catch (SQLException | ClassNotFoundException e) {
+            if (coneccion != null) {
+                coneccion.rollback();
+            }
             throw e;
         } finally {
-            desconectarBaseDatos();//Una vez terminada, se haya producido una excepcion o no, se desconecta de la base de datos.
+            desconectarBaseDatos();
         }
     }
 
@@ -97,10 +123,13 @@ public abstract class DAO {
      */
     protected void consultarBaseDatos(String sql) throws Exception {
         try {
-            coneccionBaseDatos();//Llama al metodo "coneccionBaseDatos" para establecer una comunicacion con la base de datos. 
-            sentencia = coneccion.createStatement();//Preparamos la variable sentencia para recibir la consulta.
-            resultado = sentencia.executeQuery(sql);//En este caso utilizamos la variable resultado para obtener los valores de la viriable sentencia.
+            coneccionBaseDatos();
+            sentencia = coneccion.createStatement();
+            resultado = sentencia.executeQuery(sql);
         } catch (Exception e) {
+            if (coneccion != null) {
+                coneccion.rollback();
+            }
             throw e;
         }
     }
@@ -109,3 +138,13 @@ public abstract class DAO {
      * dentro de los metodos de las clases hijas de DAO.
      */
 }
+/**
+ * En esta base de datos se aplico un "rollback". El rollback garantiza que la
+ * base de datos no quede en un estado inconsistente si ocurre un error durante
+ * una transacción. Por ejemplo, se refiere a una operación en una base de datos
+ * que revierte una transacción a su estado previo, anulando todos los cambios
+ * que se han realizado en el transcurso de la transacción. El rollback es una
+ * parte fundamental de la gestión de transacciones en sistemas de bases de
+ * datos y se utiliza para garantizar la integridad y consistencia de los datos,
+ * especialmente en situaciones de errores o fallos.
+ */
